@@ -11,7 +11,7 @@ const path = require('path');
 
 //For any get request send /react-app/build/index.html
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'react-app', 'build', 'index.html'))
+    res.sendFile(path.resolve(__dirname, '..','react-app', 'build', 'index.html'))
 });
 
 //set the port number to listen on
