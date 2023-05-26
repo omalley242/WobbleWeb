@@ -7,10 +7,10 @@ const app = express();
 const path = require('path');
 
 //tell the server to use static files within the react-build section
-app.use(express.static('../react-app/build'));
+app.use(express.static(path.join(__dirname, '../react-app/build')));
 
 //For any get request send /react-app/build/index.html (except for linked files within the html)
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..','react-app', 'build', 'index.html'))
 });
 
