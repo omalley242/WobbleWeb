@@ -6,16 +6,16 @@ const app = express();
 //a library to locate the current path
 const path = require('path');
 
+//tell the server to use static files within the react-build section
+app.use(express.static('../react-app/build'));
+
 //For any get request send /react-app/build/index.html (except for linked files within the html)
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..','react-app', 'build', 'index.html'))
 });
 
-//tell the server to use static files within the react-build section
-app.use(express.static('../react-app/build/'));
-
 //set the port number to listen on
-const PORT = 8080;
+const PORT = 5000;
 console.log("Server has been started on port", PORT);
 
 //launch the server
