@@ -1,10 +1,30 @@
 import './App.css';
+import MapContainer from './components/MapContainer/MapContainer';
 
 function App() {
 
+  let data = [];
+  for(let i=0; i< 1024; i++){
+    data.push({content: ""});
+  }
+
   return (
-    <div>
-      <img src="https://live.staticflickr.com/5515/11003816936_08e72de26e_z.jpg" className="Testing" alt="test"/>
+    <div style={{display: 'flex', width: '100%', height: '100%', justifyContent: 'center', alignContent: 'center', padding: '0', margin: '0'}}>
+
+      <div style={{display: 'inline-block', padding: 20}}>
+        <MapContainer data={data}></MapContainer>
+      </div>
+      <div style={{display: 'inline-block', padding: 20}}>
+        <label>
+          IP Address
+        </label>
+        <br/>
+        <input type="url" id='IpAddressForm'>
+        </input>
+        <div>
+
+        </div>
+      </div>
     </div>
   );
 }
