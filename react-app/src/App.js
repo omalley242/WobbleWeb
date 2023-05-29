@@ -5,35 +5,48 @@ import ReactPolling from 'react-polling/lib/ReactPolling';
 
 function App() {
 
+  //define the inital states of the nodeData and its updated verion
   const [nodeData, updateNodeData] = useState([[]]);
 
   const fetchNodeData = () => {
-    //location.host gives the server ip
+    //location.host gives the server ip maybe?
     return fetch(`http://${window.location.host}/nodes`);
   }
 
   console.log(fetch(`http://${window.location.host}/nodes`));
-  //Fetch all nodes from the database, on load
 
+  //Function to call on a successful database poll (update component data)
+  const pollingSuccess = (jsonResponse) => {
+    console.log(jsonResponse);
+    updateNodeData(jsonResponse);
+    return true;
+  }
 
-  //pass the data into the map container and create a component for each
+  //Function to call on failuer of database poll (dont update but dont throw err)
+  const pollingFailure = () => {
+    console.log("Polling of database failed");
+    return true;
+  }
 
-  //use the data for css positioning
+  //A Hook to define how the component will update
+  React.useEffect(() => {
 
-  //Repeat for each path
-
-  //poll the database for changes
-
-  //on change re-render the components within the container
-
-  let data = [{content: "test"}];
+  }, [nodeData]);
 
   return (
     <div style={{display: 'flex', width: '100%', height: '100%', justifyContent: 'center', alignContent: 'center', padding: '0', margin: '0'}}>
+      <ReactPolling
+      url={`http://${window.location.host}/nodes`}
+      interval={500}
+      retryCount={2}
+      OnSuccess = {pollingSuccess}
+      OnFailure = {pollingFailure}
+      promise = {fetchNodeData}
 
-      <div style={{display: 'inline-block', padding: 20}}>
-        <MapContainer data={data}></MapContainer>
-      </div>
+      render={({ startPolling, endPolling, isPolling }) => {
+        return <MapContainer data={nodeData}></MapContainer>;
+      }}
+      />
       <div style={{display: 'inline-block', padding: 20}}>
         <label>
           IP Address
