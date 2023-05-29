@@ -10,6 +10,6 @@
   width: 30px;
 }
 
-.node-path {
+.node-path:hover {
   fill: #7f2102;
 }
