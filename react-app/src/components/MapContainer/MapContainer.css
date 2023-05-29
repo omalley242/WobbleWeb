@@ -11,13 +11,13 @@
 }
 
 .node:hover {
-  height: 35px;
-  width: 35px;
+  height: 42px;
+  width: 42px;
   animation: Scale .25s;
   animation-duration: 300ms;
 }
 
-@keyframes Scale {
+@keyframes ScaleUp {
   from {
     transform: scale(1);
   }
