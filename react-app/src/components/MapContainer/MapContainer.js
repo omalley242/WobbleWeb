@@ -5,8 +5,8 @@ const MapContainer = ({data}) => {
     console.log(data);
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
     const MapItems = data.map((item, index) => (
-        <div key={index} className='Map-Item' style={{position: 'absolute', left: item.X_Pos, bottom: item.Y_Pos, height: 30, width: 30}}>
-            {item.Con_Num}
+        <div key={index} className='Map-Item' style={{position: 'absolute', left: item.X_Pos, bottom: item.Y_Pos}}>
+            <circle style={{height: 20, width: 20}}> {item.Con_Num}</circle>
         </div>
     ));
 
