@@ -13,7 +13,7 @@
 .node:hover {
   height: 42px;
   width: 42px;
-  animation: Scale .25s;
+  animation: ScaleUp .25s;
   animation-duration: 300ms;
 }
 
