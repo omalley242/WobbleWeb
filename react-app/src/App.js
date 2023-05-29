@@ -15,11 +15,11 @@ function App() {
 
   //Function to call on a successful database poll (update component data)
   const pollingSuccess = (jsonResponse) => {
-    console.log("test");
     console.log(jsonResponse);
     updateNodeData(jsonResponse);
     return true;
   }
+  
 
   //Function to call on failuer of database poll (dont update but dont throw err)
   const pollingFailure = () => {
@@ -30,7 +30,7 @@ function App() {
   //A Hook to define how the component will update
   React.useEffect(() => {
     console.log(nodeData);
-  }, []);
+  }, [nodeData]);
 
   return (
     <div style={{display: 'flex', width: '100%', height: '100%', justifyContent: 'center', alignContent: 'center', padding: '0', margin: '0'}}>
@@ -38,8 +38,8 @@ function App() {
       url={`http://${window.location.host}/nodes`}
       interval={500}
       retryCount={2}
-      OnSuccess = {pollingSuccess}
-      OnFailure = {pollingFailure}
+      onSuccess = {pollingSuccess}
+      onFailure = {pollingFailure}
       promise = {fetchNodeData}
 
       render={({ startPolling, endPolling, isPolling }) => {
