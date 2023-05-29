@@ -9,13 +9,13 @@ function App() {
   const [nodeData, updateNodeData] = useState([{}]);
 
   const fetchNodeData = () => {
-    //location.host gives the server ip maybe?
+    //location.host gives the server ip
     return fetch(`http://${window.location.host}/nodes`);
   }
 
   //Function to call on a successful database poll (update component data)
   const pollingSuccess = (jsonResponse) => {
-    
+
     updateNodeData(jsonResponse);
     return true;
   }
