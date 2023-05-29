@@ -12,7 +12,6 @@ var PORT = 5000;
 
 //a library to locate the current path
 const path = require('path');
-const { get } = require('http');
 
 //load the express library
 const express = require('express');
@@ -55,14 +54,22 @@ function main_server(database_connection) {
         res.sendFile(path.resolve(__dirname, '..','react-app', 'build', 'index.html'))
     });
 
-
     //Handle requests from the esp32 
     app.get('/esp', (req, res) => {
-        req.accepts('json, text');
         console.log("-----Esp32 Message Recieved-----");
         console.log("Message of type GET");
         res.status(200).json({direction: "left"});
     });
+
+    app.get('/nodes', (req, res) => {
+        console.log("Fetching all nodes");
+        database_connection.query("SELECT * FROM Nodes", function(err, result, fields) {
+            if (err) throw err;
+            res.json(result);
+        });
+    })
+
+    console.log("starting server on port: " + PORT);
 
     //launch the server
     app.listen(PORT);
