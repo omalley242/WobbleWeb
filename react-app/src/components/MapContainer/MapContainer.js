@@ -7,7 +7,7 @@ const MapContainer = ({data}) => {
     const MapItems = data.map((item, index) => (
         <div key={index} className='Map-Item' style={{position: 'absolute', left: item.X_Pos, bottom: item.Y_Pos}}>
             <svg>
-                <circle style={{height: 20, width: 20}}> {item.Con_Num}</circle>
+                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="green">{item.Con_Num}</circle>            
             </svg>
         </div>
     ));
