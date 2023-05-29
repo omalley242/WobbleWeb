@@ -1,13 +1,24 @@
 
 //SETUP CODE =========================================================
 
+//fetch the mysql node library
+var sql = require('mysql');
+
+//Fetch my current IPV4 incase it has changed since restart
+const axios = require("axios");
+
+//set the port number to listen on
+var PORT = 5000;
+
+//a library to locate the current path
+const path = require('path');
+const { get } = require('http');
+
+//load the express library
+const express = require('express');
+const app = express();
+
 function server_init() {
-
-    //fetch the mysql node library
-    var sql = require('mysql');
-
-    //Fetch my current IPV4 incase it has changed since restart
-    const axios = require("axios");
 
     axios("https://checkip.amazonaws.com/").then(response => {
         let current_ip = response.data
@@ -19,13 +30,8 @@ function server_init() {
             password: "",
             database: "Maze"
         });
-
-        connection.connect(function(err) {
-            if(err) throw err;
-            console.log("Successfully connected to database...\n");
-        });
         
-        main_server();
+        main_server(connection);
 
     }, err => {
 
@@ -34,18 +40,12 @@ function server_init() {
 }
 
 //MAIN PROCESS LOOP =====================================================
-function main_server() {
+function main_server(database_connection) {
 
-    //set the port number to listen on
-    var PORT = 5000;
-
-    //a library to locate the current path
-    const path = require('path');
-    const { get } = require('http');
-
-    //load the express library
-    const express = require('express');
-    const app = express();
+    database_connection.connect((err) => {
+        if (err) throw err;
+        console.log("Successful database connection");
+    });
 
     //tell the server to use static files within the react-build section
     app.use(express.static(path.join(__dirname, '../react-app/build')));
