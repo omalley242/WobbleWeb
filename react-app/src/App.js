@@ -7,6 +7,12 @@ function App() {
 
   //define the inital states of the nodeData and its updated verion
   const [nodeData, updateNodeData] = useState([{}]);
+  const [pathData, updatePathData] = useState([{}]);
+
+  const fetchPathData = () => {
+    //location.host gives the server ip
+    return fetch(`http://${window.location.host}/paths`);
+  }
 
   const fetchNodeData = () => {
     //location.host gives the server ip
@@ -14,15 +20,25 @@ function App() {
   }
 
   //Function to call on a successful database poll (update component data)
-  const pollingSuccess = (jsonResponse) => {
-
+  const pathPollingSuccess = (jsonResponse) => {
     updateNodeData(jsonResponse);
     return true;
   }
   
+  //Function to call on a successful database poll (update component data)
+  const nodePollingSuccess = (jsonResponse) => {
+    updateNodeData(jsonResponse);
+    return true;
+  }
+  
+  //Function to call on failuer of database poll (dont update but dont throw err)
+  const pathPollingFailure = () => {
+    console.log("Polling of database failed");
+    return true;
+  }
 
   //Function to call on failuer of database poll (dont update but dont throw err)
-  const pollingFailure = () => {
+  const nodePollingFailure = () => {
     console.log("Polling of database failed");
     return true;
   }
@@ -33,12 +49,22 @@ function App() {
       url={`http://${window.location.host}/nodes`}
       interval={500}
       retryCount={2}
-      onSuccess = {pollingSuccess}
-      onFailure = {pollingFailure}
+      onSuccess = {nodePollingSuccess}
+      onFailure = {nodePollingFailure}
       promise = {fetchNodeData}
 
       render={({ startPolling, endPolling, isPolling }) => {
-        return <MapContainer nodeData={nodeData}></MapContainer>;
+        return <ReactPolling 
+                url = {`http://${window.location.host}/paths`}
+                interval = {500}
+                retryCount = {2}
+                onSuccess = {pathPollingSuccess}
+                onFailure = {pathPollingFailure}
+                promis = {fetchPathData}
+                render = {({ startPolling, endPolling, isPolling }) => {
+                  return <MapContainer nodeData={nodeData} pathData={pathData}></MapContainer>;
+                }}
+                />;
       }}
       />
 

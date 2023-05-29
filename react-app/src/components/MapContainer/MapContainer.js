@@ -2,9 +2,11 @@ import './MapContainer.css'
 import Node from '../../node.svg'; 
 import Xarrow from 'react-xarrows';
 
-const MapContainer = ({nodeData}) => {
+const MapContainer = ({nodeData, pathData}) => {
    
     console.log(nodeData);
+    console.log(pathData);
+
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
     const MapItems = nodeData.map((item, index) => (
         <div key={index} id={item.Id} className='Map-Item' style={{position: 'absolute', left: item.X_Pos, bottom: item.Y_Pos}}>
@@ -19,16 +21,22 @@ const MapContainer = ({nodeData}) => {
                 <path class='node-path' d="M12.2573 20.9159L15.5175 10.8822" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>                   
 
-            <Xarrow>
-                start = {item.Id}
-                end = {item.End_Node_Id}
-            </Xarrow>
         </div>
     ));
+
+    //A function that creates all the paths
+    const PathItems = pathData.map((item, index) => {
+        <Xarrow key = {index}>
+            start = {item.Start_Node_Id}
+            end = {item.End_Node_Id}
+        </Xarrow>
+    });
+
 
     return (
         <div className='Map-Container' style={{display: 'flex', position: 'relative', height: 800, width: 1000, flexWrap: 'wrap', border: '3px solid #222', margin: 50}}>
             {MapItems}
+            {PathItems}
         </div>
     )
 }
