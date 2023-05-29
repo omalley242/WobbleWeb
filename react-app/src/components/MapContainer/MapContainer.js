@@ -34,6 +34,10 @@ const MapContainer = ({nodeData, pathData}) => {
         <div className='Map-Container' style={{display: 'flex', position: 'relative', height: 800, width: 1000, flexWrap: 'wrap', border: '3px solid #222', margin: 50}}>
             {MapItems}
             {PathItems}
+            <Xarrow
+                start = "0"
+                end = "1"
+            />
         </div>
     )
 }
