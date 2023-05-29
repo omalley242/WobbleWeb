@@ -1,11 +1,7 @@
 import './MapContainer.css'
-import Node from '../../node.svg'; 
 import Xarrow from 'react-xarrows';
 
 const MapContainer = ({nodeData, pathData}) => {
-   
-    console.log(nodeData);
-    console.log(pathData);
 
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
     const MapItems = nodeData.map((item, index) => (
@@ -24,6 +20,7 @@ const MapContainer = ({nodeData, pathData}) => {
         </div>
     ));
 
+    console.log(pathData[0].Start_Node_Id);
     //A function that creates all the paths
     const PathItems = pathData.map((item, index) => {
         <Xarrow key = {index}
