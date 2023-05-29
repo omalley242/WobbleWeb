@@ -6,3 +6,7 @@
   font-size: xx-small;
   padding: 0;
 }
+
+.Map-Item:hover {
+  background-color: #1B5F7C;
+}

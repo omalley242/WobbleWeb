@@ -4,7 +4,7 @@ import MapContainer from './components/MapContainer/MapContainer';
 function App() {
 
   let data = [];
-  for(let i=0; i< 1024; i++){
+  for(let i=0; i< 3025; i++){
     data.push({content: ""});
   }
 

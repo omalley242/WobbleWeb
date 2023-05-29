@@ -14,7 +14,7 @@ const MapContainer = ({data}) => {
     ));
 
     return (
-        <div className='Map-Container' style={{display: 'flex', width: container_width, flexWrap: 'wrap'}}>
+        <div className='Map-Container' style={{display: 'flex', width: container_width, flexWrap: 'wrap', border: '3px solid #222'}}>
             {MapItems}
         </div>
     )
