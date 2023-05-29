@@ -5,6 +5,13 @@
   padding: 0;
 }
 
-.Map-Item:hover {
-  background-color: #1B5F7C;
+.node {
+  height: 30px;
+  width: 30px;
+}
+
+.node:hover {
+  height: 35px;
+  width: 35px;
+  animation-duration: 300ms;
 }
