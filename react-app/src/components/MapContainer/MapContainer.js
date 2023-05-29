@@ -6,7 +6,7 @@ const MapContainer = ({data}) => {
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
     const MapItems = data.map((item, index) => (
         <div key={index} className='Map-Item' style={{position: 'absolute', left: item.X_Pos, bottom: item.Y_Pos}}>
-            <img src={Node} alt="Node Icon">{item.Con_Num}</img>            
+            <img style={{height: 50, width: 50}}src={Node} alt="Node Icon">{item.Con_Num}</img>            
         </div>
     ));
 
