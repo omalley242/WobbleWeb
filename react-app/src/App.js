@@ -21,7 +21,7 @@ function App() {
 
   //Function to call on a successful database poll (update component data)
   const pathPollingSuccess = (jsonResponse) => {
-    updateNodeData(jsonResponse);
+    updatePathData(jsonResponse);
     return true;
   }
   
