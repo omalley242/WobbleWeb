@@ -10,16 +10,6 @@
   width: 30px;
 }
 
-.node:hover {
-  animation: ScaleUp .25s;
-  fill: red;
-}
-
-@keyframes ScaleUp {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.2);
-  }
+.node-path {
+  fill: #7f2102;
 }
