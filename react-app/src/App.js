@@ -13,8 +13,6 @@ function App() {
     return fetch(`http://${window.location.host}/nodes`);
   }
 
-  console.log(fetch(`http://${window.location.host}/nodes`));
-
   //Function to call on a successful database poll (update component data)
   const pollingSuccess = (jsonResponse) => {
     console.log("test");
@@ -32,7 +30,7 @@ function App() {
   //A Hook to define how the component will update
   React.useEffect(() => {
     console.log(nodeData);
-  }, [nodeData]);
+  }, []);
 
   return (
     <div style={{display: 'flex', width: '100%', height: '100%', justifyContent: 'center', alignContent: 'center', padding: '0', margin: '0'}}>
