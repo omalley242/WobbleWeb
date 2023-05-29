@@ -63,7 +63,7 @@ function main_server(database_connection) {
 
     app.get('/nodes', (req, res) => {
         console.log("Fetching all nodes");
-        database_connection.query("SELECT * FROM Nodes", function(err, result, fields) {
+        database_connection.query("SELECT * FROM Nodes JOIN Paths on Nodes.Id = Paths.Start_Node_Id", function(err, result, fields) {
             if (err) throw err;
             res.json(result);
         });

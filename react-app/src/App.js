@@ -15,7 +15,7 @@ function App() {
 
   //Function to call on a successful database poll (update component data)
   const pollingSuccess = (jsonResponse) => {
-    console.log(jsonResponse);
+    
     updateNodeData(jsonResponse);
     return true;
   }
@@ -38,7 +38,7 @@ function App() {
       promise = {fetchNodeData}
 
       render={({ startPolling, endPolling, isPolling }) => {
-        return <MapContainer data={nodeData}></MapContainer>;
+        return <MapContainer nodeData={nodeData}></MapContainer>;
       }}
       />
 

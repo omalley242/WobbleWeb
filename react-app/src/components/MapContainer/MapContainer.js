@@ -1,10 +1,10 @@
 import './MapContainer.css'
 import Node from '../../node.svg'; 
-const MapContainer = ({data}) => {
+const MapContainer = ({nodeData}) => {
    
-    console.log(data);
+    console.log(nodeData);
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
-    const MapItems = data.map((item, index) => (
+    const MapItems = nodeData.map((item, index) => (
         <div key={index} className='Map-Item' style={{position: 'absolute', left: item.X_Pos, bottom: item.Y_Pos}}>
 
             <svg class='node' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,6 +17,7 @@ const MapContainer = ({data}) => {
                 <path class='node-path' d="M12.2573 20.9159L15.5175 10.8822" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>                   
         
+            
         </div>
     ));
 
