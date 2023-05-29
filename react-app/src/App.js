@@ -30,7 +30,7 @@ function App() {
 
   //A Hook to define how the component will update
   React.useEffect(() => {
-
+    console.log(nodeData);
   }, [nodeData]);
 
   return (
