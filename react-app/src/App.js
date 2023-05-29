@@ -17,6 +17,7 @@ function App() {
 
   //Function to call on a successful database poll (update component data)
   const pollingSuccess = (jsonResponse) => {
+    console.log("test");
     console.log(jsonResponse);
     updateNodeData(jsonResponse);
     return true;
@@ -47,6 +48,7 @@ function App() {
         return <MapContainer data={nodeData}></MapContainer>;
       }}
       />
+
       <div style={{display: 'inline-block', padding: 20}}>
         <label>
           IP Address
