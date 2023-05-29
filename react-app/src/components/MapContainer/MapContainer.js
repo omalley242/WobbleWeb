@@ -6,9 +6,7 @@ const MapContainer = ({data}) => {
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
     const MapItems = data.map((item, index) => (
         <div key={index} className='Map-Item' style={{position: 'absolute', left: item.X_Pos, bottom: item.Y_Pos}}>
-            <svg>
-                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="green">{item.Con_Num}</circle>            
-            </svg>
+            <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="green">{item.Con_Num}</circle>            
         </div>
     ));
 
