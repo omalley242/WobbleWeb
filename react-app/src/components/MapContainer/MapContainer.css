@@ -12,6 +12,7 @@
 
 .node:hover {
   animation: ScaleUp .25s;
+  fill: red;
 }
 
 @keyframes ScaleUp {

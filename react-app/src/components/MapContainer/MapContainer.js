@@ -15,8 +15,7 @@ const MapContainer = ({data}) => {
                 <path d="M17.0322 4.6355L8.4971 10.8366" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M20.5591 14.5104L12.024 8.30924" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M12.2573 20.9159L15.5175 10.8822" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-                    
+            </svg>                   
         
         </div>
     ));
