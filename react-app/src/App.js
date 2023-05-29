@@ -27,11 +27,6 @@ function App() {
     return true;
   }
 
-  //A Hook to define how the component will update
-  React.useEffect(() => {
-    console.log(nodeData);
-  }, [nodeData]);
-
   return (
     <div style={{display: 'flex', width: '100%', height: '100%', justifyContent: 'center', alignContent: 'center', padding: '0', margin: '0'}}>
       <ReactPolling
