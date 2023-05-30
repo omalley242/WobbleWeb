@@ -20,22 +20,19 @@ const MapContainer = ({nodeData, pathData}) => {
         </div>
     ));
 
-    console.log(pathData[0].Start_Node_Id);
     //A function that creates all the paths
-    const PathItems = pathData.map((item, index) => {
+    const PathItems = pathData.map((item, index) => (
         <Xarrow key = {index}
-            start = {`${item.Start_Node_Id}`}
-            end = {`${item.End_Node_Id}`}
+            start = {item.Start_Node_Id}
+            end = {item.End_Node_Id}
         />
-    });
+    ));
 
 
     return (
         <div className='Map-Container' style={{display: 'flex', position: 'relative', height: 800, width: 1000, flexWrap: 'wrap', border: '3px solid #222', margin: 50}}>
-            <Xwrapper>
-                {MapItems}
-                {PathItems}
-            </Xwrapper>
+            {MapItems}
+            {PathItems}
         </div>
     )
 }
