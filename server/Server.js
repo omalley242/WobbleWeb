@@ -94,7 +94,7 @@ function main_server(database_connection) {
         console.log("Adding New Node");
         console.log(req.body);
 
-        let reqbody = req.body;
+        let reqbody = req.data;
         let nodeJson = reqbody.Node[0];
         let pathsJson = reqbody.Paths;
 
