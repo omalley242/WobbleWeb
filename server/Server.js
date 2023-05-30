@@ -152,10 +152,17 @@ function main_server(database_connection) {
 
         console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
 
+        //Check if node already exists (is very close to another one)
+
         database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${PX},${PY},0,0,0,0)`, function(err, result, fields) {
             if (err) throw err;
         });
 
+
+        //check path if it connects two nodes or not
+
+
+        //testing the webhook stuff
         pathsJson.map((pathItem) => {
             database_connection.query(`INSERT INTO Paths VALUES (${pathItem.Start_Id},0,0,0,0)`, function(err, result, fields) {
             if (err) throw err;
