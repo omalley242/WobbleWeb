@@ -25,15 +25,20 @@ const MapContainer = ({nodeData, pathData}) => {
     ));
 
     // A function that creates all the paths
-    const PathItems = pathData.map((item, index) => (
-        <Xarrow 
+    const PathItems = pathData.map(function(item, index){
+        if (item.End_Node_Id != NULL){
+            return <Xarrow 
             start="0"
             end={item.End_Node_Id.toString()}
             curveness={0.2}
             strokeWidth={2}
-            headSize={2}
-        />
-    ));
+            headSize={3}
+            />;
+        }else {
+            return <svg style={{height: 20, width: 20}}><rect style={{height: 20, width:20, fill: 'black'}}></rect></svg>;
+        }
+
+        });
     
     return (
         <div className='Map-Container' style={{display: 'flex', position: 'relative', height: 800, width: 1000, flexWrap: 'wrap', border: '3px solid #222', margin: 50}}>
