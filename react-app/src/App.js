@@ -60,7 +60,7 @@ function App() {
                 retryCount = {2}
                 onSuccess = {pathPollingSuccess}
                 onFailure = {pathPollingFailure}
-                promis = {fetchPathData}
+                promise = {fetchPathData}
                 render = {({ startPolling, endPolling, isPolling }) => {
                   return <MapContainer nodeData={nodeData} pathData={pathData}></MapContainer>;
                 }}
