@@ -43,6 +43,10 @@ function App() {
     return true;
   }
 
+  const resetDatabase = () => {
+    return fetch(`http://${window.location.host}/clear`);
+  }
+
   return (
     <div style={{display: 'flex', width: '100%', height: '100%', justifyContent: 'center', alignContent: 'center', padding: '0', margin: '0'}}>
       <ReactPolling
@@ -75,7 +79,9 @@ function App() {
         <br/>
         <input type="url" id='IpAddressForm'>
         </input>
+        <input id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
       </div>
+
     </div>
   );
 }
