@@ -79,7 +79,7 @@ function App() {
         <br/>
         <input type="url" id='IpAddressForm'>
         </input>
-        <input id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
+        <input type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
       </div>
 
     </div>
