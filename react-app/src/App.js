@@ -77,7 +77,7 @@ function App() {
         <br/>
         <input type="url" id='IpAddressForm'/>
         <br/>
-        <input style={{height: '5%', width: '5%'}}type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
+        <input style={{marginTop: '10%', height: '5%', width: '100%'}}type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
       </div>
 
     </div>
