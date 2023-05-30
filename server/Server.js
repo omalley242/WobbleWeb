@@ -152,9 +152,9 @@ function main_server(database_connection) {
 
         console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
 
-        // database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${nodeJson.X},${nodeJson.Y},0,0,0,0)`, function(err, result, fields) {
-        //     if (err) throw err;
-        // });
+        database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${nodeJson.PX},${nodeJson.PY},0,0,0,0)`, function(err, result, fields) {
+            if (err) throw err;
+        });
 
         // pathsJson.map((pathItem) => {
         //     database_connection.query(`INSERT INTO Paths VALUES (${pathItem.Start_Id},0,0,0,0)`, function(err, result, fields) {
