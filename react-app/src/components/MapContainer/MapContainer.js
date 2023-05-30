@@ -24,7 +24,7 @@ const MapContainer = ({nodeData, pathData}) => {
     const PathItems = pathData.map((item, index) => (
         <Xarrow 
             start="0"
-            end={item.Start_Node_Id.toString()}
+            end={item.End_Node_Id.toString()}
         />
     ));
     
