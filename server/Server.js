@@ -106,10 +106,10 @@ function main_server(database_connection) {
         pathsJson.map((pathitem) => {
             database_connection.query(`INSERT INTO Paths VALUES (${pathItemJson.Start_Id},0,0,0,0)`, function(err, result, fields) {
             if (err) throw err;
-                res.json(result);
             });
         });
 
+        res.json("Recieved shiz");
         console.log("Added new Node");
     });
 
