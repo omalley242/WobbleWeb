@@ -67,15 +67,28 @@ function main_server(database_connection) {
             if (err) throw err;
             res.json(result);
         });
-    })
+    });
 
     app.get('/paths', (req, res) => {
-        console.log("Fetching all nodes");
+        console.log("Fetching all paths");
         database_connection.query("SELECT * FROM Paths", function(err, result, fields) {
             if (err) throw err;
             res.json(result);
         });
-    })
+    });
+
+    app.get('/clear', (req, res) => {
+        console.log("Deleting all rows");
+        
+        database_connection.query("DELETE * FROM Nodes", function(err, result, fields) {
+            if (err) throw err;
+        });
+        database_connection.query("DELETE * FROM Paths", function(err, result, fields) {
+            if (err) throw err;
+        });
+
+        console.log("Complete Deletion");
+    });
 
     console.log("starting server on port: " + PORT);
 
