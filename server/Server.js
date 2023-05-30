@@ -79,7 +79,7 @@ function main_server(database_connection) {
 
     app.get('/clear', (req, res) => {
         console.log("Deleting all rows");
-        
+
         database_connection.query("DELETE * FROM Nodes", function(err, result, fields) {
             if (err) throw err;
         });
@@ -88,6 +88,16 @@ function main_server(database_connection) {
         });
 
         console.log("Complete Deletion");
+    });
+
+    app.put('/add/node', (req, res) => {
+        console.log("Adding New Node");
+        console.log(req);
+        database_connection.query(`INSERT INTO Nodes VALUES`, function(err, result, fields) {
+            if (err) throw err;
+        });
+
+        console.log("Added new Node");
     });
 
     console.log("starting server on port: " + PORT);
