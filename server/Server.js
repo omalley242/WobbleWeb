@@ -90,7 +90,7 @@ function main_server(database_connection) {
         console.log("Complete Deletion");
     });
 
-    app.get('/add/node', (req, res) => {
+    app.post('/add/node', (req, res) => {
         console.log("Adding New Node");
         console.log(req);
         let nodeJson = req.Node;
