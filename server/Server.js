@@ -97,7 +97,7 @@ function main_server(database_connection) {
         console.log(req);
         console.log(req.body);
         let reqbody = req.body;
-        let nodeJson = reqbody.Node[0];
+        let nodeJson = reqbody.Node;
         let pathsJson = reqbody.Paths;
 
         database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${nodeJson.X},${nodeJson.Y},0,0,0,0)`, function(err, result, fields) {
