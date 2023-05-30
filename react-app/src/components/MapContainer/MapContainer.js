@@ -22,7 +22,7 @@ const MapContainer = ({nodeData, pathData}) => {
 
     //A function that creates all the paths
     const PathItems = pathData.map((item, index) => (
-        <Xarrow key = {index}
+        <Xarrow key = {index + 10}
             start = {item.Start_Node_Id}
             end = {item.End_Node_Id}
         />
