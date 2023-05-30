@@ -162,7 +162,7 @@ function main_server(database_connection) {
         //check path if it connects two nodes or not
 
 
-        //testing the webhook stuff v4
+        //testing the webhook stuff v5
         pathsJson.map((pathItem) => {
             database_connection.query(`INSERT INTO Paths VALUES (${pathItem.Start_Id},0,0,0,0)`, function(err, result, fields) {
             if (err) throw err;
