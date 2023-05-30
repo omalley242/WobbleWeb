@@ -1,5 +1,5 @@
 import './MapContainer.css'
-import Xarrow from 'react-xarrows';
+import Xarrow, { Xwrapper } from 'react-xarrows';
 
 const MapContainer = ({nodeData, pathData}) => {
 
@@ -32,12 +32,10 @@ const MapContainer = ({nodeData, pathData}) => {
 
     return (
         <div className='Map-Container' style={{display: 'flex', position: 'relative', height: 800, width: 1000, flexWrap: 'wrap', border: '3px solid #222', margin: 50}}>
-            {MapItems}
-            {PathItems}
-            <Xarrow
-                start = "0"
-                end = "1"
-            />
+            <Xwrapper>
+                {MapItems}
+                {PathItems}
+            </Xwrapper>
         </div>
     )
 }
