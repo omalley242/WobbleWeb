@@ -48,13 +48,6 @@ function main_server(database_connection) {
         console.log("Successful database connection");
     });
 
-    function defaultContentTypeMiddleware (req, res, next) {
-        req.headers['content-type'] = req.headers['content-type'] || 'application/json';
-        next();
-      }
-      
-    app.use(defaultContentTypeMiddleware);
-
     //tell the server to use static files within the react-build section
     app.use(express.static(path.join(__dirname, '../react-app/build')));
 
