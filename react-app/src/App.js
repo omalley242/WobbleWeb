@@ -6,8 +6,8 @@ import ReactPolling from 'react-polling/lib/ReactPolling';
 function App() {
 
   //define the inital states of the nodeData and its updated verion
-  const [nodeData, updateNodeData] = useState();
-  const [pathData, updatePathData] = useState();
+  const [nodeData, updateNodeData] = useState([]);
+  const [pathData, updatePathData] = useState([]);
 
   const fetchPathData = () => {
     //location.host gives the server ip
