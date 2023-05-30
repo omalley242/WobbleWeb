@@ -129,6 +129,9 @@ function main_server(database_connection) {
         let ALPHA = reqbody.HeadingAlpha;
         let GAMMA = reqbody.HeadingGamma;
 
+        console.log(ALPHA);
+        console.log(GAMMA);
+        
         ANG_ALPHA=ALPHA * Math.PI / 180;
         ANG_GAMMA=GAMMA * Math.PI / 180;
         
