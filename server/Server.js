@@ -92,11 +92,10 @@ function main_server(database_connection) {
         console.log("Complete Deletion");
     });
 
-    app.get('/add/node', bodyParser.json(), (req, res) => {
+    app.post('/add/node', bodyParser.json(), (req, res) => {
         console.log("Adding New Node");
         console.log(req.body);
-        console.log(req.toString());
-        let reqbody = req.data;
+
         let nodeJson = reqbody.Node[0];
         let pathsJson = reqbody.Paths;
 
