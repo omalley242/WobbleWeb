@@ -93,9 +93,9 @@ function main_server(database_connection) {
     app.get('/add/node', (req, res) => {
         console.log("Adding New Node");
         console.log(req);
-        database_connection.query(`INSERT INTO Nodes VALUES`, function(err, result, fields) {
-            if (err) throw err;
-        });
+        // database_connection.query(`INSERT INTO Nodes VALUES`, function(err, result, fields) {
+        //     if (err) throw err;
+        // });
 
         console.log("Added new Node");
     });
