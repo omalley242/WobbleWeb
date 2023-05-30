@@ -24,8 +24,8 @@ const MapContainer = ({nodeData, pathData}) => {
     const PathItems = pathData.map((item, index) => (
         <Xarrow 
             key={index}
-            start={"0"}
-            end={"1"}
+            start="0"
+            end="1"
         />
     ));
 
