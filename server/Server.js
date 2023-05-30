@@ -17,6 +17,8 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
+const bodyParser = require('body-parser');
+
 function server_init() {
 
     axios("https://checkip.amazonaws.com/").then(response => {
@@ -90,7 +92,7 @@ function main_server(database_connection) {
         console.log("Complete Deletion");
     });
 
-    app.get('/add/node', bodyParse.json(), (req, res) => {
+    app.get('/add/node', bodyParser.json(), (req, res) => {
         console.log("Adding New Node");
         console.log(req.body);
 
