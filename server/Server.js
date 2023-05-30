@@ -94,8 +94,8 @@ function main_server(database_connection) {
 
     app.post('/add/node', bodyParser.json(), (req, res) => {
         console.log("Adding New Node");
-        console.log(req);
         console.log(req.body);
+
         let reqbody = req.body;
         let nodeJson = reqbody.Node;
         let pathsJson = reqbody.Path;
@@ -104,8 +104,8 @@ function main_server(database_connection) {
             if (err) throw err;
         });
 
-        pathsJson.map((pathitem) => {
-            database_connection.query(`INSERT INTO Paths VALUES (${pathItemJson.Start_Id},0,0,0,0)`, function(err, result, fields) {
+        pathsJson.map((pathItem) => {
+            database_connection.query(`INSERT INTO Paths VALUES (${pathItem.Start_Id},0,0,0,0)`, function(err, result, fields) {
             if (err) throw err;
             });
         });
