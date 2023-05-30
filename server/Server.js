@@ -93,7 +93,7 @@ function main_server(database_connection) {
     app.post('/add/node', (req, res) => {
         console.log("Adding New Node");
         console.log(req);
-        let nodeJson = req.Node;
+        let nodeJson = req.Node[0];
         let pathsJson = req.Paths;
 
         database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${nodeJson.X},${nodeJson.Y},0,0,0,0)`, function(err, result, fields) {
