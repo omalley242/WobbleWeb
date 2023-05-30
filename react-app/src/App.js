@@ -75,9 +75,6 @@ function App() {
         <br/>
         <input type="url" id='IpAddressForm'>
         </input>
-        <div>
-
-        </div>
       </div>
     </div>
   );
