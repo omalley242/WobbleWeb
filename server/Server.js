@@ -46,10 +46,6 @@ function main_server(database_connection) {
         console.log("Successful database connection");
     });
 
-    app.configure(function(){
-        app.use(express.bodyParser());
-    });
-
     //tell the server to use static files within the react-build section
     app.use(express.static(path.join(__dirname, '../react-app/build')));
 
@@ -94,7 +90,7 @@ function main_server(database_connection) {
         console.log("Complete Deletion");
     });
 
-    app.get('/add/node', (req, res) => {
+    app.get('/add/node', bodyParse.json(), (req, res) => {
         console.log("Adding New Node");
         console.log(req.body);
 
