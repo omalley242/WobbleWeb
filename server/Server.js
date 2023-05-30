@@ -80,10 +80,10 @@ function main_server(database_connection) {
     app.get('/clear', (req, res) => {
         console.log("Deleting all rows");
 
-        database_connection.query("DELETE * FROM Nodes", function(err, result, fields) {
+        database_connection.query("DELETE FROM Nodes", function(err, result, fields) {
             if (err) throw err;
         });
-        database_connection.query("DELETE * FROM Paths", function(err, result, fields) {
+        database_connection.query("DELETE FROM Paths", function(err, result, fields) {
             if (err) throw err;
         });
 
@@ -93,9 +93,18 @@ function main_server(database_connection) {
     app.get('/add/node', (req, res) => {
         console.log("Adding New Node");
         console.log(req);
-        // database_connection.query(`INSERT INTO Nodes VALUES`, function(err, result, fields) {
-        //     if (err) throw err;
-        // });
+        let nodeJson = req.Node;
+        let pathsJson = req.Paths;
+
+        database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${nodeJson.X},${nodeJson.Y},0,0,0,0)`, function(err, result, fields) {
+            if (err) throw err;
+        });
+
+        pathsJson.map((pathitem) => {
+            database_connection.query(`INSERT INTO Paths VALUES (${pathItemJson.Start_Id},0,0,0,0)`, function(err, result, fields) {
+            if (err) throw err;
+            });
+        });
 
         console.log("Added new Node");
     });
