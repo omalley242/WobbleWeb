@@ -110,7 +110,7 @@ function main_server(database_connection) {
             });
         });
 
-        res.json("Recieved shiz");
+        res.status(200).json("Recieved shiz");
         console.log("Added new Node");
     });
 
