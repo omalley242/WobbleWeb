@@ -22,10 +22,7 @@ const MapContainer = ({nodeData, pathData}) => {
 
     //A function that creates all the paths
     const PathItems = pathData.map((item, index) => (
-        <Xarrow 
-            start="0"
-            end="1"
-        />
+
     ));
 
 
@@ -34,6 +31,10 @@ const MapContainer = ({nodeData, pathData}) => {
             <Xwrapper>
                 {MapItems}
                 {PathItems}
+                <Xarrow 
+                    start="0"       
+                    end="1"
+                />
             </Xwrapper>
         </div>
     )
