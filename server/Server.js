@@ -90,7 +90,7 @@ function main_server(database_connection) {
         console.log("Complete Deletion");
     });
 
-    app.put('/add/node', (req, res) => {
+    app.get('/add/node', (req, res) => {
         console.log("Adding New Node");
         console.log(req);
         database_connection.query(`INSERT INTO Nodes VALUES`, function(err, result, fields) {
