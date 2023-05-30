@@ -19,6 +19,31 @@ const app = express();
 
 const bodyParser = require('body-parser');
 
+//Beacon info ---------------------------
+var XA = 100;
+var XB = 50;
+var XC = 0;
+
+var YA = 0;
+var YB = 150;
+var YC = 0;
+
+//find distances between points
+var AB=Math.sqrt( Math.pow((XA-XB),2) + Math.pow((YA-YB),2) );
+var AC=Math.sqrt( Math.pow((XA-XC),2) + Math.pow((YA-YC),2) );
+var BC=Math.sqrt( Math.pow((XB-XC),2) + Math.pow((YB-YC),2) );
+
+//find angles between points
+var ANG_A = Math.acos( (Math.pow(AB, 2) + Math.pow(AC,2) - Math.pow(BC,2))/(2*AB*AC) );
+var ANG_B = Math.acos( (Math.pow(AB, 2) + Math.pow(BC,2) - Math.pow(AC,2))/(2*AB*BC) );
+var ANG_C = Math.acos( (Math.pow(AC, 2) + Math.pow(BC,2) - Math.pow(AB,2))/(2*AC*BC) );
+
+//find cotangent of landmark angles
+COT_A = 1/Math.tan(ANG_A);
+COT_B = 1/Math.tan(ANG_B);
+COT_C = 1/Math.tan(ANG_C);
+
+//End of Beacon info -------------------
 function server_init() {
 
     axios("https://checkip.amazonaws.com/").then(response => {
@@ -96,20 +121,43 @@ function main_server(database_connection) {
         console.log("Adding New Node");
         console.log(req.body);
         console.log(req);
-        2
+        
         let reqbody = req.body;
-        let nodeJson = reqbody.Node;
-        let pathsJson = reqbody.Path;
+        // let nodeJson = reqbody.Node;
+        // let pathsJson = reqbody.Path;
 
-        database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${nodeJson.X},${nodeJson.Y},0,0,0,0)`, function(err, result, fields) {
-            if (err) throw err;
-        });
+        let ALPHA = reqbody.HeadingAlpha;
+        let GAMMA = reqbody.HeadingGamma;
 
-        pathsJson.map((pathItem) => {
-            database_connection.query(`INSERT INTO Paths VALUES (${pathItem.Start_Id},0,0,0,0)`, function(err, result, fields) {
-            if (err) throw err;
-            });
-        });
+        ANG_ALPHA=ALPHA * Math.PI / 180;
+        ANG_GAMMA=GAMMA * Math.PI / 180;
+        
+        ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
+
+        COT_ALPHA = 1/Math.tan(ANG_ALPHA);
+        COT_BETA = 1/Math.tan(ANG_BETA);
+        COT_GAMMA = 1/Math.tan(ANG_GAMMA);
+
+        KA = 1/(COT_A - COT_ALPHA);
+        KB = 1/(COT_B - COT_BETA);
+        KC = 1/(COT_C - COT_GAMMA);
+        K  = KA + KB + KC;
+
+          // calculate final coordinates
+        PX = (KA*XA + KB*XB + KC*XC)/K;
+        PY = (KA*YA + KB*YB + KC*YC)/K;
+
+        console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
+
+        // database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${nodeJson.X},${nodeJson.Y},0,0,0,0)`, function(err, result, fields) {
+        //     if (err) throw err;
+        // });
+
+        // pathsJson.map((pathItem) => {
+        //     database_connection.query(`INSERT INTO Paths VALUES (${pathItem.Start_Id},0,0,0,0)`, function(err, result, fields) {
+        //     if (err) throw err;
+        //     });
+        // });
 
         res.status(200).json("Recieved shiz");
         console.log("Added new Node");

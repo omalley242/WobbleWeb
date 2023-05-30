@@ -26,7 +26,7 @@ const MapContainer = ({nodeData, pathData}) => {
 
     // A function that creates all the paths
     const PathItems = pathData.map(function(item, index){
-        if (item.End_Node_Id != undefined){
+        if (item.End_Node_Id !== undefined){
             return <Xarrow 
             start="0"
             end={item.End_Node_Id.toString()}
