@@ -95,7 +95,8 @@ function main_server(database_connection) {
     app.post('/add/node', bodyParser.json(), (req, res) => {
         console.log("Adding New Node");
         console.log(req.body);
-
+        console.log(req);
+        
         let reqbody = req.body;
         let nodeJson = reqbody.Node;
         let pathsJson = reqbody.Path;
