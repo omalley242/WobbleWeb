@@ -152,7 +152,7 @@ function main_server(database_connection) {
 
         console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
 
-        database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${nodeJson.PX},${nodeJson.PY},0,0,0,0)`, function(err, result, fields) {
+        database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${PX},${PY},0,0,0,0)`, function(err, result, fields) {
             if (err) throw err;
         });
 
