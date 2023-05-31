@@ -19,6 +19,9 @@ const app = express();
 
 const bodyParser = require('body-parser');
 
+//Id for storing nodes as unique within the database
+var NodeId = 0;
+
 //Beacon info ---------------------------
 var XA = 100;
 var XB = 50;
@@ -44,6 +47,8 @@ COT_B = 1/Math.tan(ANG_B);
 COT_C = 1/Math.tan(ANG_C);
 
 //End of Beacon info -------------------
+
+
 function server_init() {
 
     axios("https://checkip.amazonaws.com/").then(response => {
@@ -121,46 +126,59 @@ function main_server(database_connection) {
         console.log("Adding New Node");
         console.log(req.body);
         
-        let reqbody = req.body;
-        // let nodeJson = reqbody.Node;
-        // let pathsJson = reqbody.Path;
-        let nodeJson = reqbody.Node;
+        //Fetch Json from HTTP
+        let nodeJson = req.body.Node;
 
-        let ALPHA = nodeJson.HeadingAlpha;
-        let GAMMA = nodeJson.HeadingGamma;
-
-        console.log(ALPHA);
-        console.log(GAMMA);
+        //Set ALPHA and GAMMA Angles
+        let ANG_ALPHA = nodeJson.HeadingAlpha;
+        let ANG_GAMMA = nodeJson.HeadingGamma;
         
-        ANG_ALPHA=ALPHA * Math.PI / 180;
-        ANG_GAMMA=GAMMA * Math.PI / 180;
-        
+        //Find third angle between the other two
         ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
 
+        //Find cotangent angles
         COT_ALPHA = 1/Math.tan(ANG_ALPHA);
         COT_BETA = 1/Math.tan(ANG_BETA);
         COT_GAMMA = 1/Math.tan(ANG_GAMMA);
 
+        //Find Scalars from cotangents
         KA = 1/(COT_A - COT_ALPHA);
         KB = 1/(COT_B - COT_BETA);
         KC = 1/(COT_C - COT_GAMMA);
         K  = KA + KB + KC;
 
-          // calculate final coordinates
+        // calculate final coordinates
         PX = (KA*XA + KB*XB + KC*XC)/K;
         PY = (KA*YA + KB*YB + KC*YC)/K;
 
+        console.log("Position Calculated:");
         console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
 
-        //Check if node already exists (is very close to another one)
 
-        database_connection.query(`INSERT INTO Nodes VALUES (${nodeJson.Id},${PX},${PY},0,0,0,0)`, function(err, result, fields) {
-            if (err) throw err;
+        // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
+        //check for similar entries
+        database_connection.query(`SELECT ID FROM Nodes WHERE XCoordinate (BETWEEN ${PX - 5} AND ${PX + 5}) AND (BETWEEN ${PY - 5} AND ${PY + 5})) OR (BETWEEN ${ANG_ALPHA - 5} AND ${ANG_ALPHA + 5}) AND (BETWEEN ${ANG_BETA - 5} AND ${ANG_BETA + 5}) AND (BETWEEN ${ANG_GAMMA - 5} AND ${ANG_GAMMA + 5})) `, function(err, result, fields) {
+            if (err) 
+                throw err;
+            if (result) {
+                //If the node already exsists
+                console.log("This Node Already Exists");
+            } else {
+                //if the node doesnt exist 
+                console.log(`Adding Node with ID: ${NodeId}`);
+                database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},${ANG_ALPHA},${ANG_BETA},${ANG_GAMMA})`, function(err, result, fields) {
+                    if (err) 
+                        throw err;
+                    else {
+                        NodeId++;
+                    }
+                });
+                
+            }
         });
 
 
-        //check path if it connects two nodes or not
-
+        // Start_ID | End_ID | Heading From Start | Distance |
         pathsJson.map((pathItem) => {
             database_connection.query(`INSERT INTO Paths VALUES (${pathItem.Start_Id},0,0,0,0)`, function(err, result, fields) {
             if (err) throw err;
