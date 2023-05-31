@@ -233,6 +233,7 @@ function main_server(database_connection) {
         let currentId = addNode(ANG_ALPHA, ANG_GAMMA);
 
         console.log(currentId.Id);
+        console.log("test");
 
 
         nodeJson.Paths.map((item, currentId) => {
