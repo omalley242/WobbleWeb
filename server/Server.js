@@ -199,8 +199,7 @@ function main_server(database_connection) {
             }
         });
 
-        console.log(databaseResponse);
-
+        console.log( await databaseResponse);
     }
 
     function addPath(StartId, Heading){
