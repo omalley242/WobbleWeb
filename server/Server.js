@@ -162,7 +162,7 @@ function main_server(database_connection) {
         return {PX, PY};
     }
 
-    function addNode(ANG_ALPHA, ANG_GAMMA) {
+    async function addNode(ANG_ALPHA, ANG_GAMMA) {
         
         //Find third angle between the other two
         ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
