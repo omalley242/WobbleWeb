@@ -23,6 +23,7 @@ const bodyParser = require('body-parser');
 var NodeId = 0;
 
 var LastId;
+var currentId;
 
 //Beacon info ---------------------------
 var XA = 240;
@@ -162,7 +163,7 @@ function main_server(database_connection) {
         return {PX, PY};
     }
 
-    async function addNode(ANG_ALPHA, ANG_GAMMA) {
+    function addNode(ANG_ALPHA, ANG_GAMMA) {
         
         //Find third angle between the other two
         ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
@@ -182,19 +183,19 @@ function main_server(database_connection) {
                 if (result.length >= 2){
 
                     addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
-
-                    return {"Id": NodeId - 1};
                     
-                }
+                    currentId = NodeId - 1;
 
-                return result[0];
+                    
+                }else {
+                    currentId = result[0];
+                }
 
             } else {
                 addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
 
-                console.log(NodeId);
                 //return the old node id
-                return {"Id": NodeId - 1};
+                currentId = NodeId - 1;
             }
         });
 
@@ -225,23 +226,23 @@ function main_server(database_connection) {
         let ANG_ALPHA = nodeJson.HeadingAlpha;
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
-        addNode(ANG_ALPHA, ANG_GAMMA).then((currentId) => {
+        addNode(ANG_ALPHA, ANG_GAMMA)
 
-            console.log(currentId);
-            
-            nodeJson.Paths.map((item, currentId) => {
-                addPath(currentId,item.Heading);
-            });
-    
-            if (LastId !== undefined){
-    
-                completePath(LastId, currentId);
-            }
-    
-            LastId = currentId;
-    
-            res.status(200).json("Recieved shiz");
+        console.log(currentId);
+        
+        nodeJson.Paths.map((item, currentId) => {
+            addPath(currentId,item.Heading);
         });
+
+        if (LastId !== undefined){
+
+            completePath(LastId, currentId);
+        }
+
+        LastId = currentId;
+
+        res.status(200).json("Recieved shiz");
+        
 
     });
 
