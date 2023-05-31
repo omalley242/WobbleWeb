@@ -199,7 +199,8 @@ function main_server(database_connection) {
             }
         });
 
-        console.log( await databaseResponse);
+        fufilled = await databaseResponse;
+        console.log(fufilled);
     }
 
     function addPath(StartId, Heading){
