@@ -178,7 +178,6 @@ function main_server(database_connection) {
 
                 //If the node already exsists
                 console.log("This Node Already Exists Database Returned");
-                console.log(result);
 
                 if (result.length >= 2){
 
@@ -188,11 +187,11 @@ function main_server(database_connection) {
                     
                 }
 
-                return result;
+                return result[0];
 
             } else {
                 addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
-                console.log("This is happening");
+
                 console.log(NodeId);
                 //return the old node id
                 return {"Id": NodeId - 1};
