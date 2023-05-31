@@ -134,9 +134,6 @@ function main_server(database_connection) {
         database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},${ANG_ALPHA},${ANG_BETA},${ANG_GAMMA})`, function(err, result, fields) {
             if (err) 
                 throw err;
-            else {
-                NodeId += 1;
-            }
         });     
     }
 
@@ -186,6 +183,7 @@ function main_server(database_connection) {
                     
                     currentId = NodeId - 1;
 
+                    NodeId += 1;
                     
                 }else {
                     currentId = result[0].ID;
@@ -196,6 +194,8 @@ function main_server(database_connection) {
 
                 //return the old node id
                 currentId = NodeId - 1;
+
+                NodeId += 1;
             }
         });
 
@@ -228,8 +228,8 @@ function main_server(database_connection) {
         let ANG_ALPHA = nodeJson.HeadingAlpha;
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
-        addNode(ANG_ALPHA, ANG_GAMMA)
-        
+        addNode(ANG_ALPHA, ANG_GAMMA);
+                
         nodeJson.Paths.map((item, currentId) => {
             addPath(currentId,item.Heading);
         });
