@@ -232,8 +232,10 @@ function main_server(database_connection) {
         addNode(ANG_ALPHA, ANG_GAMMA);
                 
         pathArray = nodeJson.Paths
+
+        console.log("currentId " + currentId);
         for (let i=0; i<pathArray.length; i++){
-            addPath(currentId,pathArray[i].Heading);
+            addPath(currentId, pathArray[i].Heading);
         }
 
         if (LastId !== undefined){
