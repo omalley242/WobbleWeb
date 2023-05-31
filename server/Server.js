@@ -120,21 +120,7 @@ function main_server(database_connection) {
         console.log("Complete Deletion");
     });
 
-    app.post('/add/node', bodyParser.json(), (req, res) => {
-        console.log("Adding New Node");
-        console.log(req.body);
-        
-        //Fetch Json from HTTP
-        let nodeJson = req.body.Node;
-        let pathJson = req.body.Paths;
-
-        //Set ALPHA and GAMMA Angles
-        let ANG_ALPHA = nodeJson.HeadingAlpha;
-        let ANG_GAMMA = nodeJson.HeadingGamma;
-        
-        //Find third angle between the other two
-        ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
-
+    function calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA){
         console.log(`Angle Beta: ${ANG_BETA}`);
         //Find cotangent angles
         COT_ALPHA = 1/Math.tan(ANG_ALPHA);
@@ -153,8 +139,25 @@ function main_server(database_connection) {
 
         console.log("Position Calculated:");
         console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
+        return (PX, PY);
+    }
 
+    app.post('/add/node', bodyParser.json(), (req, res) => {
+        console.log("Adding New Node");
+        console.log(req.body);
+        
+        //Fetch Json from HTTP
+        let nodeJson = req.body.Node;
 
+        //Set ALPHA and GAMMA Angles
+        let ANG_ALPHA = nodeJson.HeadingAlpha;
+        let ANG_GAMMA = nodeJson.HeadingGamma;
+        
+        //Find third angle between the other two
+        ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
+
+        PX, PY = calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA);
+        
         // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
         //check for similar entries
         database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - 5} AND ${PX + 5}) AND (YCoordinate BETWEEN ${PY - 5} AND ${PY + 5})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - .1} AND ${ANG_ALPHA + .1}) AND (HeadingBeta BETWEEN ${ANG_BETA - .1} AND ${ANG_BETA + .1}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - .1} AND ${ANG_GAMMA + .1})) `, function(err, result, fields) {
@@ -179,19 +182,31 @@ function main_server(database_connection) {
             }
         });
 
+        res.status(200).json("Recieved shiz");
+    });
+
+    app.post('/add/path', bodyParser.json(), (req, res) => {
+        
+        //Fetch Json from Http
+        let pathJson = req.body.Paths;
+
+        //Set ALPHA and GAMMA Angles
+        let ANG_ALPHA = nodeJson.HeadingAlpha;
+        let ANG_GAMMA = nodeJson.HeadingGamma;
+        
+        //Find third angle between the other two
+        ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
+
         // StartId | EndId | Heading From Start | Distance |
         pathJson.map((pathItem) => {
-            if (pathItem.EndId === undefined){
-                pathItem.EndId = "NULL";
-            }
+
 
             database_connection.query(`INSERT INTO Paths VALUES (${pathItem.StartId},${pathItem.EndId},${pathItem.Heading},${pathItem.Distance})`, function(err, result, fields) {
             if (err) throw err;
             });                
-        });
 
-        res.status(200).json("Recieved shiz");
-    });
+        });
+    })
 
     console.log("starting server on port: " + PORT);
 
