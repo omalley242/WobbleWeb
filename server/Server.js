@@ -128,8 +128,6 @@ function main_server(database_connection) {
         
         //Fetch Json from HTTP
         let nodeJson = req.body.Node;
-
-        //webhook test
         
         //Set ALPHA and GAMMA Angles
         let ANG_ALPHA = nodeJson.HeadingAlpha;
@@ -138,6 +136,7 @@ function main_server(database_connection) {
         //Find third angle between the other two
         ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
 
+        console.log(`Angle Beta: ${ANG_BETA}`);
         //Find cotangent angles
         COT_ALPHA = 1/Math.tan(ANG_ALPHA);
         COT_BETA = 1/Math.tan(ANG_BETA);
