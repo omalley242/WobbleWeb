@@ -236,11 +236,14 @@ function main_server(database_connection) {
         });
 
         if (LastId !== undefined){
-
+            console.log("LastId = " + LastId);
+            console.log("currentId = " + currentId);
             completePath(currentId, LastId);
         }
 
         LastId = currentId;
+
+
 
         res.status(200).json("Recieved shiz");
         
