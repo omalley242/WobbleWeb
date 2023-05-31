@@ -139,7 +139,7 @@ function main_server(database_connection) {
 
         console.log("Position Calculated:");
         console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
-        return (PX, PY);
+        return {PX, PY};
     }
 
     app.post('/add/node', bodyParser.json(), (req, res) => {
