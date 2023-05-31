@@ -51,7 +51,7 @@ function App() {
     <div style={{display: 'flex', width: '100%', height: '100%', justifyContent: 'center', alignContent: 'center', padding: '0', margin: '0'}}>
       <ReactPolling
       url={`http://${window.location.host}/nodes`}
-      interval={1000}
+      interval={250}
       retryCount={2}
       onSuccess = {nodePollingSuccess}
       onFailure = {nodePollingFailure}
