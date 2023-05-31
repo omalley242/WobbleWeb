@@ -164,8 +164,9 @@ function main_server(database_connection) {
             if (result.length != 0) {
 
                 //If the node already exsists
-                console.log("This Node Already Exists");
+                console.log("This Node Already Exists Database Returned");
                 console.log(result);
+
             } else {
                 //if the node doesnt exist 
                 console.log(`Adding Node with ID: ${NodeId}`);
