@@ -159,7 +159,7 @@ function main_server(database_connection) {
 
         // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
         //check for similar entries
-        database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - 5} AND ${PX + 5}) AND (YCoordinate BETWEEN ${PY - 5} AND ${PY + 5})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - 5} AND ${ANG_ALPHA + 5}) AND (HeadingBeta BETWEEN ${ANG_BETA - 5} AND ${ANG_BETA + 5}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - 5} AND ${ANG_GAMMA + 5})) `, function(err, result, fields) {
+        database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - 5} AND ${PX + 5}) AND (YCoordinate BETWEEN ${PY - 5} AND ${PY + 5})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - .1} AND ${ANG_ALPHA + .1}) AND (HeadingBeta BETWEEN ${ANG_BETA - .1} AND ${ANG_BETA + .1}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - .1} AND ${ANG_GAMMA + .1})) `, function(err, result, fields) {
             if (err) 
                 throw err;
             if (result.length != 0) {
@@ -178,11 +178,10 @@ function main_server(database_connection) {
                         NodeId++;
                     }
                 });
-                
             }
         });
 
-        // Start_ID | End_ID | Heading From Start | Distance |
+        // StartId | EndId | Heading From Start | Distance |
         pathJson.map((pathItem) => {
             database_connection.query(`INSERT INTO Paths VALUES (${pathItem.StartId},${pathItem.EndId},${pathItem.Heading},${pathItem.Distance})`, function(err, result, fields) {
             if (err) throw err;
