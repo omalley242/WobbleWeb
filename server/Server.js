@@ -160,7 +160,33 @@ function main_server(database_connection) {
         return {PX, PY};
     }
 
-    async function addNode(ANG_ALPHA, ANG_GAMMA) {
+    function addPath(StartId, Heading){
+        // StartId | EndId | Heading From Start | Distance |
+        console.log("Adding Paths to Node");
+        database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, function(err, result, fields) {
+        if (err) throw err;
+        });                
+    }
+
+    function completePath(currentId, LastId){
+        console.log("Completing Path From and To Node Using");
+
+        // StartId | EndId | Heading From Start | Distance |
+        database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE StartId=${LastId}`, function(err, result, fields) {
+            if (err) throw err;
+        });        
+    }
+
+    app.post('/add/node', bodyParser.json(), (req, res) => {
+        console.log("Adding New Node");
+        console.log(req.body);
+        
+        //Fetch Json from HTTP
+        let nodeJson = req.body.Node;
+
+        //Set ALPHA and GAMMA Angles
+        let ANG_ALPHA = nodeJson.HeadingAlpha;
+        let ANG_GAMMA = nodeJson.HeadingGamma;
         
         //Find third angle between the other two
         ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
@@ -169,7 +195,7 @@ function main_server(database_connection) {
 
         // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
         //check for similar entries
-        let databaseResponse = database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - 5} AND ${PX + 5}) AND (YCoordinate BETWEEN ${PY - 5} AND ${PY + 5})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - .1} AND ${ANG_ALPHA + .1}) AND (HeadingBeta BETWEEN ${ANG_BETA - .1} AND ${ANG_BETA + .1}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - .1} AND ${ANG_GAMMA + .1})) `, function(err, result, fields) {
+        database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - 5} AND ${PX + 5}) AND (YCoordinate BETWEEN ${PY - 5} AND ${PY + 5})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - .1} AND ${ANG_ALPHA + .1}) AND (HeadingBeta BETWEEN ${ANG_BETA - .1} AND ${ANG_BETA + .1}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - .1} AND ${ANG_GAMMA + .1})) `, function(err, result, fields) {
             if (err) 
                 throw err;
             if (result.length != 0) {
@@ -199,40 +225,6 @@ function main_server(database_connection) {
             }
         });
 
-        fufilled = await databaseResponse;
-        console.log(fufilled);
-    }
-
-    function addPath(StartId, Heading){
-        // StartId | EndId | Heading From Start | Distance |
-        console.log("Adding Paths to Node");
-        database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, function(err, result, fields) {
-        if (err) throw err;
-        });                
-    }
-
-    function completePath(currentId, LastId){
-        console.log("Completing Path From and To Node Using");
-
-        // StartId | EndId | Heading From Start | Distance |
-        database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE StartId=${LastId}`, function(err, result, fields) {
-            if (err) throw err;
-        });        
-    }
-
-    app.post('/add/node', bodyParser.json(), (req, res) => {
-        console.log("Adding New Node");
-        console.log(req.body);
-        
-        //Fetch Json from HTTP
-        let nodeJson = req.body.Node;
-
-        //Set ALPHA and GAMMA Angles
-        let ANG_ALPHA = nodeJson.HeadingAlpha;
-        let ANG_GAMMA = nodeJson.HeadingGamma;
-        
-        addNode(ANG_ALPHA, ANG_GAMMA);
-          
         pathArray = nodeJson.Paths
 
         for (let i=0; i<pathArray.length; i++){
