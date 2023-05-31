@@ -161,7 +161,7 @@ function main_server(database_connection) {
         database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - 5} AND ${PX + 5}) AND (YCoordinate BETWEEN ${PY - 5} AND ${PY + 5})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - 5} AND ${ANG_ALPHA + 5}) AND (HeadingBeta BETWEEN ${ANG_BETA - 5} AND ${ANG_BETA + 5}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - 5} AND ${ANG_GAMMA + 5})) `, function(err, result, fields) {
             if (err) 
                 throw err;
-            if (result) {
+            if (result.length != 0) {
 
                 //If the node already exsists
                 console.log("This Node Already Exists");
