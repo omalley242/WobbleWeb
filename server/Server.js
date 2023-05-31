@@ -160,7 +160,7 @@ function main_server(database_connection) {
         return {PX, PY};
     }
 
-    function addNode(ANG_ALPHA, ANG_GAMMA) {
+    async function addNode(ANG_ALPHA, ANG_GAMMA) {
         
         //Find third angle between the other two
         ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
@@ -229,20 +229,20 @@ function main_server(database_connection) {
         let ANG_ALPHA = nodeJson.HeadingAlpha;
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
-        addNode(ANG_ALPHA, ANG_GAMMA);
+        addNode(ANG_ALPHA, ANG_GAMMA).then(() => {
+            pathArray = nodeJson.Paths
+
+            for (let i=0; i<pathArray.length; i++){
+                addPath(currentId, pathArray[i].Heading);
+            }
+    
+            if (LastId !== undefined){
+                console.log("LastId = " + LastId);
+                console.log("currentId = " + currentId);
+                completePath(currentId, LastId);
+            }
+        });
                 
-        pathArray = nodeJson.Paths
-
-        console.log("currentId " + currentId);
-        for (let i=0; i<pathArray.length; i++){
-            addPath(currentId, pathArray[i].Heading);
-        }
-
-        if (LastId !== undefined){
-            console.log("LastId = " + LastId);
-            console.log("currentId = " + currentId);
-            completePath(currentId, LastId);
-        }
 
         LastId = currentId;
 
