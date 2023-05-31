@@ -240,6 +240,8 @@ function main_server(database_connection) {
             completePath(LastId, currentId);
         }
 
+        LastId = currentId;
+
         res.status(200).json("Recieved shiz");
     });
 
