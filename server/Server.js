@@ -120,6 +120,19 @@ function main_server(database_connection) {
         console.log("Complete Deletion");
     });
 
+
+    function addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA){
+        //if the node doesnt exist 
+        console.log(`Adding Node with ID: ${NodeId}`);
+        database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},${ANG_ALPHA},${ANG_BETA},${ANG_GAMMA})`, function(err, result, fields) {
+            if (err) 
+                throw err;
+            else {
+                NodeId++;
+            }
+        });     
+    }
+
     function calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA){
         console.log(`Angle Beta: ${ANG_BETA}`);
         //Find cotangent angles
@@ -142,6 +155,42 @@ function main_server(database_connection) {
         return {PX, PY};
     }
 
+    function addNode(ANG_ALPHA, ANG_GAMMA) {
+        
+        //Find third angle between the other two
+        ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
+
+        let {PX, PY} = calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA);
+
+        // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
+        //check for similar entries
+        let result = database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - 5} AND ${PX + 5}) AND (YCoordinate BETWEEN ${PY - 5} AND ${PY + 5})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - .1} AND ${ANG_ALPHA + .1}) AND (HeadingBeta BETWEEN ${ANG_BETA - .1} AND ${ANG_BETA + .1}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - .1} AND ${ANG_GAMMA + .1})) `, function(err, result, fields) {
+            if (err) 
+                throw err;
+            if (result.length != 0) {
+
+                //If the node already exsists
+                console.log("This Node Already Exists Database Returned");
+                console.log(result);
+
+                if (result.length >= 2){
+                    //if the node doesnt exist 
+                    addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
+                }
+
+                return result;
+
+            } else {
+                addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
+
+                //return the old node id
+                return [{"Id": NodeId - 1}];
+            }
+        });
+
+        return result;
+    }
+
     app.post('/add/node', bodyParser.json(), (req, res) => {
         console.log("Adding New Node");
         console.log(req.body);
@@ -153,34 +202,7 @@ function main_server(database_connection) {
         let ANG_ALPHA = nodeJson.HeadingAlpha;
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
-        //Find third angle between the other two
-        ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
-
-        let {PX, PY} = calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA);
-
-        // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
-        //check for similar entries
-        database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - 5} AND ${PX + 5}) AND (YCoordinate BETWEEN ${PY - 5} AND ${PY + 5})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - .1} AND ${ANG_ALPHA + .1}) AND (HeadingBeta BETWEEN ${ANG_BETA - .1} AND ${ANG_BETA + .1}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - .1} AND ${ANG_GAMMA + .1})) `, function(err, result, fields) {
-            if (err) 
-                throw err;
-            if (result.length != 0) {
-
-                //If the node already exsists
-                console.log("This Node Already Exists Database Returned");
-                console.log(result);
-
-            } else {
-                //if the node doesnt exist 
-                console.log(`Adding Node with ID: ${NodeId}`);
-                database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},${ANG_ALPHA},${ANG_BETA},${ANG_GAMMA})`, function(err, result, fields) {
-                    if (err) 
-                        throw err;
-                    else {
-                        NodeId++;
-                    }
-                });
-            }
-        });
+        addNode(ANG_ALPHA, ANG_GAMMA);
 
         res.status(200).json("Recieved shiz");
     });
@@ -191,20 +213,24 @@ function main_server(database_connection) {
         let pathJson = req.body.Paths;
 
         //Set ALPHA and GAMMA Angles
-        let ANG_ALPHA = nodeJson.HeadingAlpha;
-        let ANG_GAMMA = nodeJson.HeadingGamma;
+        let S_ANG_ALPHA = pathJson.StartHeadingAlpha;
+        let S_ANG_GAMMA = pathJson.StartHeadingGamma;
+
+        let E_ANG_ALPHA = pathJson.EndHeadingAlpha;
+        let E_ANG_GAMMA = pathJson.EndHeadingGamma;
         
         //Find third angle between the other two
-        ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
+        S_ANG_BETA=2*Math.PI - S_ANG_ALPHA - S_ANG_GAMMA;
+
+        let StartId = addNode(S_ANG_ALPHA, S_ANG_GAMMA);
+        let EndId = addNode(E_ANG_ALPHA, E_ANG_GAMMA);
 
         // StartId | EndId | Heading From Start | Distance |
         pathJson.map((pathItem) => {
-
-
             database_connection.query(`INSERT INTO Paths VALUES (${pathItem.StartId},${pathItem.EndId},${pathItem.Heading},${pathItem.Distance})`, function(err, result, fields) {
             if (err) throw err;
             });                
-
+            
         });
     })
 
