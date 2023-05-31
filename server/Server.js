@@ -181,9 +181,13 @@ function main_server(database_connection) {
 
         // StartId | EndId | Heading From Start | Distance |
         pathJson.map((pathItem) => {
+            if (pathItem.EndId === undefined){
+                pathItem.EndId = "NULL";
+            }
+
             database_connection.query(`INSERT INTO Paths VALUES (${pathItem.StartId},${pathItem.EndId},${pathItem.Heading},${pathItem.Distance})`, function(err, result, fields) {
             if (err) throw err;
-            });
+            });                
         });
 
         res.status(200).json("Recieved shiz");
