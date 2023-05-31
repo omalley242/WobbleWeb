@@ -230,24 +230,22 @@ function main_server(database_connection) {
         let ANG_ALPHA = nodeJson.HeadingAlpha;
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
-        let currentId = addNode(ANG_ALPHA, ANG_GAMMA);
-
-        console.log(currentId.Id);
-        console.log("test");
-
-
-        nodeJson.Paths.map((item, currentId) => {
-            addPath(currentId,item.Heading);
+        addNode(ANG_ALPHA, ANG_GAMMA).then((currentId) => {
+            
+            nodeJson.Paths.map((item, currentId) => {
+                addPath(currentId,item.Heading);
+            });
+    
+            if (LastId !== undefined){
+    
+                completePath(LastId, currentId);
+            }
+    
+            LastId = currentId;
+    
+            res.status(200).json("Recieved shiz");
         });
 
-        if (LastId !== undefined){
-
-            completePath(LastId, currentId);
-        }
-
-        LastId = currentId;
-
-        res.status(200).json("Recieved shiz");
     });
 
     console.log("starting server on port: " + PORT);
