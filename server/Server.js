@@ -188,11 +188,11 @@ function main_server(database_connection) {
                     
                 }
 
-                return result[0];
+                return result;
 
             } else {
                 addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
-
+                console.log("This is happening");
                 //return the old node id
                 return {"Id": NodeId - 1};
             }
