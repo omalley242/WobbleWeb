@@ -188,7 +188,7 @@ function main_server(database_connection) {
 
                     
                 }else {
-                    currentId = result[0];
+                    currentId = result[0].ID;
                 }
 
             } else {
