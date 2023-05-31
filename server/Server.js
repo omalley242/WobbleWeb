@@ -158,7 +158,7 @@ function main_server(database_connection) {
 
         // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
         //check for similar entries
-        database_connection.query(`SELECT ID FROM Nodes WHERE XCoordinate (BETWEEN ${PX - 5} AND ${PX + 5}) AND (BETWEEN ${PY - 5} AND ${PY + 5})) OR (BETWEEN ${ANG_ALPHA - 5} AND ${ANG_ALPHA + 5}) AND (BETWEEN ${ANG_BETA - 5} AND ${ANG_BETA + 5}) AND (BETWEEN ${ANG_GAMMA - 5} AND ${ANG_GAMMA + 5})) `, function(err, result, fields) {
+        database_connection.query(`SELECT ID FROM Nodes WHERE XCoordinate ((BETWEEN ${PX - 5} AND ${PX + 5}) AND (BETWEEN ${PY - 5} AND ${PY + 5})) OR (BETWEEN ${ANG_ALPHA - 5} AND ${ANG_ALPHA + 5}) AND (BETWEEN ${ANG_BETA - 5} AND ${ANG_BETA + 5}) AND (BETWEEN ${ANG_GAMMA - 5} AND ${ANG_GAMMA + 5})) `, function(err, result, fields) {
             if (err) 
                 throw err;
             if (result) {
