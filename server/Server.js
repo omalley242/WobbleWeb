@@ -156,7 +156,7 @@ function main_server(database_connection) {
         //Find third angle between the other two
         ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
 
-        let (PX, PY) = calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA);
+        let {PX, PY} = calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA);
 
         // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
         //check for similar entries
