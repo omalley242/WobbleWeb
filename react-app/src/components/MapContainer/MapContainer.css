@@ -8,6 +8,7 @@
 .node {
   height: 1vw;
   width: 1vw;
+  stroke: black;
 }
 
 .node:hover .node-path {
