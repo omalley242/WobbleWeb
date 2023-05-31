@@ -106,7 +106,7 @@ function main_server(database_connection) {
 
     //Fetch the paths within the database
     app.get('/paths', (req, res) => {
-        database_connection.query("SELECT * FROM Paths WHERE StartId!=NULL AND EndId!=NULL", function(err, result, fields) {
+        database_connection.query("SELECT * FROM Paths WHERE StartId IS NOT NULL AND EndId IS NOT NULL", function(err, result, fields) {
             if (err) throw err;
             res.json(result);
         });
@@ -209,6 +209,7 @@ function main_server(database_connection) {
     }
 
     function completePath(currentId, LastId){
+
     // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE StartId=${LastId}`, function(err, result, fields) {
             if (err) throw err;
@@ -227,11 +228,8 @@ function main_server(database_connection) {
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
         addNode(ANG_ALPHA, ANG_GAMMA)
-
-        console.log(currentId);
         
         nodeJson.Paths.map((item, currentId) => {
-            console.log("test");
             addPath(currentId,item.Heading);
         });
 
