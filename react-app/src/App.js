@@ -44,7 +44,7 @@ function App() {
   }
 
   const resetDatabase = () => {
-    return fetch(`http://${window.location.host}/clear`).then(window.location.reload());
+    return fetch(`http://${window.location.host}/clear`).then(() => window.location.reload());
   }
 
   return (
