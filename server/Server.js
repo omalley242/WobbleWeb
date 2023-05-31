@@ -230,8 +230,9 @@ function main_server(database_connection) {
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
         addNode(ANG_ALPHA, ANG_GAMMA).then(() => {
+            console.log(currentId);
+
             nodeJson.Paths.map((item) => {
-                console.log(currentId);
                 addPath(currentId,item.Heading);
             });
     
