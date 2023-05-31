@@ -114,8 +114,9 @@ function main_server(database_connection) {
 
     //Delete all data within the database
     app.get('/clear', (req, res) => {
-        console.log("Deleting all rows");
 
+        console.log("Deleting all rows");
+        NodeId = 0;
         database_connection.query("DELETE FROM Nodes", function(err, result, fields) {
             if (err) throw err;
         });
