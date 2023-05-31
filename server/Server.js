@@ -22,6 +22,8 @@ const bodyParser = require('body-parser');
 //Id for storing nodes as unique within the database
 var NodeId = 0;
 
+var LastId;
+
 //Beacon info ---------------------------
 var XA = 240;
 var XB = 120;
@@ -93,6 +95,7 @@ function main_server(database_connection) {
         res.status(200).json({direction: "left"});
     });
 
+    //Fetch the nodes within the database
     app.get('/nodes', (req, res) => {
         database_connection.query("SELECT * FROM Nodes", function(err, result, fields) {
             if (err) throw err;
@@ -100,6 +103,7 @@ function main_server(database_connection) {
         });
     });
 
+    //Fetch the paths within the database
     app.get('/paths', (req, res) => {
         database_connection.query("SELECT * FROM Paths", function(err, result, fields) {
             if (err) throw err;
@@ -107,6 +111,7 @@ function main_server(database_connection) {
         });
     });
 
+    //Delete all data within the database
     app.get('/clear', (req, res) => {
         console.log("Deleting all rows");
 
@@ -121,6 +126,7 @@ function main_server(database_connection) {
     });
 
 
+    //A function to add a node to the database
     function addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA){
         //if the node doesnt exist 
         console.log(`Adding Node with ID: ${NodeId}`);
@@ -133,6 +139,7 @@ function main_server(database_connection) {
         });     
     }
 
+    //Algorithm to find position
     function calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA){
         console.log(`Angle Beta: ${ANG_BETA}`);
         //Find cotangent angles
@@ -174,21 +181,42 @@ function main_server(database_connection) {
                 console.log(result);
 
                 if (result.length >= 2){
-                    //if the node doesnt exist 
+
                     addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
+
+                    return {"Id": NodeId - 1};
+                    
                 }
 
-                return result;
+                return result[0];
 
             } else {
                 addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
 
                 //return the old node id
-                return [{"Id": NodeId - 1}];
+                return {"Id": NodeId - 1};
             }
         });
 
         return result;
+    }
+
+    function addPath(StartId, Heading){
+        // StartId | EndId | Heading From Start | Distance |
+        database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, function(err, result, fields) {
+        if (err) throw err;
+        });                
+    }
+
+    function completePath(LastId, CurrentId){
+
+        //fetch all paths with curret and last id 
+        //if there is a heading between 2 of the paths where 
+
+        // StartId | EndId | Heading From Start | Distance |
+        database_connection.query(`UPDATE Paths SET EndId=${CurrentId} WHERE StartId=${LastId}`, function(err, result, fields) {
+            if (err) throw err;
+        });        
     }
 
     app.post('/add/node', bodyParser.json(), (req, res) => {
@@ -202,37 +230,18 @@ function main_server(database_connection) {
         let ANG_ALPHA = nodeJson.HeadingAlpha;
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
-        addNode(ANG_ALPHA, ANG_GAMMA);
+        let currentId = addNode(ANG_ALPHA, ANG_GAMMA).Id;
+
+        if (LastId !== undefined){
+            nodeJson.Paths.map((item) => {
+                addPath(currentId,item.Heading);
+            });
+
+            completePath(LastId, currentId);
+        }
 
         res.status(200).json("Recieved shiz");
     });
-
-    app.post('/add/path', bodyParser.json(), (req, res) => {
-        
-        //Fetch Json from Http
-        let pathJson = req.body.Paths;
-
-        //Set ALPHA and GAMMA Angles
-        let S_ANG_ALPHA = pathJson.StartHeadingAlpha;
-        let S_ANG_GAMMA = pathJson.StartHeadingGamma;
-
-        let E_ANG_ALPHA = pathJson.EndHeadingAlpha;
-        let E_ANG_GAMMA = pathJson.EndHeadingGamma;
-        
-        //Find third angle between the other two
-        S_ANG_BETA=2*Math.PI - S_ANG_ALPHA - S_ANG_GAMMA;
-
-        let StartId = addNode(S_ANG_ALPHA, S_ANG_GAMMA);
-        let EndId = addNode(E_ANG_ALPHA, E_ANG_GAMMA);
-
-        // StartId | EndId | Heading From Start | Distance |
-        pathJson.map((pathItem) => {
-            database_connection.query(`INSERT INTO Paths VALUES (${pathItem.StartId},${pathItem.EndId},${pathItem.Heading},${pathItem.Distance})`, function(err, result, fields) {
-            if (err) throw err;
-            });                
-            
-        });
-    })
 
     console.log("starting server on port: " + PORT);
 
