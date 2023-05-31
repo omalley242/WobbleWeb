@@ -134,7 +134,7 @@ function main_server(database_connection) {
             if (err) 
                 throw err;
             else {
-                NodeId++;
+                NodeId += 1;
             }
         });     
     }
