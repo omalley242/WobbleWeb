@@ -5,7 +5,7 @@ const MapContainer = ({nodeData, pathData}) => {
 
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
     const MapItems = nodeData.map((item, index) => (
-        <div key={index} className='Map-Item' style={{position: 'absolute', left: `${item.X_Pos}%`, bottom: `${item.Y_Pos}%`}}>
+        <div key={index} className='Map-Item' style={{position: 'absolute', left: `${item.XCoordinate}%`, bottom: `${item.YCoordinate}%`}}>
 
 
             <svg class='node' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
