@@ -17,7 +17,7 @@ const MapContainer = ({nodeData, pathData}) => {
             </svg>                   
         </div>
     ));
-
+3
     // A function that creates all the paths
     const PathItems = pathData.map(function(item, index){
         if (item.EndId !== undefined){
