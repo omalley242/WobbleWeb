@@ -183,7 +183,7 @@ function main_server(database_connection) {
                     
                     currentId = NodeId;
 
-                    NodeId += 1;
+                    NodeId = NodeId + 1;
                     
                 }else {
                     currentId = result[0].ID;
@@ -195,7 +195,7 @@ function main_server(database_connection) {
                 //return the old node id
                 currentId = NodeId;
 
-                NodeId += 1;
+                NodeId = NodeId + 1;
             }
         });
 
