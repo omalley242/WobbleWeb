@@ -237,7 +237,7 @@ function main_server(database_connection) {
 
         if (LastId !== undefined){
 
-            completePath(LastId, currentId);
+            completePath(currentId, LastId);
         }
 
         LastId = currentId;
