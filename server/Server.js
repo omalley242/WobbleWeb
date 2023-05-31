@@ -183,7 +183,7 @@ function main_server(database_connection) {
         });
 
         // Start_ID | End_ID | Heading From Start | Distance |
-        pathsJson.map((pathItem) => {
+        pathJson.map((pathItem) => {
             database_connection.query(`INSERT INTO Paths VALUES (${pathItem.StartId},${pathItem.EndId},${pathItem.Heading},${pathItem.Distance})`, function(err, result, fields) {
             if (err) throw err;
             });
