@@ -17,10 +17,9 @@ const MapContainer = ({nodeData, pathData}) => {
             </svg>                   
         </div>
     ));
-    
+
     // A function that creates all the paths
     const PathItems = pathData.map(function(item, index){
-        if (item.EndId !== undefined){
             return <Xarrow 
             start={item.StartId.toString()}
             end={item.EndId.toString()}
@@ -28,10 +27,6 @@ const MapContainer = ({nodeData, pathData}) => {
             strokeWidth={2}
             headSize={3}
             />;
-        }else {
-            return <svg style={{height: 20, width: 20}}><rect style={{height: 20, width:20, fill: 'black'}}></rect></svg>;
-        }
-
         });
     
     return (
