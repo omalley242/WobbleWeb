@@ -23,12 +23,12 @@ const bodyParser = require('body-parser');
 var NodeId = 0;
 
 //Beacon info ---------------------------
-var XA = 100;
-var XB = 50;
+var XA = 240;
+var XB = 120;
 var XC = 0;
 
 var YA = 0;
-var YB = 150;
+var YB = 360;
 var YC = 0;
 
 //find distances between points
