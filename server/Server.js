@@ -94,7 +94,6 @@ function main_server(database_connection) {
     });
 
     app.get('/nodes', (req, res) => {
-        console.log("Fetching all nodes");
         database_connection.query("SELECT * FROM Nodes", function(err, result, fields) {
             if (err) throw err;
             res.json(result);
@@ -102,7 +101,6 @@ function main_server(database_connection) {
     });
 
     app.get('/paths', (req, res) => {
-        console.log("Fetching all paths");
         database_connection.query("SELECT * FROM Paths", function(err, result, fields) {
             if (err) throw err;
             res.json(result);
