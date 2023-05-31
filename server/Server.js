@@ -229,20 +229,20 @@ function main_server(database_connection) {
         let ANG_ALPHA = nodeJson.HeadingAlpha;
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
-        addNode(ANG_ALPHA, ANG_GAMMA);
-                
-        nodeJson.Paths.map((currentId, item) => {
-            console.log(currentId);
-            addPath(currentId,item.Heading);
+        addNode(ANG_ALPHA, ANG_GAMMA).then(() => {
+            nodeJson.Paths.map((item) => {
+                console.log(currentId);
+                addPath(currentId,item.Heading);
+            });
+    
+            if (LastId !== undefined){
+                console.log("LastId = " + LastId);
+                console.log("currentId = " + currentId);
+                completePath(currentId, LastId);
+            }
+    
+            LastId = currentId;
         });
-
-        if (LastId !== undefined){
-            console.log("LastId = " + LastId);
-            console.log("currentId = " + currentId);
-            completePath(currentId, LastId);
-        }
-
-        LastId = currentId;
 
 
 
