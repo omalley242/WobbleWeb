@@ -203,13 +203,14 @@ function main_server(database_connection) {
 
     function addPath(StartId, Heading){
         // StartId | EndId | Heading From Start | Distance |
+        console.log("Adding Paths to Node");
         database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, function(err, result, fields) {
         if (err) throw err;
         });                
     }
 
     function completePath(currentId, LastId){
-
+        console.log("Completing Path From and To Node");
     // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE StartId=${LastId}`, function(err, result, fields) {
             if (err) throw err;
