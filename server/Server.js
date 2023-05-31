@@ -162,8 +162,10 @@ function main_server(database_connection) {
             if (err) 
                 throw err;
             if (result) {
+
                 //If the node already exsists
                 console.log("This Node Already Exists");
+                console.log(result);
             } else {
                 //if the node doesnt exist 
                 console.log(`Adding Node with ID: ${NodeId}`);
@@ -187,7 +189,6 @@ function main_server(database_connection) {
         // });
 
         res.status(200).json("Recieved shiz");
-        console.log("Added new Node");
     });
 
     console.log("starting server on port: " + PORT);
