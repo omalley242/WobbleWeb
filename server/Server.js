@@ -128,7 +128,8 @@ function main_server(database_connection) {
         
         //Fetch Json from HTTP
         let nodeJson = req.body.Node;
-        
+        let pathJson = req.body.Paths;
+
         //Set ALPHA and GAMMA Angles
         let ANG_ALPHA = nodeJson.HeadingAlpha;
         let ANG_GAMMA = nodeJson.HeadingGamma;
@@ -181,13 +182,12 @@ function main_server(database_connection) {
             }
         });
 
-
         // Start_ID | End_ID | Heading From Start | Distance |
-        // pathsJson.map((pathItem) => {
-        //     database_connection.query(`INSERT INTO Paths VALUES (${pathItem.Start_Id},0,0,0,0)`, function(err, result, fields) {
-        //     if (err) throw err;
-        //     });
-        // });
+        pathsJson.map((pathItem) => {
+            database_connection.query(`INSERT INTO Paths VALUES (${pathItem.StartId},${pathItem.EndId},${pathItem.Heading},${pathItem.Distance})`, function(err, result, fields) {
+            if (err) throw err;
+            });
+        });
 
         res.status(200).json("Recieved shiz");
     });
