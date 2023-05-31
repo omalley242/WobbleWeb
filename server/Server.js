@@ -209,8 +209,7 @@ function main_server(database_connection) {
     }
 
     function completePath(currentId, LastId){
-        console.log(currentId);
-        console.log(LastId);        // StartId | EndId | Heading From Start | Distance |
+    // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE StartId=${LastId}`, function(err, result, fields) {
             if (err) throw err;
         });        
@@ -228,6 +227,8 @@ function main_server(database_connection) {
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
         addNode(ANG_ALPHA, ANG_GAMMA).then((currentId) => {
+
+            console.log(currentId);
             
             nodeJson.Paths.map((item, currentId) => {
                 addPath(currentId,item.Heading);
