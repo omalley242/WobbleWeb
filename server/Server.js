@@ -223,27 +223,24 @@ function main_server(database_connection) {
 
                 NodeId = NodeId + 1;
             }
+
+            pathArray = nodeJson.Paths
+
+            for (let i=0; i<pathArray.length; i++){
+                addPath(currentId, pathArray[i].Heading);
+            }
+    
+            if (LastId !== undefined){
+                console.log("LastId = " + LastId);
+                console.log("currentId = " + currentId);
+                completePath(currentId, LastId);
+            }
+    
+            LastId = currentId;
         });
 
-        pathArray = nodeJson.Paths
-
-        for (let i=0; i<pathArray.length; i++){
-            addPath(currentId, pathArray[i].Heading);
-        }
-
-        if (LastId !== undefined){
-            console.log("LastId = " + LastId);
-            console.log("currentId = " + currentId);
-            completePath(currentId, LastId);
-        }
-
-        LastId = currentId;
-
-
-
         res.status(200).json("Recieved shiz");
-        
-
+    
     });
 
     console.log("starting server on port: " + PORT);
