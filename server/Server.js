@@ -156,8 +156,8 @@ function main_server(database_connection) {
         //Find third angle between the other two
         ANG_BETA=2*Math.PI - ANG_ALPHA - ANG_GAMMA;
 
-        PX, PY = calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA);
-        
+        let PX, PY = calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA);
+
         // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
         //check for similar entries
         database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - 5} AND ${PX + 5}) AND (YCoordinate BETWEEN ${PY - 5} AND ${PY + 5})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - .1} AND ${ANG_ALPHA + .1}) AND (HeadingBeta BETWEEN ${ANG_BETA - .1} AND ${ANG_BETA + .1}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - .1} AND ${ANG_GAMMA + .1})) `, function(err, result, fields) {
