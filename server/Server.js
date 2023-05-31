@@ -193,6 +193,7 @@ function main_server(database_connection) {
             } else {
                 addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
                 console.log("This is happening");
+                console.log(NodeId);
                 //return the old node id
                 return {"Id": NodeId - 1};
             }
@@ -230,7 +231,7 @@ function main_server(database_connection) {
         let ANG_ALPHA = nodeJson.HeadingAlpha;
         let ANG_GAMMA = nodeJson.HeadingGamma;
         
-        let currentId = addNode(ANG_ALPHA, ANG_GAMMA);
+        let currentId = addNode(ANG_ALPHA, ANG_GAMMA).Id;
 
         console.log(currentId);
         nodeJson.Paths.map((item) => {
