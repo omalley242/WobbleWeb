@@ -181,7 +181,7 @@ function main_server(database_connection) {
 
                     addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
                     
-                    currentId = NodeId - 1;
+                    currentId = NodeId;
 
                     NodeId += 1;
                     
@@ -193,7 +193,7 @@ function main_server(database_connection) {
                 addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
 
                 //return the old node id
-                currentId = NodeId - 1;
+                currentId = NodeId;
 
                 NodeId += 1;
             }
@@ -211,8 +211,7 @@ function main_server(database_connection) {
 
     function completePath(currentId, LastId){
         console.log("Completing Path From and To Node Using");
-        console.log(currentId);
-        console.log(LastId);
+
     // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE StartId=${LastId}`, function(err, result, fields) {
             if (err) throw err;
