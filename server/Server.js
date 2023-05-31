@@ -209,7 +209,8 @@ function main_server(database_connection) {
     }
 
     function completePath(currentId, LastId){
-        // StartId | EndId | Heading From Start | Distance |
+        console.log(currentId);
+        console.log(LastId);        // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE StartId=${LastId}`, function(err, result, fields) {
             if (err) throw err;
         });        
