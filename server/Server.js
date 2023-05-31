@@ -231,6 +231,7 @@ function main_server(database_connection) {
         console.log(currentId);
         
         nodeJson.Paths.map((item, currentId) => {
+            console.log("test");
             addPath(currentId,item.Heading);
         });
 
