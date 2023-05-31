@@ -105,7 +105,7 @@ function main_server(database_connection) {
 
     //Fetch the paths within the database
     app.get('/paths', (req, res) => {
-        database_connection.query("SELECT * FROM Paths", function(err, result, fields) {
+        database_connection.query("SELECT * FROM Paths WHERE StartId!=NULL AND EndId!=NULL", function(err, result, fields) {
             if (err) throw err;
             res.json(result);
         });
