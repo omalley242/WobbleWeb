@@ -173,7 +173,7 @@ function main_server(database_connection) {
         console.log("Completing Path From and To Node Using");
 
         // StartId | EndId | Heading From Start | Distance |
-        database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId=NULL)`, function(err, result, fields) {
+        database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, function(err, result, fields) {
             if (err) throw err;
         });        
     }
@@ -240,7 +240,7 @@ function main_server(database_connection) {
             LastId = currentId;
         });
 
-        res.status(200).json("Recieved shiz");
+        res.status(200).json(`Recieved Node With Id: "${LastId}"`);
     
     });
 
