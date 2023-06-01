@@ -162,10 +162,6 @@ function main_server(database_connection) {
         return {PX, PY};
     }
 
-    function calculateTravelledHeading() {
-
-    }
-
     function addPath(StartId, Heading){
         // StartId | EndId | Heading From Start | Distance |
         console.log("Adding Paths to Node");

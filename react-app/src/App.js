@@ -44,7 +44,7 @@ function App() {
   }
 
   const resetDatabase = () => {
-    return fetch(`http://${window.location.host}/clear`).then(fetchNodeData).then(fetchPathData);
+    return fetch(`http://${window.location.host}/clear`).then(fetchNodeData.then(nodePollingSuccess)).then(fetchPathData.then(nodePollingSuccess));
   }
 
   return (
