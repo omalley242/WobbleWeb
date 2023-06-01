@@ -1,6 +1,10 @@
 
 //SETUP CODE =========================================================
 
+var MergeRadius = 5;
+var MergeAngle = 0.1;
+var HeadingMergeAngle = 0.1;
+
 //fetch the mysql node library
 var sql = require('mysql');
 
@@ -69,7 +73,7 @@ function server_init() {
 
     }, err => {
 
-        console.log(`error ${err.message}`);
+        console.log(`error connecting to database: ${err.message}`);
     });
 }
 
@@ -87,13 +91,6 @@ function main_server(database_connection) {
     //For any get request send /react-app/build/index.html (except for linked files within the html)
     app.get('/', (req, res) => {
         res.sendFile(path.resolve(__dirname, '..','react-app', 'build', 'index.html'))
-    });
-
-    //Handle requests from the esp32 
-    app.get('/esp', (req, res) => {
-        console.log("-----Esp32 Message Recieved-----");
-        console.log("Message of type GET");
-        res.status(200).json({direction: "left"});
     });
 
     //Fetch the nodes within the database
@@ -115,8 +112,13 @@ function main_server(database_connection) {
     //Delete all data within the database
     app.get('/clear', (req, res) => {
 
-        console.log("Deleting all rows");
+        //Reseting Global vars
         NodeId = 0;
+        currentId = undefined;
+        LastId = undefined;
+
+        //Reseting the database
+        console.log("Deleting all rows");
         database_connection.query("DELETE FROM Nodes", function(err, result, fields) {
             if (err) throw err;
         });
@@ -124,13 +126,12 @@ function main_server(database_connection) {
             if (err) throw err;
         });
 
-        console.log("Complete Deletion");
+        console.log("Reset Complete");
     });
 
 
     //A function to add a node to the database
-    function addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA){
-        //if the node doesnt exist 
+    function addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_BETA, ANG_GAMMA){
         console.log(`Adding Node with ID: ${NodeId}`);
         database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},${ANG_ALPHA},${ANG_BETA},${ANG_GAMMA})`, function(err, result, fields) {
             if (err) 
@@ -161,6 +162,10 @@ function main_server(database_connection) {
         return {PX, PY};
     }
 
+    function calculateTravelledHeading() {
+
+    }
+
     function addPath(StartId, Heading){
         // StartId | EndId | Heading From Start | Distance |
         console.log("Adding Paths to Node");
@@ -172,6 +177,7 @@ function main_server(database_connection) {
     function completePath(currentId, LastId){
         console.log("Completing Path From and To Node Using");
 
+        //Compare Headings Here
         // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, function(err, result, fields) {
             if (err) throw err;
@@ -196,7 +202,7 @@ function main_server(database_connection) {
 
         // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
         //check for similar entries
-        database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - 5} AND ${PX + 5}) AND (YCoordinate BETWEEN ${PY - 5} AND ${PY + 5})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - .1} AND ${ANG_ALPHA + .1}) AND (HeadingBeta BETWEEN ${ANG_BETA - .1} AND ${ANG_BETA + .1}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - .1} AND ${ANG_GAMMA + .1})) `, function(err, result, fields) {
+        database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - MergeRadius} AND ${PX + MergeRadius}) AND (YCoordinate BETWEEN ${PY - MergeRadius} AND ${PY + MergeRadius})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - MergeAngle} AND ${ANG_ALPHA + MergeAngle}) AND (HeadingBeta BETWEEN ${ANG_BETA - MergeAngle} AND ${ANG_BETA + MergeAngle}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - MergeAngle} AND ${ANG_GAMMA + MergeAngle})) `, function(err, result, fields) {
             if (err) 
                 throw err;
             if (result.length != 0) {
@@ -206,7 +212,7 @@ function main_server(database_connection) {
 
                 if (result.length >= 2){
 
-                    addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
+                    addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_BETA, ANG_GAMMA);
                     
                     currentId = NodeId;
 
@@ -217,7 +223,7 @@ function main_server(database_connection) {
                 }
 
             } else {
-                addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_GAMMA);
+                addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_BETA, ANG_GAMMA);
 
                 //return the old node id
                 currentId = NodeId;
@@ -240,7 +246,7 @@ function main_server(database_connection) {
             LastId = currentId;
         });
 
-        res.status(200).json(`Recieved Node With Id: ${LastId}`);
+        res.status(200).json(`Recieved Node With Id: ${currentId}`);
     
     });
 
