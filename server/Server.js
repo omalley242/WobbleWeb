@@ -26,12 +26,12 @@ var LastId;
 var currentId;
 
 //Beacon info ---------------------------
-var XA = 240;
-var XB = 120;
+var XA = 0;
+var XB = 360;
 var XC = 0;
 
-var YA = 0;
-var YB = 360;
+var YA = 240;
+var YB = 120;
 var YC = 0;
 
 //find distances between points
