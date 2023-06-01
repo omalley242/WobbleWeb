@@ -240,7 +240,7 @@ function main_server(database_connection) {
             LastId = currentId;
         });
 
-        res.status(200).json(`Recieved Node With Id: "${LastId}"`);
+        res.status(200).json(`Recieved Node With Id: ${LastId}`);
     
     });
 
