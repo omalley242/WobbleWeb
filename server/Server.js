@@ -157,9 +157,6 @@ function main_server(database_connection) {
         PX = (KA*XA + KB*XB + KC*XC)/K;
         PY = (KA*YA + KB*YB + KC*YC)/K;
 
-        console.log("Position Calculated:");
-        console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
-
         let invert = false;
         if(PX < 0) {
             PX = 360 + PX;
@@ -183,6 +180,9 @@ function main_server(database_connection) {
             PX = PY;
             PY = tmp;
         }
+
+        console.log("Position Calculated:");
+        console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
 
         return {PX, PY};
     }
