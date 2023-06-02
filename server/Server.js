@@ -176,8 +176,8 @@ function main_server(database_connection) {
         }
 
         if (invert){
-            tmp = PX;
-            PX = PY;
+            tmp = PX/3 * 2;
+            PX = PY/2 * 3;
             PY = tmp;
         }
 
