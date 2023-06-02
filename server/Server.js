@@ -164,14 +164,14 @@ function main_server(database_connection) {
 
     function addPath(StartId, Heading){
         // StartId | EndId | Heading From Start | Distance |
-        console.log("Adding Paths to Node");
+        console.log(`Adding Paths to Node ${StartId}`);
         database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, function(err, result, fields) {
         if (err) throw err;
         });                
     }
 
     function completePath(currentId, LastId){
-        console.log("Completing Path From and To Node Using");
+        console.log(`Completing Path From ${LastId} To ${currentId}`);
 
         //Compare Headings Here
         // StartId | EndId | Heading From Start | Distance |
