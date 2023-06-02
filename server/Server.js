@@ -160,21 +160,22 @@ function main_server(database_connection) {
         console.log("Position Calculated:");
         console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
 
+        let invert = false;
         if(PX < 0) {
             PX = 360 + PX;
-            let invert = true;
+            invert = true;
         }
         if(PY < 0){
             PY = 240 + PY;
-            let invert = true;
+            invert = true;
         }
         if(PX > 360){
             PX = 360 - PX%360;
-            let invert = true;
+            invert = true;
         }
         if(PY > 240){
             PY = 240 - PY%240;
-            let invert = true;
+            invert = true;
         }
 
         if (invert){
