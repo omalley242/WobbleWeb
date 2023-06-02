@@ -162,6 +162,25 @@ function main_server(database_connection) {
 
         if(PX < 0) {
             PX = 360 + PX;
+            let invert = true;
+        }
+        if(PY < 0){
+            PY = 240 + PY;
+            let invert = true;
+        }
+        if(PX > 360){
+            PX = 360 - PX%360;
+            let invert = true;
+        }
+        if(PY > 240){
+            PY = 240 - PY%240;
+            let invert = true;
+        }
+
+        if (invert){
+            tmp = PX;
+            PX = PY;
+            PY = tmp;
         }
 
         return {PX, PY};
