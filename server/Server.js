@@ -161,6 +161,7 @@ function main_server(database_connection) {
         if(PX < 0 || PX > 360 || PY < 0 || PY > 240) {
             PX = 360 - (Math.sign(PX)*PX)%360;
             PY = 240 - (Math.sign(PY)*PY)%240;
+            invert = true;
         }
 
         if (invert){
