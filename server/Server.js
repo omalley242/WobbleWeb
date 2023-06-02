@@ -166,7 +166,7 @@ function main_server(database_connection) {
         // StartId | EndId | Heading From Start | Distance |
         console.log(`Adding Paths to Node ${StartId}`);
         database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, function(err, result, fields) {
-        if (err) console.log(err);
+        if (err) console.log(err.code);
         });                
     }
 
@@ -176,7 +176,7 @@ function main_server(database_connection) {
         //Compare Headings Here
         // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, function(err, result, fields) {
-            if (err) console.log(err);
+            if (err) console.log(err.code);
         });        
     }
 
@@ -221,7 +221,6 @@ function main_server(database_connection) {
             } else {
                 addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_BETA, ANG_GAMMA);
 
-                //return the old node id
                 currentId = NodeId;
 
                 NodeId = NodeId + 1;
@@ -233,16 +232,18 @@ function main_server(database_connection) {
                 addPath(currentId, pathArray[i].Heading);
             }
     
-            if (LastId !== undefined){
+            //If it isnt the first node or a repeated node (we didnt move)
+            if (LastId !== undefined && LastId !== currentId){
                 console.log("LastId = " + LastId);
                 console.log("currentId = " + currentId);
                 completePath(currentId, LastId);
             }
     
             LastId = currentId;
-        });
 
-        res.status(200).json(`Recieved Node With Id: ${currentId}`);
+            res.status(200).json(`Recieved Node With Id: ${LastId}`);
+
+        });
     
     });
 
