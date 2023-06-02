@@ -166,7 +166,7 @@ function main_server(database_connection) {
         // StartId | EndId | Heading From Start | Distance |
         console.log(`Adding Paths to Node ${StartId}`);
         database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, function(err, result, fields) {
-        if (err) console.log(err.code);
+        if (err) console.log(`Error Adding path: ${err.code}`);
         });                
     }
 
@@ -176,7 +176,7 @@ function main_server(database_connection) {
         //Compare Headings Here
         // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, function(err, result, fields) {
-            if (err) console.log(err.code);
+            if (err) console.log(`Error updating path: ${err.code}`);
         });        
     }
 
@@ -241,7 +241,7 @@ function main_server(database_connection) {
     
             LastId = currentId;
 
-            res.status(200).json(`Recieved Node With Id: ${LastId}`);
+            res.status(200).json(`Recieved Node With Id: ${currentId}`);
 
         });
     
