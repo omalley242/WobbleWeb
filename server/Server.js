@@ -158,21 +158,9 @@ function main_server(database_connection) {
         PY = (KA*YA + KB*YB + KC*YC)/K;
 
         let invert = false;
-        if(PX < 0) {
-            PX = 360 + PX;
-            invert = true;
-        }
-        if(PY < 0){
-            PY = 240 + PY;
-            invert = true;
-        }
-        if(PX > 360){
-            PX = 360 - PX%360;
-            invert = true;
-        }
-        if(PY > 240){
-            PY = 240 - PY%240;
-            invert = true;
+        if(PX < 0 || PX > 360 || PY < 0 || PY > 240) {
+            PX = 360 - (Math.sign(PX)*PX)%360;
+            PY = 240 - (Math.sign(PY)*PY)%240;
         }
 
         if (invert){
