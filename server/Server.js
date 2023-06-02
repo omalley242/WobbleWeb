@@ -159,6 +159,11 @@ function main_server(database_connection) {
 
         console.log("Position Calculated:");
         console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
+
+        if(PX < 0) {
+            PX = 360 + PX;
+        }
+
         return {PX, PY};
     }
 
