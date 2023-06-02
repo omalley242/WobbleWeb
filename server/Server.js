@@ -36,7 +36,7 @@ var XC = 360;
 
 var YA = 0;
 var YB = 240;
-var YC = 120;
+var YC = 240;
 
 //find distances between points
 var AB=Math.sqrt( Math.pow((XA-XB),2) + Math.pow((YA-YB),2) );
