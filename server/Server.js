@@ -39,9 +39,9 @@ var YB = 240;
 var YC = 240;
 
 //find distances between points
-var AB=Math.sqrt( Math.pow((XA-XB),2) + Math.pow((YA-YB),2) );
-var AC=Math.sqrt( Math.pow((XA-XC),2) + Math.pow((YA-YC),2) );
-var BC=Math.sqrt( Math.pow((XB-XC),2) + Math.pow((YB-YC),2) );
+var AB=Math.sqrt( Math.pow((XA-XB),2) + Math.pow((YA-YB),2) )*-1;
+var AC=Math.sqrt( Math.pow((XA-XC),2) + Math.pow((YA-YC),2) )*-1;
+var BC=Math.sqrt( Math.pow((XB-XC),2) + Math.pow((YB-YC),2) )*-1;
 
 //find angles between points
 var ANG_A = Math.acos( (Math.pow(AB, 2) + Math.pow(AC,2) - Math.pow(BC,2))/(2*AB*AC) );
@@ -157,18 +157,19 @@ function main_server(database_connection) {
         PX = (KA*XA + KB*XB + KC*XC)/K;
         PY = (KA*YA + KB*YB + KC*YC)/K;
 
-        let invert = false;
-        if(PX < 0 || PX > 360 || PY < 0 || PY > 240) {
-            PX = 360 - (Math.sign(PX)*PX)%360;
-            PY = 240 - (Math.sign(PY)*PY)%240;
-            invert = true;
-        }
+        // let invert = false;
+        // if(PX < 0 || PX > 360 || PY < 0 || PY > 240) {
+        //     PX = 360 - (Math.sign(PX)*PX)%360;
+        //     PY = 240 - (Math.sign(PY)*PY)%240;
+        //     invert = true;
+        //     console.log("Editing Value");
+        // }
 
-        if (invert){
-            tmp = PX/3 * 2;
-            PX = PY/2 * 3;
-            PY = tmp;
-        }
+        // if (invert){
+        //     tmp = PX/3 * 2;
+        //     PX = PY/2 * 3;
+        //     PY = tmp;
+        // }
 
         console.log("Position Calculated:");
         console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
