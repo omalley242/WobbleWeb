@@ -205,7 +205,7 @@ function main_server(database_connection) {
 
         //Set ALPHA and GAMMA Angles
         let ANG_ALPHA = nodeJson.HeadingAlpha;
-        let ANG_BETA = nodeJson.HeadingBeta;
+        // let ANG_BETA = nodeJson.HeadingBeta;
         let ANG_GAMMA = nodeJson.HeadingGamma;
 
         let {PX, PY} = calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA);
