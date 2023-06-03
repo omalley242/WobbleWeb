@@ -45,7 +45,7 @@ var BC=Math.sqrt( Math.pow((XB-XC),2) + Math.pow((YB-YC),2) );
 
 //find angles between points
 var ANG_A = Math.acos( (Math.pow(AB, 2) + Math.pow(AC,2) - Math.pow(BC,2))/(2*AB*AC) );
-var ANG_B =2*Math.PI - Math.acos( (Math.pow(AB, 2) + Math.pow(BC,2) - Math.pow(AC,2))/(2*AB*BC) );
+var ANG_B = Math.acos( (Math.pow(AB, 2) + Math.pow(BC,2) - Math.pow(AC,2))/(2*AB*BC) );
 var ANG_C = Math.acos( (Math.pow(AC, 2) + Math.pow(BC,2) - Math.pow(AB,2))/(2*AC*BC) );
 
 //find cotangent of landmark angles
@@ -142,6 +142,7 @@ function main_server(database_connection) {
     //Algorithm to find position
     function calculate_Tienstra_formula(ANG_ALPHA, ANG_BETA, ANG_GAMMA){
         console.log(`Angle Beta: ${ANG_BETA}`);
+        ANG_BETA = 2*Math.PI - (ANG_ALPHA + ANG_GAMMA);
         //Find cotangent angles
         COT_ALPHA = 1/Math.tan(ANG_ALPHA);
         COT_BETA = 1/Math.tan(ANG_BETA);
