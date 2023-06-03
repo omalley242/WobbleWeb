@@ -44,13 +44,12 @@ var AC=Math.sqrt( Math.pow((XA-XC),2) + Math.pow((YA-YC),2) );
 var BC=Math.sqrt( Math.pow((XB-XC),2) + Math.pow((YB-YC),2) );
 
 //find angles between points
-var ANG_A = Math.acos( (Math.pow(AB, 2) + Math.pow(AC,2) - Math.pow(BC,2))/(2*AB*AC) );
-var ANG_B = Math.acos( (Math.pow(AB, 2) + Math.pow(BC,2) - Math.pow(AC,2))/(2*AB*BC) );
-var ANG_C = Math.acos( (Math.pow(AC, 2) + Math.pow(BC,2) - Math.pow(AB,2))/(2*AC*BC) );
+var ANG_A = 2*Math.PI - Math.acos( (Math.pow(AB, 2) + Math.pow(AC,2) - Math.pow(BC,2))/(2*AB*AC) );
+var ANG_B = 2*Math.PI - Math.acos( (Math.pow(AB, 2) + Math.pow(BC,2) - Math.pow(AC,2))/(2*AB*BC) );
+var ANG_C = 2*Math.PI - Math.acos( (Math.pow(AC, 2) + Math.pow(BC,2) - Math.pow(AB,2))/(2*AC*BC) );
 
-console.log("A" + ANG_A);
-console.log("B" + ANG_B);
-console.log("C" + ANG_C);
+
+
 //find cotangent of landmark angles
 COT_A = 1/Math.tan(ANG_A);
 COT_B = 1/Math.tan(ANG_B);
