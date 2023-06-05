@@ -21,9 +21,13 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
+//load http library
+const http = require('http')
+
 //load the websocket library
+const server = http.createServer(app)
 const WebSocket = require('ws');
-const WebSocketServer = new WebSocket.Server({app});
+const WebSocketServer = new WebSocket.Server({server});
 
 const bodyParser = require('body-parser');
 
@@ -84,7 +88,11 @@ function server_init() {
 //MAIN PROCESS LOOP =====================================================
 function main_server(database_connection) {
 
-    WebSocketServer.on('connection', function (ws) {
+    server.listen(5001, function () {
+        console.log('WebSocket Server running')
+    })
+
+    WebSocketServer.on('connection', function (WebSocket) {
         console.log('new connection')
     
         WebSocket.on('message', function (data) {
