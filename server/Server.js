@@ -260,6 +260,7 @@ function main_server(database_connection) {
 
     //On upgrade request
     server.on('upgrade', (request, socket, head) => {
+        console.log("Upgrade HTTP Request");
         //Upgrade the connection
         WebSocketServer.handleUpgrade(request, socket, head, (WebSocket) => {
             //Emit the new connection to the websocket server
