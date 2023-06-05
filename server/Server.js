@@ -274,7 +274,7 @@ function main_server(database_connection) {
 
         //For any message on this given connection handle
         WebSocketConnection.on('message', (message)=> {
-            console.log(message);
+            console.log(JSON.parse(message));
         })
     })
 
