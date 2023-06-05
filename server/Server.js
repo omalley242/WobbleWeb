@@ -24,7 +24,7 @@ const app = express();
 
 //load the websocket library
 const WebSocket = require('ws');
-const WebSocketServer = new WebSocket.Server({noServer: true});
+const WebSocketServer = new WebSocket.Server({noServer: true, path: '/position'});
 
 const bodyParser = require('body-parser');
 const { Socket } = require('dgram');
@@ -263,7 +263,7 @@ function main_server(database_connection) {
         //Upgrade the connection
         WebSocketServer.handleUpgrade(request, socket, head, (WebSocket) => {
             //Emit the new connection to the websocket server
-            WebSocketServer.emit("connection", websocket, request);
+            WebSocketServer.emit("connection", WebSocket, request);
         })
     })
 
