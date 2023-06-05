@@ -21,15 +21,13 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
-//load http library
-const http = require('http')
 
 //load the websocket library
-const server = http.createServer(app)
 const WebSocket = require('ws');
-const WebSocketServer = new WebSocket.Server({server});
+const WebSocketServer = new WebSocket.Server({noServer: true});
 
 const bodyParser = require('body-parser');
+const { Socket } = require('dgram');
 
 //Id for storing nodes as unique within the database
 var NodeId = 0;
@@ -87,18 +85,6 @@ function server_init() {
 
 //MAIN PROCESS LOOP =====================================================
 function main_server(database_connection) {
-
-    server.listen(5001, function () {
-        console.log('WebSocket Server running')
-    })
-
-    WebSocketServer.on('connection', function (WebSocket) {
-        console.log('new connection')
-    
-        WebSocket.on('message', function (data) {
-            console.log('New message: ' + data);
-        })
-    })
 
     database_connection.connect((err) => {
         if (err) throw err;
@@ -270,7 +256,27 @@ function main_server(database_connection) {
     console.log("starting server on port: " + PORT);
 
     //launch the server
-    app.listen(PORT);
+    let server = app.listen(PORT);
+
+    //On upgrade request
+    server.on('upgrade', (request, socket, head) => {
+        //Upgrade the connection
+        WebSocketServer.handleUpgrade(request, socket, head, (WebSocket) => {
+            //Emit the new connection to the websocket server
+            WebSocketServer.emit("connection", websocket, request);
+        })
+    })
+
+    //once we have a new connection handle
+    WebSocketServer.on('connection', function(WebSocketConnection, connectionRequest) {
+        console.log(connectionRequest);
+
+        //For any message on this given connection handle
+        WebSocketConnection.on('message', (message)=> {
+            console.log(message);
+        })
+    })
+
 }
 
 server_init();
