@@ -21,6 +21,10 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
+//load the websocket library
+const WebSocket = require('ws');
+const WebSocketServer = new WebSocket.Server({app});
+
 const bodyParser = require('body-parser');
 
 //Id for storing nodes as unique within the database
@@ -79,6 +83,14 @@ function server_init() {
 
 //MAIN PROCESS LOOP =====================================================
 function main_server(database_connection) {
+
+    WebSocketServer.on('connection', function (ws) {
+        console.log('new connection')
+    
+        WebSocket.on('message', function (data) {
+            console.log('New message: ' + data);
+        })
+    })
 
     database_connection.connect((err) => {
         if (err) throw err;
@@ -157,20 +169,6 @@ function main_server(database_connection) {
         // calculate final coordinates
         PX = (KA*XA + KB*XB + KC*XC)/K;
         PY = (KA*YA + KB*YB + KC*YC)/K;
-
-        // let invert = false;
-        // if(PX < 0 || PX > 360 || PY < 0 || PY > 240) {
-        //     PX = 360 - (Math.sign(PX)*PX)%360;
-        //     PY = 240 - (Math.sign(PY)*PY)%240;
-        //     invert = true;
-        //     console.log("Editing Value");
-        // }
-
-        // if (invert){
-        //     tmp = PX/3 * 2;
-        //     PX = PY/2 * 3;
-        //     PY = tmp;
-        // }
 
         console.log("Position Calculated:");
         console.log("X coordinate:" + PX + "; Y coordinate:" + PY);
