@@ -24,7 +24,8 @@ const app = express();
 
 //load the websocket library
 const WebSocket = require('ws');
-const WebSocketServer = new WebSocket.Server({noServer: true, path: '/position'});
+const WebSocketMotorServer = new WebSocket.Server({noServer: true, path: '/position'});
+const WebSocketNodeServer = new WebSocket.Server({noServer: true, path: '/position'});
 
 const bodyParser = require('body-parser');
 const { Socket } = require('dgram');
@@ -260,22 +261,24 @@ function main_server(database_connection) {
 
     //On upgrade request
     server.on('upgrade', (request, socket, head) => {
-        console.log("Upgrade HTTP Request");
+        console.log("Upgrade HTTP Request Recieved");
         //Upgrade the connection
-        WebSocketServer.handleUpgrade(request, socket, head, (WebSocket) => {
+        WebSocketMotorServer.handleUpgrade(request, socket, head, (WebSocket) => {
             //Emit the new connection to the websocket server
-            WebSocketServer.emit("connection", WebSocket, request);
+            WebSocketMotorServer.emit("connection", WebSocket, request);
         })
     })
 
     //once we have a new connection handle
-    WebSocketServer.on('connection', function(WebSocketConnection, connectionRequest) {
+    WebSocketMotorServer.on('connection', function(WebSocketConnection, connectionRequest) {
         console.log(connectionRequest);
 
         //For any message on this given connection handle
         WebSocketConnection.on('message', (message)=> {
             console.log(JSON.parse(message));
+            WebSocketConnection.send(message);
         })
+
     })
 
 }
