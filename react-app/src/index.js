@@ -14,6 +14,15 @@ root.render(
 //dictionary holding all currently pressed keys
 var keys = {};
 
+//Setup WebSocket to the server
+webSocket = new WebSocket("ws://" + window.location.host + ":5000" + "/ManualControl");
+
+webSocket.onmessage() = (event) => {
+  msg = JSON.parse(event.data);
+  console.log(msg);
+}
+
+
 //Keydown Handler
 window.addEventListener(
   "keydown",
@@ -56,31 +65,10 @@ window.addEventListener(
   true
 );
 
-//Make a HTTP request
-async function HttpRequest(url = "", data = {}) {
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    return response;
-  }catch (err){
-    console.log("A network error occoured")
-  }
-
-
-}
-
 //Add a template for direction and distance for each keypress
 async function add_movement_listener(key, message = {}) {
   if(keys[key] === true) {
-    let IpAddress = document.getElementById("IpAddressForm").value;
-    let response = HttpRequest("http://" + IpAddress, message);
+    webSocket.send(key);    
     console.log(response);
   }
 }

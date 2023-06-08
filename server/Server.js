@@ -262,6 +262,8 @@ function main_server(database_connection) {
     //On upgrade request
     server.on('upgrade', (request, socket, head) => {
         console.log("Upgrade HTTP Request Recieved");
+
+        console.log(request.url);
         //Upgrade the connection
         WebSocketMotorServer.handleUpgrade(request, socket, head, (WebSocket) => {
             //Emit the new connection to the websocket server
