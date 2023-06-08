@@ -24,8 +24,8 @@ const app = express();
 
 //load the websocket library
 const WebSocket = require('ws');
-const WebSocketMotorServer = new WebSocket.Server({noServer: true, path: '/position'});
-const WebSocketNodeServer = new WebSocket.Server({noServer: true, path: '/position'});
+const WebSocketMotorControlServer = new WebSocket.Server({noServer: true, path: '/position'});
+const WebSocketManualControlServer = new WebSocket.Server({noServer: true, path: '/ManualControl'});
 
 const bodyParser = require('body-parser');
 const { Socket } = require('dgram');
@@ -263,22 +263,35 @@ function main_server(database_connection) {
     server.on('upgrade', (request, socket, head) => {
         console.log("Upgrade HTTP Request Recieved");
 
-        console.log(request.url);
         //Upgrade the connection
-        WebSocketMotorServer.handleUpgrade(request, socket, head, (WebSocket) => {
+        WebSocketMotorControlServer.handleUpgrade(request, socket, head, (WebSocket) => {
             //Emit the new connection to the websocket server
-            WebSocketMotorServer.emit("connection", WebSocket, request);
+            WebSocketMotorControlServer.emit("connection", WebSocket, request);
+        })
+
+        //Upgrade the Connection for client to server (manual controls)
+        WebSocketManualControlServer.handleUpgrade(request, socket, head, (WebSocket) => {
+            //Emit the new connection to the manual control websocket server
+            WebSocketManualControlServer.emit("connection", WebSocket, request);
         })
     })
 
     //once we have a new connection handle
-    WebSocketMotorServer.on('connection', function(WebSocketConnection, connectionRequest) {
-        console.log(connectionRequest);
-
+    WebSocketMotorControlServer.on('connection', function(WebSocketConnection, connectionRequest) {
         //For any message on this given connection handle
         WebSocketConnection.on('message', (message)=> {
             console.log(JSON.parse(message));
             WebSocketConnection.send(message);
+        })
+
+    })
+
+    //once we have a new connection handle
+    WebSocketManualControlServer.on('connection', function(WebSocketConnection, connectionRequest) {
+        //For any message on this given connection handle
+        WebSocketConnection.on('message', (message)=> {
+            console.log("Manual Control Message Recieved");
+            console.log(JSON.parse(message));
         })
 
     })

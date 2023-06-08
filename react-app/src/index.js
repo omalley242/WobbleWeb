@@ -14,8 +14,10 @@ root.render(
 //dictionary holding all currently pressed keys
 var keys = {};
 
+
+console.log(window.location.host);
 //Setup WebSocket to the server
-let webSocket = new WebSocket("ws://" + window.location.host + ":5000" + "/ManualControl");
+let webSocket = new WebSocket("ws://" + window.location.host + "/ManualControl");
 
 
 //If we receive a message update our position
