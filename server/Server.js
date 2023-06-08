@@ -24,11 +24,10 @@ const app = express();
 
 //load the websocket library
 const WebSocket = require('ws');
-const WebSocketMotorControlServer = new WebSocket.Server({noServer: true, path: '/position'});
-const WebSocketManualControlServer = new WebSocket.Server({noServer: true, path: '/ManualControl'});
+const WebSocketMotorControlServer = new WebSocket.Server({noServer: true});
+const WebSocketManualControlServer = new WebSocket.Server({noServer: true});
 
 const bodyParser = require('body-parser');
-const { Socket } = require('dgram');
 
 //Id for storing nodes as unique within the database
 var NodeId = 0;
@@ -263,19 +262,24 @@ function main_server(database_connection) {
     server.on('upgrade', (request, socket, head) => {
         console.log("Upgrade HTTP Request Recieved");
 
-        //Upgrade the connection
-        WebSocketMotorControlServer.handleUpgrade(request, socket, head, (WebSocket) => {
-            console.log("Motor Control Connection Established");
-            //Emit the new connection to the websocket server
-            WebSocketMotorControlServer.emit("connection", WebSocket, request);
-        })
+        if(request.url === "/MotorControl"){
+            //Upgrade the connection
+            WebSocketMotorControlServer.handleUpgrade(request, socket, head, (WebSocket) => {
+                console.log("Motor Control Connection Established");
+                //Emit the new connection to the websocket server
+                WebSocketMotorControlServer.emit("connection", WebSocket, request);
+            })
+        }
 
-        //Upgrade the Connection for client to server (manual controls)
-        WebSocketManualControlServer.handleUpgrade(request, socket, head, (WebSocket) => {
-            console.log("Manual Control Connection Established");
-            //Emit the new connection to the manual control websocket server
-            WebSocketManualControlServer.emit("connection", WebSocket, request);
-        })
+        if(request.url === "/ManualControl"){
+            //Upgrade the Connection for client to server (manual controls)
+            WebSocketManualControlServer.handleUpgrade(request, socket, head, (WebSocket) => {
+                console.log("Manual Control Connection Established");
+                //Emit the new connection to the manual control websocket server
+                WebSocketManualControlServer.emit("connection", WebSocket, request);
+            })
+        }
+
     })
 
     //once we have a new connection handle
