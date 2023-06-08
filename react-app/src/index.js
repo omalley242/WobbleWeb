@@ -15,60 +15,37 @@ root.render(
 var keys = {};
 
 //Setup WebSocket to the server
-webSocket = new WebSocket("ws://" + window.location.host + ":5000" + "/ManualControl");
+let webSocket = new WebSocket("ws://" + window.location.host + ":5000" + "/ManualControl");
 
-webSocket.onmessage() = (event) => {
-  msg = JSON.parse(event.data);
-  console.log(msg);
+
+//If we receive a message update our position
+var cur_position_data = {};
+
+webSocket.onmessage = (event) => {
+  cur_position_data = JSON.parse(event.data);
 }
 
+//Movement Speed / Distance difference
+var Displacement = 10;
 
-//Keydown Handler
-window.addEventListener(
-  "keydown",
-  (event) => {
-    //Only send on inital press not repitions
-    if(event.repeat){
-      return;
-    }
-
-    //on keypress set the current key to true within the dictionary
-    keys[event.key] = true;
-
-    console.log("Setting " + event.key + " to true");
-
-    //do any key checking within this section
-    add_movement_listener("w", {forward: true});
-    add_movement_listener("a", {left: true});
-    add_movement_listener("s", {back: true});
-    add_movement_listener("d", {right: true});
-
-  },
-  true
-);
-
-//Keyup Handler
-window.addEventListener(
-  "keyup",
-  (event) => {
-    //on key release set the current key to false within the dictionary
-    keys[event.key] = false;
-
-    console.log("Setting " + event.key + " to false");
-
-    add_movement_listener("w", {forward: false});
-    add_movement_listener("a", {left: false});
-    add_movement_listener("s", {back: false});
-    add_movement_listener("d", {right: false});
-
-  },
-  true
-);
-
-//Add a template for direction and distance for each keypress
-async function add_movement_listener(key, message = {}) {
-  if(keys[key] === true) {
-    webSocket.send(key);    
-    console.log(response);
+//Key listeners
+document.addEventListener('keydown', (e) => {
+  if(e.code === "KeyW"){
+    console.log("Forward Command Recieved");
+    webSocket.send(JSON.stringify({"XPos": (cur_position_data.XPos + Displacement)*Math.sin(cur_position_data.heading), "YPos": (cur_position_data.YPos + Displacement)*Math.cos(cur_position_data.heading), "Heading": cur_position_data.heading}));
   }
-}
+  else if(e.code === "KeyS"){
+    console.log("Back Command Recieved");
+    webSocket.send(JSON.stringify({"XPos": (cur_position_data.XPos - Displacement)*Math.sin(cur_position_data.heading), "YPos": (cur_position_data.YPos - Displacement)*Math.cos(cur_position_data.heading), "Heading": cur_position_data.heading}));
+  }
+  else if(e.code === "KeyD"){
+    console.log("Right Turn Command Recieved");
+    webSocket.send(JSON.stringify({"XPos": cur_position_data.XPos, "YPos": cur_position_data.YPos, "Heading": cur_position_data.heading + 0.3}));
+  }
+  else if(e.code === "KeyA"){
+    console.log("Left Turn Command Recieved");
+    webSocket.send(JSON.stringify({"XPos": cur_position_data.XPos, "YPos": cur_position_data.YPos, "Heading": cur_position_data.heading - 0.3}));
+  }
+});
+
+
