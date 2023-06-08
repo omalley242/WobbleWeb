@@ -17,7 +17,7 @@ var keys = {};
 
 console.log(window.location.host);
 //Setup WebSocket to the server
-let webSocket = new WebSocket("ws://" + window.location.host + "/ManualControl");
+let webSocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
 
 
 //If we receive a message update our position
