@@ -265,12 +265,14 @@ function main_server(database_connection) {
 
         //Upgrade the connection
         WebSocketMotorControlServer.handleUpgrade(request, socket, head, (WebSocket) => {
+            console.log("Motor Control Connection Established");
             //Emit the new connection to the websocket server
             WebSocketMotorControlServer.emit("connection", WebSocket, request);
         })
 
         //Upgrade the Connection for client to server (manual controls)
         WebSocketManualControlServer.handleUpgrade(request, socket, head, (WebSocket) => {
+            console.log("Manual Control Connection Established");
             //Emit the new connection to the manual control websocket server
             WebSocketManualControlServer.emit("connection", WebSocket, request);
         })
