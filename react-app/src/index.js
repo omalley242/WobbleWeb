@@ -23,8 +23,9 @@ let webSocket = new WebSocket("ws://" + window.location.host + "/ManualControl",
 //If we receive a message update our position
 var cur_position_data = {};
 
-webSocket.onmessage = (event) => {
-  cur_position_data = JSON.parse(event.data);
+webSocket.onmessage = (message) => {
+  cur_position_data = JSON.parse(message.data);
+  console.log(message);
 }
 
 //Movement Speed / Distance difference
