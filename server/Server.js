@@ -286,6 +286,7 @@ function main_server(database_connection) {
     WebSocketMotorControlServer.on('connection', function(WebSocketConnection, connectionRequest) {
         //For any message on this given connection handle
         WebSocketConnection.on('message', (message)=> {
+            console.log("Motor Control Message Recieved");
             console.log(JSON.parse(message));
             WebSocketConnection.send(message);
         })
@@ -298,6 +299,10 @@ function main_server(database_connection) {
         WebSocketConnection.on('message', (message)=> {
             console.log("Manual Control Message Recieved");
             console.log(JSON.parse(message));
+            
+            WebSocketMotorControlServer.clients.forEach((WebSocketConnection) => {
+                WebSocketConnection.send(message);
+            });
         })
 
     })
