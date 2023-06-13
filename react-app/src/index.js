@@ -35,19 +35,19 @@ var Displacement = 10;
 document.addEventListener('keydown', (e) => {
   if(e.code === "KeyW"){
     console.log("Forward Command Recieved");
-    webSocket.send(JSON.stringify({"XPos": (cur_position_data.XPos + Displacement)*Math.sin(cur_position_data.heading), "YPos": (cur_position_data.YPos + Displacement)*Math.cos(cur_position_data.heading), "Heading": cur_position_data.heading}));
+    webSocket.send(JSON.stringify({"Pos": 10, "Yaw": 0}));
   }
   else if(e.code === "KeyS"){
     console.log("Back Command Recieved");
-    webSocket.send(JSON.stringify({"XPos": (cur_position_data.XPos - Displacement)*Math.sin(cur_position_data.heading), "YPos": (cur_position_data.YPos - Displacement)*Math.cos(cur_position_data.heading), "Heading": cur_position_data.heading}));
+    webSocket.send(JSON.stringify({"Pos": -10, "Yaw": 0}));
   }
   else if(e.code === "KeyD"){
     console.log("Right Turn Command Recieved");
-    webSocket.send(JSON.stringify({"XPos": cur_position_data.XPos, "YPos": cur_position_data.YPos, "Heading": cur_position_data.heading + 0.3}));
+    webSocket.send(JSON.stringify({"Pos": 0, "Yaw": 1.57}));
   }
   else if(e.code === "KeyA"){
     console.log("Left Turn Command Recieved");
-    webSocket.send(JSON.stringify({"XPos": cur_position_data.XPos, "YPos": cur_position_data.YPos, "Heading": cur_position_data.heading - 0.3}));
+    webSocket.send(JSON.stringify({"Pos": 0, "Yaw": -1.57}));
   }
 });
 

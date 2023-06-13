@@ -3,7 +3,6 @@
 
 var MergeRadius = 5;
 var MergeAngle = 0.1;
-var HeadingMergeAngle = 0.1;
 
 //fetch the mysql node library
 var sql = require('mysql');
@@ -27,6 +26,7 @@ const WebSocket = require('ws');
 const WebSocketMotorControlServer = new WebSocket.Server({noServer: true});
 const WebSocketManualControlServer = new WebSocket.Server({noServer: true});
 
+//Allow for json parsing within the body of a html request
 const bodyParser = require('body-parser');
 
 //Id for storing nodes as unique within the database
@@ -287,8 +287,13 @@ function main_server(database_connection) {
         //For any message on this given connection handle
         WebSocketConnection.on('message', (message)=> {
             console.log("Motor Control Message Recieved");
-            console.log(JSON.parse(message));
-            // WebSocketConnection.send(message);
+            console.log("Xpos: " + message.XPos);
+            console.log("Ypos: " + message.YPos);
+            console.log("Heading: " + message.Heading);
+
+            WebSocketManualControlServer.clients.forEach((WebSocketConnection) => {
+                WebSocketConnection.send(message);
+            })
         })
 
     })
@@ -300,6 +305,7 @@ function main_server(database_connection) {
             console.log("Manual Control Message Recieved");
             console.log(JSON.parse(message));
 
+            //Send the message from the client websocket to all connections on the Motor Control web socket
             WebSocketMotorControlServer.clients.forEach((WebSocketConnection) => {
                 WebSocketConnection.send(message);
             });
