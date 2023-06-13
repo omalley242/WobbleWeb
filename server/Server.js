@@ -176,7 +176,7 @@ function main_server(database_connection) {
         //Check if the path has already been travesered, in the oposite direction, i.e match headings
         database_connection.query(`SELECT * FROM Paths WHERE EndId=${currentId} AND Heading BETWEEN (${Heading + Math.PI + PathMergeAngle} AND ${Heading + Math.PI - PathMergeAngle}`, function(err, result, fields) {
             //If more than one result is returned it is already 
-            if(result.length() > 0){
+            if(result.length > 0){
 
             }else{
                 database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, (err) => {
