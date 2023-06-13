@@ -3,7 +3,7 @@
 
 var MergeRadius = 5;
 var MergeAngle = 0.1;
-
+var PathMergeAngle = 0.1;
 //fetch the mysql node library
 var sql = require('mysql');
 
@@ -173,9 +173,18 @@ function main_server(database_connection) {
     function addPath(StartId, Heading){
         // StartId | EndId | Heading From Start | Distance |
         console.log(`Adding Paths to Node ${StartId}`);
-        database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, function(err, result, fields) {
-        if (err) console.log(`Error Adding path: ${err.code}`);
-        });                
+        //Check if the path has already been travesered, in the oposite direction, i.e match headings
+        database_connection.query(`SELECT * FROM Paths WHERE EndId=${currentId} AND Heading BETWEEN (${Heading + Math.PI + PathMergeAngle} AND ${Heading + Math.PI - PathMergeAngle}`, function(err, result, fields) {
+            //If more than one result is returned it is already 
+            if(result.length() > 0){
+
+            }else{
+                database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, (err) => {
+                    if (err) console.log(`Error Adding path: ${err.code}`);
+                });       
+            }
+        });
+         
     }
 
     function completePath(currentId, LastId){
@@ -266,7 +275,7 @@ function main_server(database_connection) {
             //Upgrade the connection
             WebSocketMotorControlServer.handleUpgrade(request, socket, head, (WebSocket) => {
                 console.log("Motor Control Connection Established");
-                //Emit the new connection to the websocket server
+                //Emit the new connection to motor control websocket server
                 WebSocketMotorControlServer.emit("connection", WebSocket, request);
             })
         }
@@ -282,14 +291,13 @@ function main_server(database_connection) {
 
     })
 
-    //once we have a new connection handle
+    //Motor Control Server is Server to Master Esp
     WebSocketMotorControlServer.on('connection', function(WebSocketConnection, connectionRequest) {
         //For any message on this given connection handle
         WebSocketConnection.on('message', (message)=> {
             console.log("Motor Control Message Recieved");
-            console.log("Xpos: " + message.XPos);
-            console.log("Ypos: " + message.YPos);
-            console.log("Heading: " + message.Heading);
+            console.log("Pos: " + message.Pos);
+            console.log("Yaw: " + message.Yaw);
 
             WebSocketManualControlServer.clients.forEach((WebSocketConnection) => {
                 WebSocketConnection.send(message);
@@ -298,12 +306,13 @@ function main_server(database_connection) {
 
     })
 
-    //once we have a new connection handle
+    //Manual Control Server is Client to Server Communication
     WebSocketManualControlServer.on('connection', function(WebSocketConnection, connectionRequest) {
         //For any message on this given connection handle
         WebSocketConnection.on('message', (message)=> {
             console.log("Manual Control Message Recieved");
-            console.log(JSON.parse(message));
+            console.log("Pos: " + message.Pos);
+            console.log("Yaw: " + message.Yaw);
 
             //Send the message from the client websocket to all connections on the Motor Control web socket
             WebSocketMotorControlServer.clients.forEach((WebSocketConnection) => {
