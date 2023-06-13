@@ -174,7 +174,7 @@ function main_server(database_connection) {
         // StartId | EndId | Heading From Start | Distance |
         console.log(`Adding Paths to Node ${StartId}`);
         //Check if the path has already been travesered, in the oposite direction, i.e match headings
-        database_connection.query(`SELECT * FROM Paths WHERE EndId=${currentId} AND Heading BETWEEN (${Heading + Math.PI + PathMergeAngle} AND ${Heading + Math.PI - PathMergeAngle})`, function(err, result, fields) {
+        database_connection.query(`SELECT * FROM Paths WHERE EndId=${currentId} OR (StartId=${currentId} AND EndId IS NOT NULL)`, (err, result) => {
             if (err) console.log(`Error Checking path: ${err.code}`);
             //If more than one result is returned it is already 
             if(result.length > 0){
@@ -193,7 +193,7 @@ function main_server(database_connection) {
 
         //Compare Headings Here
         // StartId | EndId | Heading From Start | Distance |
-        database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, function(err, result, fields) {
+        database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
         });        
     }
@@ -219,8 +219,8 @@ function main_server(database_connection) {
                 throw err;
             if (result.length != 0) {
 
-                //If the node already exsists
-                console.log("This Node Already Exists Database");
+                //If the node already exists
+                console.log("This Node Already Exist Within Database");
 
                 if (result.length >= 2){
 
