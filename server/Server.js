@@ -174,7 +174,8 @@ function main_server(database_connection) {
         // StartId | EndId | Heading From Start | Distance |
         console.log(`Adding Paths to Node ${StartId}`);
         //Check if the path has already been travesered, in the oposite direction, i.e match headings
-        database_connection.query(`SELECT * FROM Paths WHERE EndId=${currentId} AND Heading BETWEEN (${Heading + Math.PI + PathMergeAngle} AND ${Heading + Math.PI - PathMergeAngle}`, function(err, result, fields) {
+        database_connection.query(`SELECT * FROM Paths WHERE EndId=${currentId} AND Heading BETWEEN (${Heading + Math.PI + PathMergeAngle} AND ${Heading + Math.PI - PathMergeAngle})`, function(err, result, fields) {
+            if (err) console.log(`Error Checking path: ${err.code}`);
             //If more than one result is returned it is already 
             if(result.length > 0){
 
