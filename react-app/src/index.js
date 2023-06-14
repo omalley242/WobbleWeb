@@ -29,25 +29,26 @@ webSocket.onmessage = (message) => {
 }
 
 //Movement Speed / Distance difference
-var Displacement = 10;
+var Displacement = 0;
+var TurningHeading = 0;
 
 //Key listeners
 document.addEventListener('keydown', (e) => {
   if(e.code === "KeyW"){
     console.log("Forward Command Recieved");
-    webSocket.send(JSON.stringify({"Pos": 0.01, "Yaw": 0}));
+    webSocket.send(JSON.stringify({"Pos": Displacement + 0.01, "Yaw": 0}));
   }
   else if(e.code === "KeyS"){
     console.log("Back Command Recieved");
-    webSocket.send(JSON.stringify({"Pos": -0.01, "Yaw": 0}));
+    webSocket.send(JSON.stringify({"Pos": Displacement - 0.01, "Yaw": 0}));
   }
   else if(e.code === "KeyD"){
     console.log("Right Turn Command Recieved");
-    webSocket.send(JSON.stringify({"Pos": 0, "Yaw": 1.57}));
+    webSocket.send(JSON.stringify({"Pos": 0, "Yaw": TurningHeading + 0.01}));
   }
   else if(e.code === "KeyA"){
     console.log("Left Turn Command Recieved");
-    webSocket.send(JSON.stringify({"Pos": 0, "Yaw": -1.57}));
+    webSocket.send(JSON.stringify({"Pos": 0, "Yaw": TurningHeading - 0.01}));
   }
 });
 

@@ -298,7 +298,7 @@ function main_server(database_connection) {
         //For any message on this given connection handle
         WebSocketConnection.on('message', (message)=> {
             console.log("Motor Control Message Recieved");
-            console.log("Pos: " + message.Pos);
+            console.log("X: " + message.X);
             console.log("Yaw: " + message.Yaw);
 
             WebSocketManualControlServer.clients.forEach((WebSocketConnection) => {
