@@ -36,19 +36,19 @@ var TurningHeading = 0;
 document.addEventListener('keydown', (e) => {
   if(e.code === "KeyW"){
     console.log("Forward Command Recieved");
-    webSocket.send(JSON.stringify({"Pos": Displacement + 0.01, "Yaw": 0}));
+    webSocket.send(JSON.stringify({"Target_R": Displacement + 0.01, "Target_Theta": 0}));
   }
   else if(e.code === "KeyS"){
     console.log("Back Command Recieved");
-    webSocket.send(JSON.stringify({"Pos": Displacement - 0.01, "Yaw": 0}));
+    webSocket.send(JSON.stringify({"Target_R": Displacement - 0.01, "Target_Theta": 0}));
   }
   else if(e.code === "KeyD"){
     console.log("Right Turn Command Recieved");
-    webSocket.send(JSON.stringify({"Pos": 0, "Yaw": TurningHeading + 0.01}));
+    webSocket.send(JSON.stringify({"Target_R": 0, "Target_Theta": TurningHeading + 0.01}));
   }
   else if(e.code === "KeyA"){
     console.log("Left Turn Command Recieved");
-    webSocket.send(JSON.stringify({"Pos": 0, "Yaw": TurningHeading - 0.01}));
+    webSocket.send(JSON.stringify({"Target_R": 0, "Target_Theta": TurningHeading - 0.01}));
   }
 });
 
