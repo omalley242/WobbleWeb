@@ -35,11 +35,11 @@ var Displacement = 10;
 document.addEventListener('keydown', (e) => {
   if(e.code === "KeyW"){
     console.log("Forward Command Recieved");
-    webSocket.send(JSON.stringify({"Pos": 10, "Yaw": 0}));
+    webSocket.send(JSON.stringify({"Pos": 0.01, "Yaw": 0}));
   }
   else if(e.code === "KeyS"){
     console.log("Back Command Recieved");
-    webSocket.send(JSON.stringify({"Pos": -10, "Yaw": 0}));
+    webSocket.send(JSON.stringify({"Pos": -0.01, "Yaw": 0}));
   }
   else if(e.code === "KeyD"){
     console.log("Right Turn Command Recieved");

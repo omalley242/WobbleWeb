@@ -4,6 +4,7 @@
 var MergeRadius = 5;
 var MergeAngle = 0.1;
 var PathMergeAngle = 0.1;
+
 //fetch the mysql node library
 var sql = require('mysql');
 
@@ -172,13 +173,13 @@ function main_server(database_connection) {
 
     function addPath(StartId, Heading){
         // StartId | EndId | Heading From Start | Distance |
-        console.log(`Adding Paths to Node ${StartId}`);
+        console.log(`Attempting to Add Path to Node ${StartId}`);
         //Check if the path has already been travesered, in the oposite direction, i.e match headings
-        database_connection.query(`SELECT * FROM Paths WHERE EndId=${currentId} OR (StartId=${currentId} AND EndId IS NOT NULL)`, (err, result) => {
+        database_connection.query(`SELECT * FROM Paths WHERE EndId=${currentId} OR ((StartId=${currentId} AND EndId IS NOT NULL) AND (Heading BETWEEN ${Heading + PathMergeAngle} AND ${Heading - PathMergeAngle}))`, (err, result) => {
             if (err) console.log(`Error Checking path: ${err.code}`);
             //If more than one result is returned it is already 
             if(result.length > 0){
-
+                console.log(`Path Already Exists`);
             }else{
                 database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, (err) => {
                     if (err) console.log(`Error Adding path: ${err.code}`);
