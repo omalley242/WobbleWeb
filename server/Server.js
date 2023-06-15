@@ -300,6 +300,7 @@ function main_server(database_connection) {
             console.log("Motor Control Message Recieved");
             console.log("X: " + message.X);
             console.log("Yaw: " + message.Yaw);
+            console.log("Flag: " + message.Flag);
 
             WebSocketManualControlServer.clients.forEach((WebSocketConnection) => {
                 WebSocketConnection.send(message);
@@ -319,6 +320,7 @@ function main_server(database_connection) {
             //Send the message from the client websocket to all connections on the Motor Control web socket
             WebSocketMotorControlServer.clients.forEach((WebSocketConnection) => {
                 WebSocketConnection.send(message);
+                
             });
         })
 
