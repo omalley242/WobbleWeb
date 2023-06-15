@@ -36,6 +36,8 @@ var NodeId = 0;
 var LastId;
 var currentId;
 
+
+
 //Beacon info ---------------------------
 var XA = 0;
 var XB = 0;
@@ -299,8 +301,9 @@ function main_server(database_connection) {
         WebSocketConnection.on('message', (message)=> {
             console.log("Motor Control Message Recieved");
             console.log("X: " + message.X);
+            console.log("Y: " + message.Y);
             console.log("Yaw: " + message.Yaw);
-            console.log("Flag: " + message.Flag);
+            console.log("Flag: " + message.Flag); //Jakes Legma
 
             WebSocketManualControlServer.clients.forEach((WebSocketConnection) => {
                 WebSocketConnection.send(message);
@@ -317,6 +320,7 @@ function main_server(database_connection) {
             console.log("Pos: " + message.Pos);
             console.log("Yaw: " + message.Yaw);
 
+            
             //Send the message from the client websocket to all connections on the Motor Control web socket
             WebSocketMotorControlServer.clients.forEach((WebSocketConnection) => {
                 WebSocketConnection.send(message);

@@ -25,6 +25,7 @@ var cur_position_data = {};
 
 webSocket.onmessage = (message) => {
   cur_position_data = JSON.parse(message.data);
+  if(cur_position_data.keys())
   console.log(message);
 }
 
@@ -37,18 +38,22 @@ document.addEventListener('keydown', (e) => {
   if(e.code === "KeyW"){
     console.log("Forward Command Recieved");
     webSocket.send(JSON.stringify({"Target_R": Displacement + 0.01, "Target_Theta": 0}));
+    Displacement += 0.01;//Jake Line 2
   }
   else if(e.code === "KeyS"){
     console.log("Back Command Recieved");
     webSocket.send(JSON.stringify({"Target_R": Displacement - 0.01, "Target_Theta": 0}));
+    Displacement -= 0.01;
   }
   else if(e.code === "KeyD"){
     console.log("Right Turn Command Recieved");
     webSocket.send(JSON.stringify({"Target_R": 0, "Target_Theta": TurningHeading + 0.01}));
+    TurningHeading += 0.01;
   }
   else if(e.code === "KeyA"){
     console.log("Left Turn Command Recieved");
     webSocket.send(JSON.stringify({"Target_R": 0, "Target_Theta": TurningHeading - 0.01}));
+    TurningHeading -= 0.01;
   }
 });
 
