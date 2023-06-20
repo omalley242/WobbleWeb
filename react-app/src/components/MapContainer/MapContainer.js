@@ -37,13 +37,13 @@ const MapContainer = ({nodeData, pathData}) => {
     
     return (
         <span className='Map-Container' style={{display: 'flex', position: 'relative', height: '53.3vw', width: '80vw', flexWrap: 'wrap', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
-            <span style= {{width: '100%', height: '100%'}}>
+            <span style= {{width: '100%', height: '100%', float: 'left'}}>
                 <Xwrapper>
                     {PathItems}
                     {MapItems}
                 </Xwrapper>
             </span>
-            <div style={{overflow: 'scroll', width: '15%'}}>
+            <div style={{overflowY: 'scroll', width: '15%', height: '6em'}}>
                 {TextBox}
             </div>
         </span>
