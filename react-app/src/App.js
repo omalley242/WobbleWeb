@@ -57,7 +57,7 @@ function App() {
       onFailure = {nodePollingFailure}
       promise = {fetchNodeData}
 
-      render={({ startPolling, endPolling, isPolling }) => {
+      render={() => {
         return <ReactPolling 
                 url = {`http://${window.location.host}/paths`}
                 interval = {500}
@@ -65,7 +65,7 @@ function App() {
                 onSuccess = {pathPollingSuccess}
                 onFailure = {pathPollingFailure}
                 promise = {fetchPathData}
-                render = {({ startPolling, endPolling, isPolling }) => {
+                render = {() => {
                   return <MapContainer nodeData={nodeData} pathData={pathData}></MapContainer>;
                 }}
                 />;
@@ -73,7 +73,7 @@ function App() {
       />
 
       <div style={{display: 'inline-block', padding: '0', width: '10%'}}>
-        <input style={{marginTop: '5vh', height: '10%', width: '100%'}}type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
+        <input style={{marginTop: '5vh', height: '10%', width: '100%'}} type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
       </div>
 
     </div>
