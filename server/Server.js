@@ -87,7 +87,7 @@ function server_init() {
 }
 
 //MAIN PROCESS LOOP =====================================================
-function main_server(database_connection) {
+function main_server(database_connection) {Introduction:
 
     database_connection.connect((err) => {
         if (err) throw err;
@@ -128,10 +128,10 @@ function main_server(database_connection) {
 
         //Reseting the database
         console.log("Deleting all rows");
-        database_connection.query("DELETE FROM Nodes", function(err, result, fields) {
+        database_connection.query("DELETE FROM Nodes", function(err) {
             if (err) throw err;
         });
-        database_connection.query("DELETE FROM Paths", function(err, result, fields) {
+        database_connection.query("DELETE FROM Paths", function(err) {
             if (err) throw err;
         });
 
@@ -199,6 +199,35 @@ function main_server(database_connection) {
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
         });        
+    }
+
+    function dijkstras(startNodeId, EndNodeId){
+        //Find first shortest path
+        //shortest path dict "NodeId" : "Distance"
+        queryPathDistance(1, 2).then(result => {
+            Console.log(result);
+        }, err => {
+
+        });
+
+
+    }
+
+    function queryPathDistance(NodeId1, NodeId2){
+        return new Promise((resolve, reject) => {
+            database_connection.query(`SELECT Distance FROM Paths WHERE (StartId="${NodeId1} AND EndId="${NodeId2}) OR (EndId="${NodeId1} AND StartID="${NodeId2})"`, (error, result, _fields) => {
+                if (error) {
+                    console.log(`Error path does not exsist: ${err.code}`);
+                    reject(error);
+                } else {
+                    resolve(result);
+                }        
+            });    
+        })
+    } 
+
+    function queryPathConnections(NodeId){
+
     }
 
     app.post('/add/node', bodyParser.json(), (req, res) => {
