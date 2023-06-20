@@ -47,7 +47,7 @@ const MapContainer = ({nodeData, pathData}) => {
                     {MapItems}
                 </Xwrapper>
             </span>
-            <div style={{overflowY: 'scroll', width: '90vw', height: '6em'}}>
+            <div style={{overflowY: 'scroll', width: '100%', height: '6em'}}>
                 {TextBox}
             </div>
         </span>
