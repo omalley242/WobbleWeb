@@ -57,13 +57,13 @@ const MapContainer = ({nodeData, pathData}) => {
         <div className='Map-Container' style={{border: '3px solid #222', margin: '5vh', backgroundColor: '#444', maxHeight: '90vh'}}>
             <div style= {{height: '40vw', width: '60vw', position: 'relative'}}>
                     <svg height="1vw" width="1vw" style={{position: 'absolute', left: '0%', top: '0%'}}>
-                        <circle cx="0.3vw" cy="0.3vw" r="0.5vw" stroke="black" stroke-width="3" fill="red" />
-                    </svg>                     
-                    <svg height="1vw" width="1vw" style={{position: 'absolute', left: '95%', top: '0%'}}>
                         <circle cx="0.3vw" cy="0.3vw" r="0.5vw" stroke="black" stroke-width="3" fill="blue" />
                     </svg>                     
-                    <svg height="1vw" width="1vw" style={{position: 'absolute', left: '95%', top: '95%'}}>
-                        <circle cx="0.3vw" cy="0.3vw" r="0.5vw" stroke="black" stroke-width="3" fill="orange" />
+                    <svg height="1vw" width="1vw" style={{position: 'absolute', left: '98.5%', top: '0%'}}>
+                        <circle cx="0.7vw" cy="0.3vw" r="0.5vw" stroke="black" stroke-width="3" fill="red" />
+                    </svg>                     
+                    <svg height="1vw" width="1vw" style={{position: 'absolute', left: '0%', top: '97.5%'}}>
+                        <circle cx="0.3vw" cy="0.7vw" r="0.5vw" stroke="black" stroke-width="3" fill="orange" />
                     </svg>                     
                 <Xwrapper>
                     {PathItems}
