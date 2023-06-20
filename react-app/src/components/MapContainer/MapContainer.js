@@ -43,7 +43,7 @@ const MapContainer = ({nodeData, pathData}) => {
     });
 
     const NodeTextBox = nodeData.map((item) => {
-        return <div style={{backgroundColor: '#777', border: '1px solid #333', fontSize: '0.3em'}}>
+        return <div style={{backgroundColor: '#777', border: '1px solid #333', fontSize: '1em'}}>
                     <div style={{backgroundColor: '#666'}}>
                         {"--- Node ---"}
                     </div>
