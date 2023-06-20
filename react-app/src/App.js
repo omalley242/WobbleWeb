@@ -73,10 +73,6 @@ function App() {
       />
 
       <div style={{display: 'inline-block', padding: '3%'}}>
-        <label>IP Address</label>
-        <br/>
-        <input type="url" id='IpAddressForm'/>
-        <br/>
         <input style={{marginTop: '10vh', height: '5%', width: '100%'}}type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
       </div>
 
