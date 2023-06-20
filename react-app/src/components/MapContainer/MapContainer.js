@@ -27,7 +27,7 @@ const MapContainer = ({nodeData, pathData}) => {
             strokeWidth={2}
             headSize={3}
             animateDrawing={true}
-            path='grid'
+            path='straight'
             />;
         });
     
