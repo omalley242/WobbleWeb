@@ -73,7 +73,7 @@ function App() {
       />
 
       <div style={{display: 'inline-block', padding: '1vh', width: '15%', height: '20%'}}>
-        <input style={{marginTop: '4vh', height: '10%', width: '100%'}} type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
+        <input style={{marginTop: '4vh', height: '100%', width: '100%'}} type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
       </div>
 
     </div>
