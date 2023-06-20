@@ -43,7 +43,7 @@ const MapContainer = ({nodeData, pathData}) => {
     });
     
     return (
-        <div className='Map-Container' style={{position: 'relative', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
+        <div className='Map-Container' style={{position: 'relative', border: '3px solid #222', margin: '5vh', backgroundColor: '#444', maxHeight: '90vh'}}>
             <div style= {{height: '40vw', width: '60vw'}}>
                 <Xwrapper>
                     {PathItems}
