@@ -32,7 +32,7 @@ const MapContainer = ({nodeData, pathData}) => {
         });
 
     const TextBox = pathData.map((item) => {
-        return <div>{item}</div>;
+        return <div>{"StartId: " + item.StartId.toString()}</div>;
     });
     
     return (
