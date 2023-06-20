@@ -30,19 +30,22 @@ const MapContainer = ({nodeData, pathData}) => {
             labels={item.Distance.toString()}
             />;
         });
+
+    const TextBox = pathData.map((item) => {
+        return <div>{item}</div>;
+    });
     
     return (
-        <div className='Map-Container' style={{display: 'flex', position: 'relative', height: '53.3vw', width: '80vw', flexWrap: 'wrap', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
-            <span>
-                <Xwrapper>
-                    {PathItems}
-                    {MapItems}
-                </Xwrapper>
-                <div>
-                    Test
-                </div>
-            </span>
-        </div>
+        <span style= {{width: '100%', height: '100%'}}>
+            <div className='Map-Container' style={{display: 'flex', position: 'relative', height: '53.3vw', width: '80vw', flexWrap: 'wrap', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
+                    <Xwrapper>
+                        {PathItems}
+                        {MapItems}
+                    </Xwrapper>
+            </div>
+            pathData
+        </span>
+
     )
 }
 
