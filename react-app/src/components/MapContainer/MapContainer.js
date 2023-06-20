@@ -36,15 +36,17 @@ const MapContainer = ({nodeData, pathData}) => {
     });
     
     return (
-        <span style= {{width: '100%', height: '100%'}}>
-            <div className='Map-Container' style={{display: 'flex', position: 'relative', height: '53.3vw', width: '80vw', flexWrap: 'wrap', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
-                    <Xwrapper>
-                        {PathItems}
-                        {MapItems}
-                    </Xwrapper>
-            </div>
-            pathData
-        </span>
+        <div className='Map-Container' style={{display: 'flex', position: 'relative', height: '53.3vw', width: '80vw', flexWrap: 'wrap', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
+            <span style= {{width: '100%', height: '100%'}}>
+                <Xwrapper>
+                    {PathItems}
+                    {MapItems}
+                </Xwrapper>
+            </span>
+            <span>
+                {TextBox}
+            </span>
+        </div>
 
     )
 }
