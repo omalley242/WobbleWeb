@@ -72,8 +72,8 @@ function App() {
       }}
       />
 
-      <div style={{display: 'inline-block', padding: '3%'}}>
-        <input style={{marginTop: '10vh', height: '5%', width: '100%'}}type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
+      <div style={{display: 'inline-block', padding: '0', width: '10%'}}>
+        <input style={{marginTop: '5vh', height: '10%', width: '100%'}}type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
       </div>
 
     </div>
