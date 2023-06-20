@@ -43,8 +43,8 @@ const MapContainer = ({nodeData, pathData}) => {
     });
     
     return (
-        <span className='Map-Container' style={{display: 'flex', position: 'relative', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
-            <div style= {{display: 'inline',float: 'left', height: '40vw', width: '60vw'}}>
+        <div className='Map-Container' style={{display: 'flex', position: 'relative', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
+            <div style= {{float: 'left', height: '40vw', width: '60vw'}}>
                 <Xwrapper>
                     {PathItems}
                     {MapItems}
@@ -53,7 +53,7 @@ const MapContainer = ({nodeData, pathData}) => {
             <div style={{overflowY: 'scroll', overflowX: 'hidden', width: '100%', maxHeight: '100vw - 40vw - 10vh'}}>
                 {TextBox}
             </div>
-        </span>
+        </div>
 
     )
 }
