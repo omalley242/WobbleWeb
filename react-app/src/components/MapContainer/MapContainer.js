@@ -32,8 +32,8 @@ const MapContainer = ({nodeData, pathData}) => {
         });
 
     const TextBox = pathData.map((item) => {
-        return <div style={{minWidth: '100%',backgroundColor: '#777', border: '1px solid #333', fontSize: '0.5em'}}>
-                    <div style={{backgroundColor: '#666', height: '20%'}}>
+        return <div style={{backgroundColor: '#777', border: '1px solid #333', fontSize: '0.3em'}}>
+                    <div style={{backgroundColor: '#666'}}>
                         {"--- Path ---"}
                     </div>
                     {"StartId: " + item.StartId.toString() + "\n"}
@@ -50,7 +50,7 @@ const MapContainer = ({nodeData, pathData}) => {
                     {MapItems}
                 </Xwrapper>
             </div>
-            <div style={{overflowY: 'scroll', overflowX: 'hidden', width: '100%', maxHeight: '100vw - 40vw - 10vh'}}>
+            <div style={{overflowY: 'scroll', overflowX: 'hidden', width: '100%'}}>
                 {TextBox}
             </div>
         </div>
