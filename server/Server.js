@@ -183,7 +183,7 @@ function main_server(database_connection) {Introduction:
             if(result.length > 0){
                 console.log(`Path Already Exists`);
             }else{
-                database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},NULL)`, (err) => {
+                database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},5)`, (err) => {
                     if (err) console.log(`Error Adding path: ${err.code}`);
                 });       
             }
