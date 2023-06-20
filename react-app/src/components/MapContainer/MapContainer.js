@@ -40,14 +40,14 @@ const MapContainer = ({nodeData, pathData}) => {
     });
     
     return (
-        <span className='Map-Container' style={{display: 'flex', position: 'relative', height: '40vw', width: '60vw', flexWrap: 'wrap', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
-            <span style= {{width: '100%', height: '100%', float: 'left'}}>
+        <span className='Map-Container' style={{display: 'flex', position: 'relative', flexWrap: 'wrap', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
+            <span style= {{width: '100%', height: '100%', float: 'left', height: '40vw', width: '60vw',}}>
                 <Xwrapper>
                     {PathItems}
                     {MapItems}
                 </Xwrapper>
             </span>
-            <div style={{overflowY: 'scroll', width: '100%', height: '6em', border: '3px solid #222'}}>
+            <div style={{overflowY: 'scroll', width: '100%', height: '6em'}}>
                 {TextBox}
             </div>
         </span>
