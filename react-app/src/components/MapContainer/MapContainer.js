@@ -23,11 +23,11 @@ const MapContainer = ({nodeData, pathData}) => {
             return <Xarrow 
             start={item.StartId.toString()}
             end={item.EndId.toString()}
-            curveness={0.2} 
+            curveness={0.1} 
             strokeWidth={2}
             headSize={3}
             animateDrawing={true}
-            path='straight'
+            labels={index.toString() + ": " + item.Distance.toString()}
             />;
         });
     
