@@ -43,7 +43,7 @@ const MapContainer = ({nodeData, pathData}) => {
     });
     
     return (
-        <div className='Map-Container' style={{display: 'flex', position: 'relative', flexWrap: 'wrap', border: '3px solid #222', margin: '5vh', backgroundColor: '#444', maxWidth: '80%'}}>
+        <div className='Map-Container' style={{height: '53.3%', width: '80%', position: 'relative', flexWrap: 'wrap', border: '3px solid #222', margin: '5vh', backgroundColor: '#444'}}>
             <span style= {{display: 'inline',float: 'left', height: '40vw', width: '60vw'}}>
                 <Xwrapper>
                     {PathItems}
