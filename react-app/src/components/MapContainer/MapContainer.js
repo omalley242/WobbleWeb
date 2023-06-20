@@ -56,21 +56,15 @@ const MapContainer = ({nodeData, pathData}) => {
     return (
         <div className='Map-Container' style={{border: '3px solid #222', margin: '5vh', backgroundColor: '#444', maxHeight: '90vh'}}>
             <div style= {{height: '40vw', width: '60vw', position: 'relative'}}>
-                <div style={{position: 'absolute', left: '0%', top: '0%', zIndex: '10'}}>
-                    <svg height="1vw" width="1vw">
-                        <circle cx="0.5vw" cy="0.5vw" r="0.5vw" stroke="black" stroke-width="3" fill="red" />
+                    <svg height="1vw" width="1vw" style={{position: 'absolute', left: '0%', top: '0%'}}>
+                        <circle cx="0.3vw" cy="0.3vw" r="0.5vw" stroke="black" stroke-width="3" fill="red" />
                     </svg>                     
-                </div>
-                <div style={{position: 'absolute', left: '95%', top: '0%'}}>
-                    <svg height="1vw" width="1vw">
-                        <circle cx="0.5vw" cy="0.5vw" r="0.5vw" stroke="black" stroke-width="3" fill="blue" />
+                    <svg height="1vw" width="1vw" style={{position: 'absolute', left: '95%', top: '0%'}}>
+                        <circle cx="0.3vw" cy="0.3vw" r="0.5vw" stroke="black" stroke-width="3" fill="blue" />
                     </svg>                     
-                </div>
-                <div style={{position: 'absolute', left: '95%', top: '95%'}}>
-                    <svg height="1vw" width="1vw">
-                        <circle cx="0.5vw" cy="0.5vw" r="0.5vw" stroke="black" stroke-width="3" fill="orange" />
+                    <svg height="1vw" width="1vw" style={{position: 'absolute', left: '95%', top: '95%'}}>
+                        <circle cx="0.3vw" cy="0.3vw" r="0.5vw" stroke="black" stroke-width="3" fill="orange" />
                     </svg>                     
-                </div>
                 <Xwrapper>
                     {PathItems}
                     {MapItems}
