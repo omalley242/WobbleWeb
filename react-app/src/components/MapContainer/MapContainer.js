@@ -33,7 +33,7 @@ const MapContainer = ({nodeData, pathData}) => {
 
     const TextBox = pathData.map((item) => {
         return <div style={{backgroundColor: '#777', border: '1px solid #333', fontSize: '2em'}}>
-                    <div style={{backgroundColor: '#666', height: '3em'}}>
+                    <div style={{backgroundColor: '#666', height: '20%'}}>
                         {"--- Path ---"}
                     </div>
                     {"StartId: " + item.StartId.toString() + "\n"}
