@@ -234,9 +234,9 @@ function main_server(database_connection) {Introduction:
 
         console.log(firstNode);
         
-        console.log(firstNode["xCoordinate"]);
+        console.log(firstNode[0]["xCoordinate"]);
         console.log("or")
-        console.log(firstNode.xCoordinate)
+        console.log(firstNode[0].xCoordinate)
 
         // database_connection.query(`SELECT * FROM Nodes WHERE ID=${currentId}`, (err, result) => {
         //     if (err) console.log(`Error obataining node: ${err.code}`);
