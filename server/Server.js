@@ -230,7 +230,7 @@ function main_server(database_connection) {Introduction:
     async function completePathDirect(currentId, LastId){
         console.log(`Completing Path From ${LastId} To ${currentId}`);
 
-        let firstNode = await promiseQuery(`SELECT * FROM Nodes WHERE ID=${currentId} OR WHERE ID=${LastID}`)
+        let firstNode = await promiseQuery(`SELECT * FROM Nodes WHERE ID=${LastID}`)
 
         console.log(firstNode);
         
