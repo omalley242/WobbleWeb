@@ -201,15 +201,24 @@ function main_server(database_connection) {Introduction:
         });        
     }
 
+    app.get('/testdik', (req, res) => {
+        dijkstras(0,7);
+        res.send("working dik test");
+    });
+
     function dijkstras(startNodeId, EndNodeId){
         //Find first shortest path
         //shortest path dict "NodeId" : "Distance"
-        queryPathDistance(1, 2).then(result => {
-            Console.log(result);
-        }, err => {
-
+        // queryPathDistance(1, 2).then(result => {
+        //     Console.log(result);
+        // }, err => {
+            
+        // });
+        database_connection.query("SELECT * FROM Nodes", function(err, result, fields) {
+            if (err) throw err;
+            const nodes = result;
+            console.log(nodes);
         });
-
 
     }
 
