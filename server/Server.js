@@ -215,20 +215,14 @@ function main_server(database_connection) {Introduction:
         });        
     }
 
-    async function queryExec() {
-
-        let tags = await db.query(`select * from tags`);
-        console.log(tags);
-        return tags;
-    }
-
     async function completePathDirect(currentId, LastId){
         console.log(`Completing Path From ${LastId} To ${currentId}`);
 
-        let firstNode = await database_connection.query(`SELECT * FROM Nodes WHERE ID=${currentId}`);
+        let firstNode = await promiseQuery(`SELECT * FROM Nodes WHERE ID=${currentId}`)
+
         console.log(firstNode);
         
-        console.log(firstNode["xCoordinate"]);
+        // console.log(firstNode["xCoordinate"]);
 
         // database_connection.query(`SELECT * FROM Nodes WHERE ID=${currentId}`, (err, result) => {
         //     if (err) console.log(`Error obataining node: ${err.code}`);
