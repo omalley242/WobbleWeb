@@ -151,8 +151,7 @@ function main_server(database_connection) {Introduction:
     function addNodeToDatabaseSimple(PX, PY){
         console.log(`Adding Node with ID: ${NodeId}`);
         database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},0,0,0)`, function(err, result, fields) {
-            if (err) 
-                throw err;
+            if (err) throw err;
         });     
     }
 
@@ -361,6 +360,7 @@ function main_server(database_connection) {Introduction:
     
             LastId = currentId;
 
+            if (err) throw err;
             res.status(200).json(`Recieved Node With Id: ${currentId}`);
 
         });
