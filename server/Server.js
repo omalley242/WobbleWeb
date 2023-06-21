@@ -29,6 +29,7 @@ const WebSocketManualControlServer = new WebSocket.Server({noServer: true});
 
 //Allow for json parsing within the body of a html request
 const bodyParser = require('body-parser');
+const { NULL } = require('mysql/lib/protocol/constants/types');
 
 //Id for storing nodes as unique within the database
 var NodeId = 0;
@@ -213,6 +214,7 @@ function main_server(database_connection) {Introduction:
         res.send("working dik test");
     });
 
+    //node content ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
     function dijkstras(startNodeId, EndNodeId){
         //Find first shortest path
         //shortest path dict "NodeId" : "Distance"
@@ -221,9 +223,10 @@ function main_server(database_connection) {Introduction:
         // }, err => {
             
         // });
+        const nodes = 0;
         database_connection.query("SELECT * FROM Nodes", function(err, result, fields) {
             if (err) throw err;
-            const nodes = result;
+            nodes = result;
             console.log(nodes);
         });
 
@@ -286,6 +289,10 @@ function main_server(database_connection) {Introduction:
                 NodeId = NodeId + 1;
             }
     
+            database_connection.query(`INSERT INTO Paths VALUES (${currentId},NULL,100,5)`, (err) => {
+                if (err) console.log(`Error Adding path: ${err.code}`);
+            });
+
             //If it isnt the first node or a repeated node (we didnt move)
             if (LastId !== undefined && LastId !== currentId){
                 console.log("LastId = " + LastId);
