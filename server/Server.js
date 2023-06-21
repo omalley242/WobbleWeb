@@ -148,6 +148,14 @@ function main_server(database_connection) {Introduction:
         });     
     }
 
+    function addNodeToDatabaseSimple(PX, PY){
+        console.log(`Adding Node with ID: ${NodeId}`);
+        database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},0,0,0)`, function(err, result, fields) {
+            if (err) 
+                throw err;
+        });     
+    }
+
     //Algorithm to find position
     function calculate_Tienstra_formula(ANG_ALPHA, ANG_GAMMA){
         ANG_BETA = 2*Math.PI - (ANG_ALPHA + ANG_GAMMA);
@@ -238,6 +246,61 @@ function main_server(database_connection) {Introduction:
     function queryPathConnections(NodeId){
 
     }
+
+    app.post('/add/simplenode', bodyParser.json(), (req, res) => {
+        console.log("Adding New Node");
+        console.log(req.body);
+        
+        //Fetch Json from HTTP
+        let nodeJson = req.body.Node;
+
+        let PX = nodeJson.X;
+        let PY = nodeJson.Y;
+
+        // ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
+        //check for similar entries
+        database_connection.query(`SELECT ID FROM Nodes WHERE ((XCoordinate BETWEEN ${PX - MergeRadius} AND ${PX + MergeRadius}) AND (YCoordinate BETWEEN ${PY - MergeRadius} AND ${PY + MergeRadius})) OR ((HeadingAlpha BETWEEN ${ANG_ALPHA - MergeAngle} AND ${ANG_ALPHA + MergeAngle}) AND (HeadingBeta BETWEEN ${ANG_BETA - MergeAngle} AND ${ANG_BETA + MergeAngle}) AND (HeadingGamma BETWEEN ${ANG_GAMMA - MergeAngle} AND ${ANG_GAMMA + MergeAngle})) `, function(err, result, fields) {
+            if (err) 
+                throw err;
+            if (result.length != 0) {
+
+                //If the node already exists
+                console.log("This Node Already Exist Within Database");
+
+                if (result.length >= 2){
+
+                    addNodeToDatabaseSimple(PX, PY);
+                    
+                    currentId = NodeId;
+
+                    NodeId = NodeId + 1;
+                    
+                }else {
+                    currentId = result[0].ID;
+                }
+
+            } else {
+                addNodeToDatabaseSimple(PX, PY);
+
+                currentId = NodeId;
+
+                NodeId = NodeId + 1;
+            }
+    
+            //If it isnt the first node or a repeated node (we didnt move)
+            if (LastId !== undefined && LastId !== currentId){
+                console.log("LastId = " + LastId);
+                console.log("currentId = " + currentId);
+                completePath(currentId, LastId);
+            }
+    
+            LastId = currentId;
+
+            res.status(200).json(`Recieved Node With Id: ${currentId}`);
+
+        });
+    
+    });
 
     app.post('/add/node', bodyParser.json(), (req, res) => {
         console.log("Adding New Node");
