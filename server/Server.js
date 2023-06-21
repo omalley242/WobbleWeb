@@ -218,20 +218,22 @@ function main_server(database_connection) {Introduction:
     function completePathDirect(currentId, LastId){
         console.log(`Completing Path From ${LastId} To ${currentId}`);
 
+        var firstNode
         database_connection.query(`SELECT FROM Nodes WHERE ID=${currentId}`, (err) => {
             if (err) console.log(`Error obataining node: ${err.code}`);
             console.log(result);
-            var firstNode = result;
+            firstNode = result;
         });
 
+        console.log(firstNode["xCoordinate"]);
         database_connection.query(`SELECT FROM Nodes WHERE ID=${LastId}`, (err) => {
             if (err) console.log(`Error obataining node: ${err.code}`);
             console.log(result);
             var secondNode = result;
         });
 
-        console.log(firstNode)
-        console.log(firstNode.XCoordinate)
+        console.log(firstNode);
+        console.log(firstNode.XCoordinate);
 
 
         // Here I will query get x,y for lastId and currentId then calculate distance as crow flies.
@@ -263,7 +265,7 @@ function main_server(database_connection) {Introduction:
         // });
         var nodes 
 
-        database_connection.query("SELECT * FROM Nodes", function(err, result, fields) {
+        database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
             if (err) throw err;
             nodes = result;
             console.log(nodes);
