@@ -202,6 +202,12 @@ function main_server(database_connection) {Introduction:
     function completePath(currentId, LastId){
         console.log(`Completing Path From ${LastId} To ${currentId}`);
 
+        // Here I will query get x,y for lastId and currentId then calculate distance as crow flies.
+
+        // Then insert in UPDATE PATHS below 
+
+        //Beautiful stuff brother 
+        
         //Compare Headings Here
         // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, (err) => {
