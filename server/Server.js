@@ -269,7 +269,7 @@ function main_server(database_connection) {Introduction:
 
         //Compare Headings Here
         // StartId | EndId | Heading From Start | Distance |
-        database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, (err) => {
+        database_connection.query(`UPDATE Paths SET EndId=${currentId}, Distance=${distance} WHERE (StartId=${LastId} AND EndId IS NULL)`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
         });     
     }
