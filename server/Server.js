@@ -235,7 +235,7 @@ function main_server(database_connection) {Introduction:
         
         // d=√((x2 – x1)² + (y2 – y1)²)
 
-        let distance = Math.sqrt(Math.pow(secondNode[0].XCoordinate - firstNode[0].XCoordinate) + Math.pow(secondNode[0].YCoordinate - firstNode[0].YCoordinate))
+        let distance = Math.sqrt(Math.pow(secondNode[0].XCoordinate - firstNode[0].XCoordinate, 2) + Math.pow(secondNode[0].YCoordinate - firstNode[0].YCoordinate, 2))
         console.log(distance);
         
         // console.log(firstNode[0].XCoordinate)
