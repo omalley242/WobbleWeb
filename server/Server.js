@@ -230,11 +230,15 @@ function main_server(database_connection) {Introduction:
     async function completePathDirect(currentId, LastId){
         console.log(`Completing Path From ${LastId} To ${currentId}`);
 
-        let firstNode = await promiseQuery(`SELECT * FROM Nodes WHERE ID=${currentId},${LastId}`)
-
-        console.log(firstNode);
+        let firstNode = await promiseQuery(`SELECT * FROM Nodes WHERE ID=${LastId}`)
+        let secondNode = await promiseQuery(`SELECT * FROM Nodes WHERE ID=${currentId}`)
         
-        console.log(firstNode[0].XCoordinate)
+        // d=√((x2 – x1)² + (y2 – y1)²)
+
+        let distance = Math.sqrt(Math.pow(secondNode[0].XCoordinate - firstNode[0].XCoordinate) + Math.pow(secondNode[0].YCoordinate - firstNode[0].YCoordinate))
+        console.log(distance);
+        
+        // console.log(firstNode[0].XCoordinate)
 
         // database_connection.query(`SELECT * FROM Nodes WHERE ID=${currentId}`, (err, result) => {
         //     if (err) console.log(`Error obataining node: ${err.code}`);
