@@ -215,25 +215,39 @@ function main_server(database_connection) {Introduction:
         });        
     }
 
-    function completePathDirect(currentId, LastId){
+    async function queryExec() {
+
+        let tags = await db.query(`select * from tags`);
+        console.log(tags);
+        return tags;
+    }
+
+    async function completePathDirect(currentId, LastId){
         console.log(`Completing Path From ${LastId} To ${currentId}`);
 
-        var firstNode
-        database_connection.query(`SELECT FROM Nodes WHERE ID=${currentId}`, (err) => {
-            if (err) console.log(`Error obataining node: ${err.code}`);
-            console.log(result);
-            firstNode = result;
-        });
-
-        console.log(firstNode["xCoordinate"]);
-        database_connection.query(`SELECT FROM Nodes WHERE ID=${LastId}`, (err) => {
-            if (err) console.log(`Error obataining node: ${err.code}`);
-            console.log(result);
-            var secondNode = result;
-        });
-
+        let firstNode = await database_connection.query(`SELECT * FROM Nodes WHERE ID=${currentId}`);
         console.log(firstNode);
-        console.log(firstNode.XCoordinate);
+        
+        console.log(firstNode["xCoordinate"]);
+
+        // database_connection.query(`SELECT * FROM Nodes WHERE ID=${currentId}`, (err, result) => {
+        //     if (err) console.log(`Error obataining node: ${err.code}`);
+        //     console.log(result);
+        //     var firstNode = result;
+        //     node1 = firstNode;
+        // });
+
+        // console.log(node1)
+        // var firstNode 
+        // console.log(firstNode["xCoordinate"]);
+        // database_connection.query(`SELECT * FROM Nodes WHERE ID=${LastId}`, (err) => {
+        //     if (err) console.log(`Error obataining node: ${err.code}`);
+        //     console.log(result);
+        //     var secondNode = result;
+        // });
+
+        // console.log(firstNode);
+        // console.log(firstNode.XCoordinate);
 
 
         // Here I will query get x,y for lastId and currentId then calculate distance as crow flies.
@@ -291,7 +305,7 @@ function main_server(database_connection) {Introduction:
     }
 
     app.post('/add/simplenode', bodyParser.json(), (req, res) => {
-        console.log("Adding New Node");
+        console.log("Adding New Simple Node");
         console.log(req.body);
         
         //Fetch Json from HTTP
@@ -338,7 +352,7 @@ function main_server(database_connection) {Introduction:
             if (LastId !== undefined && LastId !== currentId){
                 console.log("LastId = " + LastId);
                 console.log("currentId = " + currentId);
-                completePath(currentId, LastId);
+                completePathDirect(currentId, LastId);
             }
     
             LastId = currentId;
