@@ -12,7 +12,7 @@ var sql = require('mysql');
 const axios = require("axios");
 
 //set the port number to listen on
-var PORT = 3000;
+var PORT = 5000;
 
 //a library to locate the current path
 const path = require('path');
