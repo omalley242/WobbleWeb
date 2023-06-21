@@ -236,7 +236,8 @@ function main_server(database_connection) {Introduction:
         // }, err => {
             
         // });
-        const nodes = 0;
+        var nodes 
+
         database_connection.query("SELECT * FROM Nodes", function(err, result, fields) {
             if (err) throw err;
             nodes = result;
