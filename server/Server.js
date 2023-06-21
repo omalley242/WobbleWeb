@@ -215,6 +215,18 @@ function main_server(database_connection) {Introduction:
         });        
     }
 
+    function promiseQuery(query) {
+        return new Promise((resolve, reject) => {
+            database_connection.query(query, (err, result) => {
+                if (err) {
+                    console.log(`Query did not return result: ${err.code}`);
+                    return reject(err);
+                }
+                resolve(result);
+            })
+        })
+    }
+
     async function completePathDirect(currentId, LastId){
         console.log(`Completing Path From ${LastId} To ${currentId}`);
 
