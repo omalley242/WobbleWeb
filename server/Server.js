@@ -208,6 +208,31 @@ function main_server(database_connection) {Introduction:
 
     function completePath(currentId, LastId){
         console.log(`Completing Path From ${LastId} To ${currentId}`);
+        //Compare Headings Here
+        // StartId | EndId | Heading From Start | Distance |
+        database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, (err) => {
+            if (err) console.log(`Error updating path: ${err.code}`);
+        });        
+    }
+
+    function completePathDirect(currentId, LastId){
+        console.log(`Completing Path From ${LastId} To ${currentId}`);
+
+        database_connection.query(`SELECT FROM Nodes WHERE ID=${currentId}`, (err) => {
+            if (err) console.log(`Error obataining node: ${err.code}`);
+            console.log(result);
+            var firstNode = result;
+        });
+
+        database_connection.query(`SELECT FROM Nodes WHERE ID=${LastId}`, (err) => {
+            if (err) console.log(`Error obataining node: ${err.code}`);
+            console.log(result);
+            var secondNode = result;
+        });
+
+        console.log(firstNode)
+        console.log(firstNode.XCoordinate)
+
 
         // Here I will query get x,y for lastId and currentId then calculate distance as crow flies.
 
@@ -219,7 +244,7 @@ function main_server(database_connection) {Introduction:
         // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
-        });        
+        });     
     }
 
     app.get('/testdik', (req, res) => {
