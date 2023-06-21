@@ -87,6 +87,13 @@ function server_init() {
     });
 }
 
+// Code to shutdown server correctly on Ctrl-C
+process.on('SIGINT', function() {
+    console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+    // some other closing procedures go here
+    process.exit(0);
+  });
+
 //MAIN PROCESS LOOP =====================================================
 function main_server(database_connection) {Introduction:
 
@@ -207,7 +214,7 @@ function main_server(database_connection) {Introduction:
         // Then insert in UPDATE PATHS below 
 
         //Beautiful stuff brother 
-        
+
         //Compare Headings Here
         // StartId | EndId | Heading From Start | Distance |
         database_connection.query(`UPDATE Paths SET EndId=${currentId} WHERE (StartId=${LastId} AND EndId IS NULL)`, (err) => {
