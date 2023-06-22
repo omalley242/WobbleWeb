@@ -299,6 +299,7 @@ function main_server(database_connection) {Introduction:
                 let EndId = paths.EndId;
                 let Distance = paths.Distance;
                 let StartId = paths.StartId;
+                console.dir({[EndId] : Distance});
                 nodeData[node] = (paths.StartId == node) ? {[EndId] : Distance} : {[StartId] : Distance};
             }
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
