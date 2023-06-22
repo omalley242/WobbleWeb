@@ -299,7 +299,7 @@ function main_server(database_connection) {Introduction:
             nodeData[node] = nodeData[node].map(path => {
                 let node_dict = {};
                 console.log(path.StartId);
-                return (path.StartId == node) ? (node_dict[(path.EndId + "test")]=path.Distance) : (node_dict[(path.StartId + "test")] = path.Distance)
+                return (path.StartId == node) ? (node_dict[path.EndId.toString()]=path.Distance) : (node_dict[(path.StartId.toString())] = path.Distance)
             });
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
