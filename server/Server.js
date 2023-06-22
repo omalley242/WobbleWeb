@@ -297,7 +297,7 @@ function main_server(database_connection) {Introduction:
         for (node in nodeData) {
 
             nodeData[node] = nodeData[node].map((path) => {
-                let node_dict = {};
+                var node_dict = {};
                 console.log(path);
                 return (path.StartId == node) ? (node_dict[(path.EndId + "test")]=path.Distance) : (node_dict[(path.StartId + "test")] = path.Distance)
             });
