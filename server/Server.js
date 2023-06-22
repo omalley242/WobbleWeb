@@ -295,7 +295,7 @@ function main_server(database_connection) {Introduction:
         let graph = new Object();
         // nodeData.forEach(node => node.keys());
         for (node in nodeData) {
-            nodeData[node].map(path => "test2");
+            nodeData = nodeData[node].map(path => "test2");
             console.log(nodeData);
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
