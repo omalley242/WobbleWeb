@@ -297,7 +297,10 @@ function main_server(database_connection) {Introduction:
         for (node in nodeData) {
             let temp_dict = {};
             for (paths in nodeData[node]) {
-                (paths.StartId == node) ? (temp_dict[paths.EndId]=paths.Distance) : (temp_dict[paths.StartId] = paths.Distance);
+                let EndId = paths.EndId;
+                let Distance = paths.Distance;
+                let StartId = paths.StartId;
+                (paths.StartId == node) ? (temp_dict[EndId]=Distance) : (temp_dict[StartId] = Distance);
             }
             nodeData[node] = temp_dict;
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
