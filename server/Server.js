@@ -297,8 +297,8 @@ function main_server(database_connection) {Introduction:
         let new_nodeData = []
         for (node in nodeData) {
             let temp_dict = {};
-            for (path in nodeData[node]) {
-                (path.StartId == node) ? (temp_dict[path.EndId]=path.Distance) : (temp_dict[(path.StartId)] = path.Distance);
+            for (paths in nodeData[node]) {
+                (paths.StartId == node) ? (temp_dict[paths.EndId]=paths.Distance) : (temp_dict[(paths.StartId)] = paths.Distance);
             }
             new_nodeData[node] = temp_dict;
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
