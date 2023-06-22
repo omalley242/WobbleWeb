@@ -277,20 +277,26 @@ function main_server(database_connection) {Introduction:
 
         // console.log(start[0].StartId);
 
-        var graph = new Object();
+        var nodeData = new Object();
 
         // graph.start[0].StartId = { (start[0].EndId) : (start[0].distance)};
         
         // graph.(start[0].StartId)
 
         for (node = startNodeId; node <= EndNodeId; node++){
-            let curNode = await promiseQuery(`SELECT * FROM Paths WHERE StartId=${node} OR EndId=${node}`)
+            let curNode = await promiseQuery(`SELECT * FROM Paths WHERE StartId=${node} OR EndId=${node}`);
             // Object.assign(graph, curNode);
-            graph[node] = JSON.parse(JSON.stringify(curNode));
+            nodeData[node] = JSON.parse(JSON.stringify(curNode));
         }
 
-        console.log(`graph:`)
-        console.log(graph);
+        console.log(`nodeData:`);
+        console.log(nodeData);
+
+        let graph = new Object();
+
+        for (node in nodeData) {
+            console.log(`${node}: ${nodeData[node]}`);
+
 
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
         //     if (err) throw err;
