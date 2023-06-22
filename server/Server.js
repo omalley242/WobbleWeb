@@ -255,7 +255,6 @@ function main_server(database_connection) {Introduction:
     //node content ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
     async function dijkstras(startNodeId, EndNodeId){
         // From start id to end if, iterate through id's and make key value, id_origin: {id_neighbour: distance, id_neighbour: distance} 
-
         // e.g.
         // let graph = {
         //     start: { A: 5, B: 2 },
@@ -265,10 +264,20 @@ function main_server(database_connection) {Introduction:
         //     D: { finish: 1 },
         //     finish: {},
         // };
-        let start = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${startNodeId}`)
-        console.log(start);
+        var start = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${startNodeId}`)
+        console.log(start[0].StartId);
 
-        for (node = startNodeId; node <= EndNodeId; node++){
+        var graph = new Object();
+
+        Object.assign(graph, start);
+
+        console.log(graph);
+
+        // graph.start[0].StartId = { (start[0].EndId) : (start[0].distance)};
+        
+        // graph.(start[0].StartId)
+
+        // for (node = startNodeId; node <= EndNodeId; node++){
             //add node and neighbours to key value list
          }
 
