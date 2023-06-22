@@ -259,7 +259,9 @@ function main_server(database_connection) {Introduction:
         res.send("working dik test");
     });
 
-    //node content ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
+    //node-content ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
+
+    // path-content StartId | EndId | Heading From Start | Distance |
     async function dijkstras(startNodeId, EndNodeId){
         // From start id to end if, iterate through id's and make key value, id_origin: {id_neighbour: distance, id_neighbour: distance} 
         // e.g.
@@ -282,7 +284,7 @@ function main_server(database_connection) {Introduction:
         // graph.(start[0].StartId)
 
         for (node = startNodeId; node <= EndNodeId; node++){
-            let curNode = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${node}`)
+            let curNode = await promiseQuery(`SELECT * FROM Paths WHERE StartId=${node} OR EndId${node}`)
             // Object.assign(graph, curNode);
             graph[node] = JSON.parse(JSON.stringify(curNode));
         }
