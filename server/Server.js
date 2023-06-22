@@ -264,7 +264,7 @@ function main_server(database_connection) {Introduction:
         //     D: { finish: 1 },
         //     finish: {},
         // };
-        var start = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${startNodeId}`)
+        // var start = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${startNodeId}`)
 
         // console.log(start[0].StartId);
 
@@ -275,7 +275,7 @@ function main_server(database_connection) {Introduction:
         // graph.(start[0].StartId)
 
         for (node = startNodeId; node <= EndNodeId; node++){
-            let curNode = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${startNodeId}`)
+            let curNode = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${node}`)
             // Object.assign(graph, curNode);
             graph[node] = JSON.parse(JSON.stringify(curNode));
         }
@@ -352,11 +352,12 @@ function main_server(database_connection) {Introduction:
                 if (err) console.log(`Error Adding path: ${err.code}`);
             });
 
-            //If it isnt the first node or a repeated node (we didnt move)
+            //If it isnt the first node or a repeated node i.e we have a new node
             if (LastId !== undefined && LastId !== currentId){
                 console.log("LastId = " + LastId);
                 console.log("currentId = " + currentId);
                 completePathDirect(currentId, LastId);
+                completePathDirect(LastId, currentId);
             }
     
             LastId = currentId;
