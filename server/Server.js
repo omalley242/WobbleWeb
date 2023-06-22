@@ -29,7 +29,7 @@ const WebSocketManualControlServer = new WebSocket.Server({noServer: true});
 
 //Allow for json parsing within the body of a html request
 const bodyParser = require('body-parser');
-const { NULL } = require('mysql/lib/protocol/constants/types');
+const { NULL, ENUM } = require('mysql/lib/protocol/constants/types');
 
 //Id for storing nodes as unique within the database
 var NodeId = 0;
@@ -299,6 +299,7 @@ function main_server(database_connection) {Introduction:
                 let EndId = paths.EndId;
                 let Distance = paths.Distance;
                 let StartId = paths.StartId;
+                console.log(EndId);
                 console.dir({[EndId] : Distance});
                 nodeData[node] = (paths.StartId == node) ? {[EndId] : Distance} : {[StartId] : Distance};
             }
