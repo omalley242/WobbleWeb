@@ -27,7 +27,7 @@ const MapContainer = ({nodeData, pathData}) => {
             strokeWidth={2}
             headSize={3}
             animateDrawing={true}
-            labels=<div style={{ fontSize: "1.3em", fontFamily: "fantasy", fontStyle: "italic" }}>{item.Distance.toString()}</div>
+            labels=<div style={{ fontSize: "0.5em", fontFamily: "fantasy", fontStyle: "italic" }}>{item.Distance.toString()}</div>
             />;
         });
 
