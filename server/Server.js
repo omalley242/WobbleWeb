@@ -276,7 +276,8 @@ function main_server(database_connection) {Introduction:
 
         for (node = startNodeId; node <= EndNodeId; node++){
             let curNode = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${startNodeId}`)
-            Object.assign(graph, curNode);
+            // Object.assign(graph, curNode);
+            graph.node = curNode[0];
         }
 
         console.log(`graph:`)
