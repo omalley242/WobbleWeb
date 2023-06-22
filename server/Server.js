@@ -246,7 +246,9 @@ function main_server(database_connection) {Introduction:
             if (err) console.log(`Error updating path: ${err.code}`);
         });     
 
-        database_connection.query(`INSERT Paths SET StartId=${currentId}, EndId=${LastId}, Distance=${distance}`, (err) => {
+        // INSERT INTO table_name (column1, column2, column3,etc)
+        // VALUES (value1, value2, value3, etc);
+        database_connection.query(`INSERT INTO Paths SET StartId=${currentId}, EndId=${LastId}, Distance=${distance}`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
         }); 
     }
