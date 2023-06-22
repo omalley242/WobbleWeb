@@ -237,35 +237,9 @@ function main_server(database_connection) {Introduction:
 
         console.log("calculating distance");
         let distance = Math.sqrt(Math.pow(secondNode[0].XCoordinate - firstNode[0].XCoordinate, 2) + Math.pow(secondNode[0].YCoordinate - firstNode[0].YCoordinate, 2));
-        console.log(distance);
+        // console.log(distance);
         
         // console.log(firstNode[0].XCoordinate)
-
-        // database_connection.query(`SELECT * FROM Nodes WHERE ID=${currentId}`, (err, result) => {
-        //     if (err) console.log(`Error obataining node: ${err.code}`);
-        //     console.log(result);
-        //     var firstNode = result;
-        //     node1 = firstNode;
-        // });
-
-        // console.log(node1)
-        // var firstNode 
-        // console.log(firstNode["xCoordinate"]);
-        // database_connection.query(`SELECT * FROM Nodes WHERE ID=${LastId}`, (err) => {
-        //     if (err) console.log(`Error obataining node: ${err.code}`);
-        //     console.log(result);
-        //     var secondNode = result;
-        // });
-
-        // console.log(firstNode);
-        // console.log(firstNode.XCoordinate);
-
-
-        // Here I will query get x,y for lastId and currentId then calculate distance as crow flies.
-
-        // Then insert in UPDATE PATHS below 
-
-        //Beautiful stuff brother 
 
         //Compare Headings Here
         // StartId | EndId | Heading From Start | Distance |
