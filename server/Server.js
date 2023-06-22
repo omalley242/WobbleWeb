@@ -248,7 +248,7 @@ function main_server(database_connection) {Introduction:
     }
 
     app.get('/testdik', (req, res) => {
-        dijkstras(0,2);
+        dijkstras(0,3);
         res.send("working dik test");
     });
 
