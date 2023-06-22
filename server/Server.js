@@ -295,12 +295,11 @@ function main_server(database_connection) {Introduction:
         let graph = new Object();
         // nodeData.forEach(node => node.keys());
         for (node in nodeData) {
-
-            nodeData[node] = nodeData[node].map(path => {
-                let node_dict = {};
-                console.log(path.StartId);
-                return (path.StartId == node) ? (node_dict[path.EndId.toString()]=path.Distance) : (node_dict[(path.StartId.toString())] = path.Distance)
-            });
+            let temp_dict = {};
+            for (path in nodeData[node]) {
+                (path.StartId == node) ? (temp_dict[path.EndId]=path.Distance) : (temp_dict[(path.StartId)] = path.Distance);
+            }
+            nodeData[node] = temp_dict;
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
         console.log(nodeData);
