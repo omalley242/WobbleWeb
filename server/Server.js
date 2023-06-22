@@ -293,7 +293,9 @@ function main_server(database_connection) {Introduction:
         console.log(nodeData);
 
         for (node in nodeData) {
-            nodeData[node] = nodeData[node].map(nodepath => nodepath.StartId);
+            let temp_dic = {};
+            nodeData[node].forEach(nodepath => temp_dic[node] = nodepath.StartId);
+            nodeData[node] = temp_dic;
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
         console.log(nodeData);
