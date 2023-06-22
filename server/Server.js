@@ -253,7 +253,7 @@ function main_server(database_connection) {Introduction:
     });
 
     //node content ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
-    function dijkstras(startNodeId, EndNodeId){
+    async function dijkstras(startNodeId, EndNodeId){
         // From start id to end if, iterate through id's and make key value, id_origin: {id_neighbour: distance, id_neighbour: distance} 
 
         // e.g.
@@ -265,6 +265,7 @@ function main_server(database_connection) {Introduction:
         //     D: { finish: 1 },
         //     finish: {},
         // };
+        let start = await promiseQuery(`SELECT Distance,EndId FROM Paths WHERE StartId="${startNodeId}`)
 
         for (node = startNodeId; node <= EndNodeId; node++){
             //add node and neighbours to key value list
