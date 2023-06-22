@@ -294,13 +294,10 @@ function main_server(database_connection) {Introduction:
 
         let graph = new Object();
         // nodeData.forEach(node => node.keys());
-        for (node in nodeData) {
+        for (node in nodeData.keys()) {
             console.log(node);
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
-
-        console.log(nodeData);
-
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
         //     if (err) throw err;
         //     nodes = result;
