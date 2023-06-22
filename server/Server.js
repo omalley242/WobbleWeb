@@ -279,7 +279,7 @@ function main_server(database_connection) {Introduction:
 
         // for (node = startNodeId; node <= EndNodeId; node++){
             //add node and neighbours to key value list
-         }
+        
 
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
         //     if (err) throw err;
@@ -494,7 +494,6 @@ function main_server(database_connection) {Introduction:
         })
 
     })
-
 }
 
 server_init();
