@@ -254,9 +254,8 @@ function main_server(database_connection) {Introduction:
 
     //node content ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
     function dijkstras(startNodeId, EndNodeId){
-        //Find first shortest path
-        //shortest path dict "NodeId" : "Distance"
-     
+        // From start id to end if, iterate through id's and make key value, id_origin: {id_neighbour: distance, id_neighbour: distance} 
+
         // e.g.
         // let graph = {
         //     start: { A: 5, B: 2 },
