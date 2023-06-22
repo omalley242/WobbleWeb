@@ -293,11 +293,11 @@ function main_server(database_connection) {Introduction:
         console.log(nodeData);
 
         let graph = new Object();
-        nodeData.forEach(node => node.map(path => (path.StartId == path.key()) ? new Object(path.EndId, path.Distance) : new Object(path.StartId, path.Distance)))
         // nodeData.forEach(node => node.keys());
         console.dir(nodeData);
         for (node in nodeData) {
-            console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
+            node.map(path => (path.StartId == path.key()) ? new Object(path.EndId, path.Distance) : new Object(path.StartId, path.Distance));
+            // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
 
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
