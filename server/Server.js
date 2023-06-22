@@ -284,7 +284,7 @@ function main_server(database_connection) {Introduction:
         // graph.(start[0].StartId)
 
         for (node = startNodeId; node <= EndNodeId; node++){
-            let curNode = await promiseQuery(`SELECT * FROM Paths WHERE StartId=${node} OR EndId${node}`)
+            let curNode = await promiseQuery(`SELECT * FROM Paths WHERE StartId=${node} OR EndId=${node}`)
             // Object.assign(graph, curNode);
             graph[node] = JSON.parse(JSON.stringify(curNode));
         }
