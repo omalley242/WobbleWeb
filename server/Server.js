@@ -298,11 +298,11 @@ function main_server(database_connection) {Introduction:
 
             nodeData[node] = nodeData[node].map((path) => {
                 let node_dict = {};
-                return (path.StartId == node) ? (node_dict[path.EndId]=path.Distance) : (node_dict[path.StartId] = path.Distance)
+                return (path.StartId == node) ? (node_dict[(path.EndId + "test")]=path.Distance) : (node_dict[path.StartId] = path.Distance)
             });
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
-        console.log(nodeData["1"]["2"]);
+        console.log(nodeData["1"]["2test"]);
 
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
         //     if (err) throw err;
