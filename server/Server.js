@@ -302,7 +302,7 @@ function main_server(database_connection) {Introduction:
             });
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
-        console.log(nodeData['1']['2']);
+        console.log(nodeData["1"]["2"]);
 
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
         //     if (err) throw err;
