@@ -245,6 +245,10 @@ function main_server(database_connection) {Introduction:
         database_connection.query(`UPDATE Paths SET EndId=${currentId}, Distance=${distance} WHERE (StartId=${LastId} AND EndId IS NULL)`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
         });     
+
+        database_connection.query(`INSERT Paths SET EndId=${LastId}, Distance=${distance} WHERE StartId=${currentId}`, (err) => {
+            if (err) console.log(`Error updating path: ${err.code}`);
+        }); 
     }
 
     app.get('/testdik', (req, res) => {
@@ -357,7 +361,6 @@ function main_server(database_connection) {Introduction:
                 console.log("LastId = " + LastId);
                 console.log("currentId = " + currentId);
                 completePathDirect(currentId, LastId);
-                completePathDirect(LastId, currentId);
             }
     
             LastId = currentId;
