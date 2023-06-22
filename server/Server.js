@@ -294,15 +294,17 @@ function main_server(database_connection) {Introduction:
 
         let graph = new Object();
         // nodeData.forEach(node => node.keys());
+        let new_nodeData = []
         for (node in nodeData) {
             let temp_dict = {};
             for (path in nodeData[node]) {
                 (path.StartId == node) ? (temp_dict[path.EndId]=path.Distance) : (temp_dict[(path.StartId)] = path.Distance);
             }
-            nodeData[node] = temp_dict;
+            new_nodeData[node] = temp_dict;
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
-        console.log(nodeData);
+
+        console.log(new_nodeData);
 
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
         //     if (err) throw err;
