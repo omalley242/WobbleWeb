@@ -265,8 +265,9 @@ function main_server(database_connection) {Introduction:
         //     D: { finish: 1 },
         //     finish: {},
         // };
-        let start = await promiseQuery(`SELECT Distance,EndId FROM Paths WHERE StartId="${startNodeId}`)
-
+        let start = await promiseQuery(`SELECT Distance, EndId FROM Paths`)
+        console.log(start);
+        
         for (node = startNodeId; node <= EndNodeId; node++){
             //add node and neighbours to key value list
          }
