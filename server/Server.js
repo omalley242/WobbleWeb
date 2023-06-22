@@ -265,21 +265,22 @@ function main_server(database_connection) {Introduction:
         //     finish: {},
         // };
         var start = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${startNodeId}`)
-        console.log(start[0].StartId);
+
+        // console.log(start[0].StartId);
 
         var graph = new Object();
-
-        Object.assign(graph, start);
-
-        console.log(graph);
 
         // graph.start[0].StartId = { (start[0].EndId) : (start[0].distance)};
         
         // graph.(start[0].StartId)
 
-        // for (node = startNodeId; node <= EndNodeId; node++){
-            //add node and neighbours to key value list
-        
+        for (node = startNodeId; node <= EndNodeId; node++){
+            let curNode = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${startNodeId}`)
+            Object.assign(graph, curNode);
+        }
+
+        console.log(`graph:`)
+        console.log(graph);
 
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
         //     if (err) throw err;
