@@ -238,7 +238,6 @@ function main_server(database_connection) {Introduction:
         console.log("calculating distance");
         let distance = Math.sqrt(Math.pow(secondNode[0].XCoordinate - firstNode[0].XCoordinate, 2) + Math.pow(secondNode[0].YCoordinate - firstNode[0].YCoordinate, 2));
         // console.log(distance);
-        
         // console.log(firstNode[0].XCoordinate)
 
         //Compare Headings Here
@@ -249,7 +248,7 @@ function main_server(database_connection) {Introduction:
     }
 
     app.get('/testdik', (req, res) => {
-        dijkstras(0,7);
+        dijkstras(0,2);
         res.send("working dik test");
     });
 
@@ -257,18 +256,26 @@ function main_server(database_connection) {Introduction:
     function dijkstras(startNodeId, EndNodeId){
         //Find first shortest path
         //shortest path dict "NodeId" : "Distance"
-        // queryPathDistance(1, 2).then(result => {
-        //     Console.log(result);
-        // }, err => {
-            
-        // });
-        var nodes 
+     
+        // e.g.
+        // let graph = {
+        //     start: { A: 5, B: 2 },
+        //     A: { start: 1, C: 4, D: 2 },
+        //     B: { A: 8, D: 7 },
+        //     C: { D: 6, finish: 3 },
+        //     D: { finish: 1 },
+        //     finish: {},
+        // };
 
-        database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
-            if (err) throw err;
-            nodes = result;
-            console.log(nodes);
-        });
+        for (node = startNodeId; node <= EndNodeId; node++){
+            //add node and neighbours to key value list
+         }
+
+        // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
+        //     if (err) throw err;
+        //     nodes = result;
+        //     console.log(nodes);
+        // });
 
     }
 
