@@ -295,7 +295,7 @@ function main_server(database_connection) {Introduction:
         let graph = new Object();
 
         for (node in nodeData) {
-            console.log(`${node}: ${nodeData[node]}`);
+            console.log(`${node}: ${nodeData[node][0]}`);
         }
 
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
