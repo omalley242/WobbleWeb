@@ -296,10 +296,9 @@ function main_server(database_connection) {Introduction:
         // nodeData.forEach(node => node.keys());
         for (node in nodeData) {
             nodeData[node] = nodeData[node].map((path) => (path.StartId == node) ? new Object()[path.EndId]=path.Distance : new Object(path.StartId, path.Distance));
-            console.log(nodeData);
-
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
+        console.dir(nodeData);
 
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
         //     if (err) throw err;
