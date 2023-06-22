@@ -298,7 +298,7 @@ function main_server(database_connection) {Introduction:
             nodeData[node] = nodeData[node].map((path) => (path.StartId == node) ? ({}[path.EndId]=path.Distance) : ({}[path.StartId] = path.Distance));
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
-        console.log(nodeData[0][0]);
+        console.log(nodeData['0']['0']);
 
         // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
         //     if (err) throw err;
