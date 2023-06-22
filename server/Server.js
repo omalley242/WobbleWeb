@@ -295,12 +295,12 @@ function main_server(database_connection) {Introduction:
         let graph = new Object();
         // nodeData.forEach(node => node.keys());
         for (node in nodeData) {
-            let temp_dict = {};
+            // let temp_dict = {};
             for (paths in nodeData[node]) {
                 let EndId = paths.EndId;
                 let Distance = paths.Distance;
                 let StartId = paths.StartId;
-                (paths.StartId == node) ? (temp_dict[EndId]=Distance) : (temp_dict[StartId] = Distance);
+                (paths.StartId == node) ? {[EndId] : Distance} : {[StartId] : Distance};
             }
             nodeData[node] = temp_dict;
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
