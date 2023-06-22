@@ -296,7 +296,8 @@ function main_server(database_connection) {Introduction:
         // nodeData.forEach(node => node.keys());
         console.dir(nodeData);
         for (node in nodeData) {
-            node.map(path => (path.StartId == path.key()) ? new Object(path.EndId, path.Distance) : new Object(path.StartId, path.Distance));
+            console.dir(nodeData);
+            node.map((path) => (path.StartId == path.keys()) ? new Object(path.EndId, path.Distance) : new Object(path.StartId, path.Distance));
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
 
