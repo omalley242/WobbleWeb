@@ -294,7 +294,7 @@ function main_server(database_connection) {Introduction:
 
         for (node in nodeData) {
             let temp_dic = {};
-            nodeData[node].forEach(nodepath => temp_dic = ((nodepath.StartId == node) ? {[nodepath.EndId] : nodepath.Distance} : {[nodepath.StartId] : nodepath.Distance}));
+            nodeData[node].forEach(nodepath => temp_dic[StartId] ((nodepath.StartId == node) ? {[nodepath.EndId] : nodepath.Distance} : {[nodepath.StartId] : nodepath.Distance}));
             nodeData[node] = temp_dic;
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
