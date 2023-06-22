@@ -296,7 +296,7 @@ function main_server(database_connection) {Introduction:
         // nodeData.forEach(node => node.keys());
         for (node in nodeData) {
             nodeData[node].map(path => (path.StartId == node) ? "test1" : "test2");
-            console.log(nodeData);
+            console.log(nodeData[0]);
             // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
 
