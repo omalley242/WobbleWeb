@@ -11,6 +11,7 @@ function App () {
   const [websocketData, updateWebsocketData] = useState([]);
 
   useEffect(() => {
+
     let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
 
     //Movement Speed / Distance difference
@@ -18,7 +19,7 @@ function App () {
     var TurningHeading = 0;
 
     websocket.onmessage = (message) => {
-      console.log(JSON.parse(message).body());
+      message.data.text().then(txt => console.log(txt));
       // console.log(JSON.parse(JSON.stringify(message.body)));
       // console.log(JSON.parse(websocketData.data));
       updateWebsocketData(message);
