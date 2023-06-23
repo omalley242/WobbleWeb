@@ -3,9 +3,9 @@ import Xarrow, { Xwrapper } from 'react-xarrows';
 
 const MapContainer = ({nodeData, pathData}) => {
 
-    function setEndNode(id) {
-        fetch(`http://${window.location.host}/setEndNode?nodeId=${id}`)
-    }
+    // function setEndNode(id) {
+    //     fetch(`http://${window.location.host}/setEndNode?nodeId=${id}`)
+    // }
 
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
     const MapItems = nodeData.map((item, index) => (
