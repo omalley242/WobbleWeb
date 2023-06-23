@@ -21,9 +21,9 @@ const MapContainer = ({nodeData, pathData, websocketData}) => {
     let newPathData = pathData.forEach((item) => {
         
         if(websocketData != undefined){
-            item[color] = 'red';
+            item.color = 'red';
         }else {
-            item[color] = 'blue';
+            item.color = 'blue';
         }
     })
 
