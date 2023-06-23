@@ -10,6 +10,7 @@ const App = ({websocket}) => {
   var websocketData = {};
 
   websocket.onmessage = (message) => {
+    console.log("test");
     websocketData = JSON.parse(message.data);
     pathData = pathData.reduce((lastPathId, path)=> {
       if (lastPathId == null){
