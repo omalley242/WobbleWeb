@@ -8,7 +8,9 @@ function App (websocket) {
   //define the inital states of the nodeData and its updated verion
   const [nodeData, updateNodeData] = useState([]);
   const [pathData, updatePathData] = useState([]);
+  const [websocketData, updateWebsocketData] = useState([]);
   
+
   useEffect(() => {
     let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
 
@@ -45,8 +47,6 @@ function App (websocket) {
         TurningHeading -= 0.01;
     }
     });
-
-    const [websocketData, updateWebsocketData] = useState([]);
     console.log(websocketData);
   })
 
