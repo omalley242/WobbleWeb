@@ -346,7 +346,7 @@ function main_server(database_connection) {Introduction:
             console.log(shortestPath);
             let lastId = "";
             for(let i=0; i<shortestPath.length; i++){
-                if(i = 0){
+                if(i == 0){
                     lastId = shortestPath[0];
                 }else{
                     console.log("Last Id:" + LastId +  "; CurrentId: " + shortestPath[i]);    
