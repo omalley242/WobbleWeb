@@ -64,7 +64,7 @@ COT_C = 1/Math.tan(ANG_C);
 
 //End of Beacon info -------------------
 
-var EndNodeId = '10';
+var EndNodeId;
 
 function server_init() {
 
@@ -377,7 +377,7 @@ function main_server(database_connection) {Introduction:
         // From start id to end if, iterate through id's and make key value, nodeData = { id_origin: {id_neighbour: distance, id_neighbour: distance} }
         var nodeData = new Object();
 
-        for (node = startNodeId; node <= endNodeId; node++){
+        for (let node = startNodeId; node <= currentId; node++){
             let curNode = await promiseQuery(`SELECT * FROM Paths WHERE StartId=${node} OR EndId=${node}`);
             nodeData[node] = JSON.parse(JSON.stringify(curNode));
         }
@@ -396,14 +396,14 @@ function main_server(database_connection) {Introduction:
     }
 
     app.get('/setEndNode', (req) => {
-        // EndNodeId = req.query.nodeId;
-        // database_connection.query(`UPDATE Nodes SET Colour='green' WHERE Colour != 'red'`, (err) => {
-        //     if (err) console.log(`Error updating path: ${err.code}`);
-        // });
-        // database_connection.query(`UPDATE Nodes SET Colour='blue' WHERE ID=${EndNodeId}`, (err) => {
-        //     if (err) console.log(`Error updating path: ${err.code}`);
-        // });
-        // console.log("NewEndNode" + EndNodeId);
+        EndNodeId = req.query.nodeId;
+        database_connection.query(`UPDATE Nodes SET Colour='green' WHERE Colour != 'red'`, (err) => {
+            if (err) console.log(`Error updating path: ${err.code}`);
+        });
+        database_connection.query(`UPDATE Nodes SET Colour='blue' WHERE ID=${EndNodeId}`, (err) => {
+            if (err) console.log(`Error updating path: ${err.code}`);
+        });
+        console.log("NewEndNode" + EndNodeId);
     })
 
     app.post('/add/simplenode', bodyParser.json(), (req, res) => {
