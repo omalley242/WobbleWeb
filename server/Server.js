@@ -366,7 +366,6 @@ function main_server(database_connection) {Introduction:
 
     async function dijkstras(startNodeId, endNodeId){
         // From start id to end if, iterate through id's and make key value, nodeData = { id_origin: {id_neighbour: distance, id_neighbour: distance} }
-     
         var nodeData = new Object();
 
         for (node = startNodeId; node <= endNodeId; node++){
