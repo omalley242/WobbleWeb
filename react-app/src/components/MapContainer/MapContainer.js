@@ -3,9 +3,6 @@ import Xarrow, { Xwrapper } from 'react-xarrows';
 
 const MapContainer = ({nodeData, pathData}) => {
 
-    //Setup WebSocket to the server
-    let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
-
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
     const MapItems = nodeData.map((item, index) => (
         <div key={index} id={item.Id} className='Map-Item' style={{height: '1vw', width: '1vw', position: 'absolute', left: `${item.XCoordinate / 3.6}%`, bottom: `${item.YCoordinate / 2.4}%`}}>
