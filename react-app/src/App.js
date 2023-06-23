@@ -9,7 +9,7 @@ const App = ({websocket}) => {
   //If we receive a message update our position
   var websocketData = {};
 
-  webSocket.onmessage = (message) => {
+  websocket.onmessage = (message) => {
     websocketData = JSON.parse(message.data);
     console.log(message);
   }
