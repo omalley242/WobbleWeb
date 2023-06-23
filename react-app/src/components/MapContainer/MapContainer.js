@@ -1,47 +1,10 @@
 import './MapContainer.css'
 import Xarrow, { Xwrapper } from 'react-xarrows';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
     //Setup WebSocket to the server
-let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
 
 const MapContainer = ({nodeData, pathData, websocket}) => {
-
-    websocket.onmessage = (message) => {
-        updateWebsocketData = message;
-        console.log(message);
-    }
-
-    //Movement Speed / Distance difference
-    var Displacement = 0;
-    var TurningHeading = 0;
-
-    //Key listeners
-    document.addEventListener('keydown', (e) => {
-    if(e.code === "KeyW"){
-        console.log("Forward Command Recieved");
-        websocket.send(JSON.stringify({"Target_R": 1}));
-        Displacement += 0.01;//Jake Line 2
-    }
-    else if(e.code === "KeyS"){
-        console.log("Back Command Recieved");
-        websocket.send(JSON.stringify({"Target_R": -1}));
-        Displacement -= 0.01;
-    }
-    else if(e.code === "KeyD"){
-        console.log("Right Turn Command Recieved");
-        websocket.send(JSON.stringify({"Target_Theta": 1}));
-        TurningHeading += 0.01;
-    }
-    else if(e.code === "KeyA"){
-        console.log("Left Turn Command Recieved");
-        websocket.send(JSON.stringify({"Target_Theta": -1}));
-        TurningHeading -= 0.01;
-    }
-    });
-
-    const [websocketData, updateWebsocketData] = useState([]);
-    console.log(websocketData);
 
 
     function setEndNode(id) {

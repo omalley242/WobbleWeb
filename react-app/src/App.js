@@ -8,6 +8,48 @@ function App (websocket) {
   //define the inital states of the nodeData and its updated verion
   const [nodeData, updateNodeData] = useState([]);
   const [pathData, updatePathData] = useState([]);
+  
+  useEffect(() => {
+    let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
+
+    websocket.onmessage = (message) => {
+      updateWebsocketData = message;
+      console.log(message);
+    
+    }
+
+    //Movement Speed / Distance difference
+    var Displacement = 0;
+    var TurningHeading = 0;
+
+    //Key listeners
+    document.addEventListener('keydown', (e) => {
+    if(e.code === "KeyW"){
+        console.log("Forward Command Recieved");
+        websocket.send(JSON.stringify({"Target_R": 1}));
+        Displacement += 0.01;//Jake Line 2
+    }
+    else if(e.code === "KeyS"){
+        console.log("Back Command Recieved");
+        websocket.send(JSON.stringify({"Target_R": -1}));
+        Displacement -= 0.01;
+    }
+    else if(e.code === "KeyD"){
+        console.log("Right Turn Command Recieved");
+        websocket.send(JSON.stringify({"Target_Theta": 1}));
+        TurningHeading += 0.01;
+    }
+    else if(e.code === "KeyA"){
+        console.log("Left Turn Command Recieved");
+        websocket.send(JSON.stringify({"Target_Theta": -1}));
+        TurningHeading -= 0.01;
+    }
+    });
+
+    const [websocketData, updateWebsocketData] = useState([]);
+    console.log(websocketData);
+  })
+
 
   const fetchPathData = () => {
     //location.host gives the server ip
