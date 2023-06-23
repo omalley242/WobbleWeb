@@ -343,15 +343,11 @@ function main_server(database_connection) {Introduction:
     app.get('/testdik', (req, res) => {     
         dijkstras('0','3').then((shortestPath) => {
             console.log(shortestPath);
-            for(let i=0; i<shortestPath.length; i++){
-                if(i == 0){
-                    //Do nothing
-                }else{
-                    console.log("Last Id:" + shortestPath[i-1] +  "; CurrentId: " + shortestPath[i]);    
-                    database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${shortestPath[i-1]} AND EndId=${shortestPath[i]} OR StartId=${shortestPath[i]} AND EndId=${shortestPath[i-1]} `, (err) => {
-                        if (err) console.log(`Error updating path: ${err.code}`);
-                    });
-                }
+            for(let i=1; i<shortestPath.length; i++){
+                console.log("Last Id:" + shortestPath[i-1] +  "; CurrentId: " + shortestPath[i]);    
+                database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${shortestPath[i-1]} AND EndId=${shortestPath[i]} OR StartId=${shortestPath[i]} AND EndId=${shortestPath[i-1]} `, (err) => {
+                    if (err) console.log(`Error updating path: ${err.code}`);
+                });
             }
             res.send("working dik test");
         });
