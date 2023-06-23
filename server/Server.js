@@ -344,16 +344,16 @@ function main_server(database_connection) {Introduction:
     app.get('/testdik', (req, res) => {     
         dijkstras('0','3').then((shortestPath) => {
             console.log(shortestPath);
-            let lastid = "";
+            let lastId = "";
             for(let i=0; i<shortestPath.length; i++){
                 if(i = 0){
-                    lastid = shortestPath[0];
+                    lastId = shortestPath[0];
                 }else{
                     console.log("Last Id:" + LastId +  "; CurrentId: " + shortestPath[i]);    
                     database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${lastId} AND EndId=${shortestPath[i]}`, (err) => {
                         if (err) console.log(`Error updating path: ${err.code}`);
                     });
-                    lastid = shortestPath[i];
+                    lastId = shortestPath[i];
                 }
             }
             res.send("working dik test");
