@@ -19,7 +19,7 @@ const MapContainer = ({nodeData, pathData}) => {
     ));
 
     // A function that creates all the paths
-    const PathItems = newPathData.map((item) => {
+    const PathItems = PathData.map((item) => {
             return <Xarrow 
             start={item.StartId.toString()}
             end={item.EndId.toString()}
