@@ -149,7 +149,7 @@ function main_server(database_connection) {Introduction:
     //A function to add a node to the database
     function addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_BETA, ANG_GAMMA){
         console.log(`Adding Node with ID: ${NodeId}`);
-        database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},${ANG_ALPHA},${ANG_BETA},${ANG_GAMMA})`, function(err, result, fields) {
+        database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},${ANG_ALPHA},${ANG_BETA},${ANG_GAMMA},"green")`, function(err, result, fields) {
             if (err) 
                 throw err;
         });     
@@ -157,7 +157,7 @@ function main_server(database_connection) {Introduction:
 
     function addNodeToDatabaseSimple(PX, PY){
         console.log(`Adding Node with ID: ${NodeId}`);
-        database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},0,0,0)`, function(err, result, fields) {
+        database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},0,0,0,"green")`, function(err) {
             if (err) throw err;
         });     
     }
