@@ -8,9 +8,8 @@
 .node {
   height: 1vw;
   width: 1vw;
-  fill: green;
 }
 
 .node:hover .node-path {
-  fill: #7f2102;
+  fill: #ba2f00;
 }
