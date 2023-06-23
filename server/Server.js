@@ -347,11 +347,9 @@ function main_server(database_connection) {Introduction:
             console.log(shortestPath);
             shortestPath.reduce((lastId, currentId) => {
                 console.log("Last Id:" + LastId +  "; CurrentId: " + currentId);    
-                if(LastId != undefined)
-                    database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${lastId} AND EndId=${currentId}`, (err) => {
-                        if (err) console.log(`Error updating path: ${err.code}`);
-                    });
-                return currentId;
+                database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${lastId} AND EndId=${currentId}`, (err) => {
+                    if (err) console.log(`Error updating path: ${err.code}`);
+                });
             }, undefined);
             res.send("working dik test");
         });
