@@ -3,7 +3,7 @@ import Xarrow, { Xwrapper } from 'react-xarrows';
 
 const MapContainer = ({nodeData, pathData}) => {
 
-    const setEndNode = (id) => {
+    function setEndNode(id) {
         fetch(`http://${window.location.host}/setEndNode?nodeId=${id}`)
     }
 
