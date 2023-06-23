@@ -25,7 +25,7 @@ const MapContainer = ({nodeData, pathData}) => {
             end={item.EndId.toString()}
             curveness={0.1}
             strokeWidth={2}
-            // color={item.color}
+            color={item.color}
             headSize={3}
             animateDrawing={true}
             // id={item.StartId + ":" + item.Heading}
