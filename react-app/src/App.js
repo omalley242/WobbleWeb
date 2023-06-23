@@ -3,13 +3,7 @@ import MapContainer from './components/MapContainer/MapContainer';
 import React, {useState} from 'react';
 import ReactPolling from 'react-polling/lib/ReactPolling';
 
-function App(){
-
-//dictionary holding all currently pressed keys
-var keys = {};
-
-  //Setup WebSocket to the server
-  let webSocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
+const App = ({websocket}) => {
 
 
   //If we receive a message update our position

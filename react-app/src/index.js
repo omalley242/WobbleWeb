@@ -4,9 +4,12 @@ import './index.css';
 import App from './App';
 //Render the main page
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+//Setup WebSocket to the server
+let webSocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
 root.render(
   <React.StrictMode>
-    <App/>
+    <App webSocket={webSocket}/>
   </React.StrictMode>
 );
 
