@@ -51,6 +51,8 @@ function App () {
     fetch(`http://${window.location.host}/dijkstras`).then(Response => {
         Response.text().then(text => {
             console.log(text);
+            var DistDiv = document.getElementById("distanceDiv");
+            myDiv.innerHTML = text;
             return text;
         });
     });
@@ -85,6 +87,8 @@ function App () {
           <input style={{marginTop: '4vh', height: '100%', width: '100%'}} type='button' id='ClearButton' Class='Button' onClick={resetDatabase} value='Reset Database'/>
 
           <input style={{marginTop: '4vh', height: '100%', width: '100%'}} type='button' id='DijkstraButton' Class='Button' onClick={runDijkstras} value='Run Dijkstras'/>
+
+          <div style={{display: 'inline-block', padding: '1vh', width: '5%', height: '5%'}} id='distanceDiv' > </div>
       </div>
 
 
