@@ -18,6 +18,7 @@ function App () {
       // console.log(JSON.parse(JSON.stringify(message.body)));
       // console.log(JSON.parse(websocketData.data));
       updateWebsocketData(message);    
+      websocket.close();
     }
 
     //Movement Speed / Distance difference
