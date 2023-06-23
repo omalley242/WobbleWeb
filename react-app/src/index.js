@@ -18,19 +18,19 @@ root.render(
 var websocketData = {};
 
 websocket.onmessage = (message) => {
-  websocketData = JSON.parse(message.data);
-  pathData = pathData.reduce((lastPathId, path)=> {
-    if (lastPathId == null){
-      pathcolor = 'blue';
-      return path.StartId;
-    }else if (websocketData.contains(path.StartId) && websocketData.contains(lastPathId)){
-      path[color] = 'red';
-      return path.StartId;
-    }else {
-      return lastPathId;
-    }
+  // websocketData = JSON.parse(message.data);
+  // pathData = pathData.reduce((lastPathId, path)=> {
+  //   if (lastPathId == null){
+  //     pathcolor = 'blue';
+  //     return path.StartId;
+  //   }else if (websocketData.contains(path.StartId) && websocketData.contains(lastPathId)){
+  //     path[color] = 'red';
+  //     return path.StartId;
+  //   }else {
+  //     return lastPathId;
+  //   }
     
-  }, null);
+  // }, null);
     console.log(message);
 }
 
