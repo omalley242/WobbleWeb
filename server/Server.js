@@ -64,6 +64,7 @@ COT_C = 1/Math.tan(ANG_C);
 
 //End of Beacon info -------------------
 
+var EndNodeId;
 
 function server_init() {
 
@@ -342,29 +343,30 @@ function main_server(database_connection) {Introduction:
     };
   
     app.get('/dijkstras', (req, res) => {     
-        dijkstras('0','3').then((shortestPath) => {
-            database_connection.query(`UPDATE Paths SET Colour="green" `, (err) => {
-                if (err) console.log(`Error updating path: ${err.code}`);
-            });
-            database_connection.query(`UPDATE Nodes SET Colour="green" `, (err) => {
-                if (err) console.log(`Error updating path: ${err.code}`);
-            });
-            console.log(shortestPath);
-            for(let i=2; i<shortestPath.length; i++){
-                console.log("Last Id:" + shortestPath[i-1] +  "; CurrentId: " + shortestPath[i]);    
-                database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${shortestPath[i-1]} AND EndId=${shortestPath[i]} OR StartId=${shortestPath[i]} AND EndId=${shortestPath[i-1]} `, (err) => {
+        if(EndNodeId != "")
+            dijkstras('0',EndNodeId.toString()).then((shortestPath) => {
+                database_connection.query(`UPDATE Paths SET Colour="green" `, (err) => {
                     if (err) console.log(`Error updating path: ${err.code}`);
                 });
-            }
-            for(let i=0; i<shortestPath.length; i++){
-                console.log("Id:" + shortestPath[i]);    
-                database_connection.query(`UPDATE Nodes SET Colour="red" WHERE ID=${shortestPath[i]}`, (err) => {
-                    if (err) console.log(`Error updating node: ${err.code}`);
+                database_connection.query(`UPDATE Nodes SET Colour="green" `, (err) => {
+                    if (err) console.log(`Error updating path: ${err.code}`);
                 });
-            }
-            // res.send((shortestPath[0]).toString());
+                console.log(shortestPath);
+                for(let i=2; i<shortestPath.length; i++){
+                    console.log("Last Id:" + shortestPath[i-1] +  "; CurrentId: " + shortestPath[i]);    
+                    database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${shortestPath[i-1]} AND EndId=${shortestPath[i]} OR StartId=${shortestPath[i]} AND EndId=${shortestPath[i-1]} `, (err) => {
+                        if (err) console.log(`Error updating path: ${err.code}`);
+                    });
+                }
+                for(let i=0; i<shortestPath.length; i++){
+                    console.log("Id:" + shortestPath[i]);    
+                    database_connection.query(`UPDATE Nodes SET Colour="red" WHERE ID=${shortestPath[i]}`, (err) => {
+                        if (err) console.log(`Error updating node: ${err.code}`);
+                    });
+                }
+                // res.send((shortestPath[0]).toString());
             res.send("test");
-        });
+            });
     });
 
     // node-content ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
@@ -392,6 +394,11 @@ function main_server(database_connection) {Introduction:
         return findShortestPath(nodeData, startNodeId, endNodeId);
 
     }
+
+    app.get('/setNodeEnd', (req, res) => {
+        EndNodeId = req.query.nodeId;
+
+    })
 
     app.post('/add/simplenode', bodyParser.json(), (req, res) => {
         console.log("Adding New Simple Node");
