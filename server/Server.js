@@ -352,7 +352,7 @@ function main_server(database_connection) {Introduction:
                         if (err) console.log(`Error updating path: ${err.code}`);
                     });
                 return currentId;
-            }, undefined)
+            }, undefined);
             res.send("working dik test");
         });
     });
