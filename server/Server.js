@@ -350,6 +350,7 @@ function main_server(database_connection) {Introduction:
                 database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${lastId} AND EndId=${currentId}`, (err) => {
                     if (err) console.log(`Error updating path: ${err.code}`);
                 });
+                return currentId;
             }, undefined);
             res.send("working dik test");
         });
