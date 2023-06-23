@@ -13,14 +13,6 @@ function App () {
   useEffect(() => {
     let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
 
-    websocket.onmessage = (message) => {
-      console.log(JSON.parse(message).body());
-      // console.log(JSON.parse(JSON.stringify(message.body)));
-      // console.log(JSON.parse(websocketData.data));
-      updateWebsocketData(message);    
-      websocket.close();
-    }
-
     //Movement Speed / Distance difference
     var Displacement = 0;
     var TurningHeading = 0;
@@ -53,6 +45,13 @@ function App () {
     return () => null;
   }, []);
 
+  websocket.onmessage = (message) => {
+    console.log(JSON.parse(message).body());
+    // console.log(JSON.parse(JSON.stringify(message.body)));
+    // console.log(JSON.parse(websocketData.data));
+    updateWebsocketData(message);
+    websocket.close();
+  }
 
   const fetchPathData = () => {
     //location.host gives the server ip
