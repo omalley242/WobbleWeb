@@ -27,6 +27,7 @@ const MapContainer = ({nodeData, pathData, websocketData}) => {
         </div>
     ));
 
+    console.log(websocketData);
     const websocketItems = websocketData.map((item) => {
         return <span style={{height: "25px", width: "25px", backgroundColor: "#bbb", borderRadius: "50%", display: "inline-block", left: `${item.XCoordinate / 3.6}%`, bottom: `${item.YCoordinate / 2.4}%`}}></span>
     })

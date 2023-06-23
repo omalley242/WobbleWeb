@@ -14,9 +14,9 @@ function App () {
     let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
 
     websocket.onmessage = (message) => {
-      updateWebsocketData(message);
+      console.log(message);
       console.log(websocketData);
-    
+      updateWebsocketData(message);    
     }
 
     //Movement Speed / Distance difference
