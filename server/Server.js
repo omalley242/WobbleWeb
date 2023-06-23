@@ -198,7 +198,7 @@ function main_server(database_connection) {Introduction:
             if(result.length > 0){
                 console.log(`Path Already Exists`);
             }else{
-                database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},5,blue)`, (err) => {
+                database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},5,"blue")`, (err) => {
                     if (err) console.log(`Error Adding path: ${err.code}`);
                 });       
             }
@@ -350,7 +350,7 @@ function main_server(database_connection) {Introduction:
                 NodeId = NodeId + 1;
             }
     
-            database_connection.query(`INSERT INTO Paths VALUES (${currentId},NULL,100,5,"blue")`, (err) => {
+            database_connection.query(`INSERT INTO Paths VALUES (${currentId},NULL,100,5,"green")`, (err) => {
                 if (err) console.log(`Error Adding path: ${err.code}`);
             });
 
