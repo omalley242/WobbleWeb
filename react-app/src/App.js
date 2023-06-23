@@ -3,57 +3,7 @@ import MapContainer from './components/MapContainer/MapContainer';
 import React, {useState} from 'react';
 import ReactPolling from 'react-polling/lib/ReactPolling';
 
-const App = ({websocket}) => {
-
-
-  //If we receive a message update our position
-  var websocketData = {};
-
-  websocket.onmessage = (message) => {
-    console.log("test");
-    websocketData = JSON.parse(message.data);
-    pathData = pathData.reduce((lastPathId, path)=> {
-      if (lastPathId == null){
-        path.color = 'blue';
-        return path.StartId;
-      }else if (websocketData.contains(path.StartId) && websocketData.contains(lastPathId)){
-        path.color = 'red';
-        return path.StartId;
-      }else {
-        return lastPathId;
-      }
-      
-    }, null);
-      console.log(message);
-  }
-
-  //Movement Speed / Distance difference
-  var Displacement = 0;
-  var TurningHeading = 0;
-
-  //Key listeners
-  document.addEventListener('keydown', (e) => {
-    if(e.code === "KeyW"){
-      console.log("Forward Command Recieved");
-      websocket.send(JSON.stringify({"Target_R": 1}));
-      Displacement += 0.01;//Jake Line 2
-    }
-    else if(e.code === "KeyS"){
-      console.log("Back Command Recieved");
-      websocket.send(JSON.stringify({"Target_R": -1}));
-      Displacement -= 0.01;
-    }
-    else if(e.code === "KeyD"){
-      console.log("Right Turn Command Recieved");
-      websocket.send(JSON.stringify({"Target_Theta": 1}));
-      TurningHeading += 0.01;
-    }
-    else if(e.code === "KeyA"){
-      console.log("Left Turn Command Recieved");
-      websocket.send(JSON.stringify({"Target_Theta": -1}));
-      TurningHeading -= 0.01;
-    }
-  });
+function App() {
   
   //define the inital states of the nodeData and its updated verion
   const [nodeData, updateNodeData] = useState([]);
