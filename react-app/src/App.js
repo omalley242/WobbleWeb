@@ -14,7 +14,7 @@ function App () {
     let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
 
     websocket.onmessage = (message) => {
-      console.log(JSON.stringify(message.data.text()));
+      console.log(JSON.parse(message.text()));
       // console.log(JSON.parse(websocketData.data));
       updateWebsocketData(message);    
     }
