@@ -340,7 +340,7 @@ function main_server(database_connection) {Introduction:
         return shortestPath;
     };
   
-    app.get('/testdik', (req, res) => {     
+    app.get('/dijkstras', (req, res) => {     
         dijkstras('0','3').then((shortestPath) => {
             console.log(shortestPath);
             for(let i=1; i<shortestPath.length; i++){
