@@ -350,7 +350,7 @@ function main_server(database_connection) {Introduction:
                 NodeId = NodeId + 1;
             }
     
-            database_connection.query(`INSERT INTO Paths VALUES (${currentId},NULL,100,5,blue)`, (err) => {
+            database_connection.query(`INSERT INTO Paths VALUES (${currentId},NULL,100,5,"blue")`, (err) => {
                 if (err) console.log(`Error Adding path: ${err.code}`);
             });
 
