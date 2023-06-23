@@ -25,7 +25,8 @@ const MapContainer = ({nodeData, pathData, websocketData}) => {
         }else {
             item.color = 'blue';
         }
-    })
+
+    });
 
     // A function that creates all the paths
     const PathItems = newPathData.map((item) => {
