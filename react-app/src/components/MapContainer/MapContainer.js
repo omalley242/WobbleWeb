@@ -1,6 +1,13 @@
 import './MapContainer.css'
 import Xarrow, { Xwrapper } from 'react-xarrows';
 
+//Setup WebSocket to the server
+let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
+
+websocket.onmessage = (message) => {
+    console.log(message);
+}
+
 const MapContainer = ({nodeData, pathData}) => {
 
     function setEndNode(id) {

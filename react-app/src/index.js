@@ -5,34 +5,12 @@ import App from './App';
 //Render the main page
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-//Setup WebSocket to the server
-let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
-
 root.render(
   <React.StrictMode>
     <App/>
   </React.StrictMode>
 );
 
-//If we receive a message update our position
-var websocketData = {};
-
-websocket.onmessage = (message) => {
-  // websocketData = JSON.parse(message.data);
-  // pathData = pathData.reduce((lastPathId, path)=> {
-  //   if (lastPathId == null){
-  //     pathcolor = 'blue';
-  //     return path.StartId;
-  //   }else if (websocketData.contains(path.StartId) && websocketData.contains(lastPathId)){
-  //     path[color] = 'red';
-  //     return path.StartId;
-  //   }else {
-  //     return lastPathId;
-  //   }
-    
-  // }, null);
-  console.log(message);
-}
 
 //Movement Speed / Distance difference
 var Displacement = 0;
