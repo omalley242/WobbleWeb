@@ -328,6 +328,8 @@ function main_server(database_connection) {Introduction:
             parent = parents[parent];
         }
         shortestPath.reverse();
+
+        shortestPath.unshift(distances[endNode]);
         
         // //this is the shortest path
         // let results = {
@@ -343,7 +345,7 @@ function main_server(database_connection) {Introduction:
     app.get('/dijkstras', (req, res) => {     
         dijkstras('0','3').then((shortestPath) => {
             console.log(shortestPath);
-            for(let i=1; i<shortestPath.length; i++){
+            for(let i=2; i<shortestPath.length; i++){
                 console.log("Last Id:" + shortestPath[i-1] +  "; CurrentId: " + shortestPath[i]);    
                 database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${shortestPath[i-1]} AND EndId=${shortestPath[i]} OR StartId=${shortestPath[i]} AND EndId=${shortestPath[i-1]} `, (err) => {
                     if (err) console.log(`Error updating path: ${err.code}`);
