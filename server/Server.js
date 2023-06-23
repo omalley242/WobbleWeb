@@ -340,8 +340,7 @@ function main_server(database_connection) {Introduction:
 
         return shortestPath;
     };
-
-    
+  
     app.get('/testdik', (req, res) => {     
         dijkstras('0','3').then((shortestPath) => {
             console.log(shortestPath);
@@ -356,9 +355,10 @@ function main_server(database_connection) {Introduction:
         });
     });
 
-    //node-content ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
+    // node-content ID | XCoordinate | YCoordinate | HeadingAlpha | HeadingBeta | HeadingGamma |
 
     // path-content StartId | EndId | Heading From Start | Distance |
+
     async function dijkstras(startNodeId, endNodeId){
         // From start id to end if, iterate through id's and make key value, nodeData = { id_origin: {id_neighbour: distance, id_neighbour: distance} }
      
@@ -379,23 +379,6 @@ function main_server(database_connection) {Introduction:
         }
         // console.log(nodeData);
         return findShortestPath(nodeData, startNodeId, endNodeId);
-
-    }
-
-    function queryPathDistance(NodeId1, NodeId2){
-        return new Promise((resolve, reject) => {
-            database_connection.query(`SELECT Distance FROM Paths WHERE (StartId="${NodeId1} AND EndId="${NodeId2}) OR (EndId="${NodeId1} AND StartID="${NodeId2})"`, (error, result, _fields) => {
-                if (error) {
-                    console.log(`Error path does not exsist: ${err.code}`);
-                    reject(error);
-                } else {
-                    resolve(result);
-                }        
-            });    
-        })
-    } 
-
-    function queryPathConnections(NodeId){
 
     }
 
