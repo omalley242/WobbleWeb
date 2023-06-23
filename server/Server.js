@@ -92,7 +92,7 @@ process.on('SIGINT', function() {
     console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
     // some other closing procedures go here
     process.exit(0);
-  });
+});
 
 //MAIN PROCESS LOOP =====================================================
 function main_server(database_connection) {Introduction:
@@ -145,7 +145,6 @@ function main_server(database_connection) {Introduction:
 
         console.log("Reset Complete");
     });
-
 
     //A function to add a node to the database
     function addNodeToDatabase(PX, PY, ANG_ALPHA, ANG_BETA, ANG_GAMMA){
