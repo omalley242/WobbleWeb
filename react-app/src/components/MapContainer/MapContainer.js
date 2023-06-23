@@ -19,7 +19,7 @@ const MapContainer = ({nodeData, pathData, websocketData}) => {
     ));
 
     let newPathData = pathData.map((item) => {
-        if(websocketData.contains(item.StartId) && websocketData.contains(item.EndId)){
+        if(websocketData.hasOwnProperty(item.StartId) && websocketData.hasOwnProperty(item.EndId)){
             item.color = 'red';
         }else {
             item.color = 'blue';
