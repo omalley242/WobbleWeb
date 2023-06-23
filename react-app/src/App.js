@@ -19,7 +19,7 @@ function App () {
     var TurningHeading = 0;
 
     websocket.onmessage = (message) => {
-      message.data.text().then(txt => updateWebsocketData(message));
+      message.data.text().then(txt => updateWebsocketData(txt));
       // console.log(JSON.parse(JSON.stringify(message.body)));
       // console.log(JSON.parse(websocketData.data));
     }
