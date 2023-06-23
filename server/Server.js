@@ -344,6 +344,12 @@ function main_server(database_connection) {Introduction:
   
     app.get('/dijkstras', (req, res) => {     
         dijkstras('0','3').then((shortestPath) => {
+            database_connection.query(`UPDATE Paths SET Colour="green" `, (err) => {
+                if (err) console.log(`Error updating path: ${err.code}`);
+            });
+            database_connection.query(`UPDATE Nodes SET Colour="green" `, (err) => {
+                if (err) console.log(`Error updating path: ${err.code}`);
+            });
             console.log(shortestPath);
             for(let i=2; i<shortestPath.length; i++){
                 console.log("Last Id:" + shortestPath[i-1] +  "; CurrentId: " + shortestPath[i]);    
