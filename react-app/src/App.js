@@ -11,7 +11,7 @@ const App = ({websocket}) => {
 
   websocket.onmessage = (message) => {
     websocketData = JSON.parse(message.data);
-    pathData = pathData.reduce(lastPathId, path => {
+    pathData = pathData.reduce((lastPathId, path)=> {
       if (lastPathId == null){
         path[color] = 'blue';
         return path.StartId;
