@@ -1,6 +1,6 @@
 import './App.css';
 import MapContainer from './components/MapContainer/MapContainer';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactPolling from 'react-polling/lib/ReactPolling';
 
 function App (websocket) {
