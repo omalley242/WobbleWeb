@@ -4,7 +4,7 @@ import Xarrow, { Xwrapper } from 'react-xarrows';
 const MapContainer = ({nodeData, pathData}) => {
 
     function setEndNode(id) {
-        document.getElementById(id).style.fill = 'blue';
+        document.getElementById('id' + id).style.fill = 'blue';
         fetch(`http://${window.location.host}/setEndNode?nodeId=${id}`);
     }
 
