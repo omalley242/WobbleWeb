@@ -88,7 +88,7 @@ function App () {
 
           <input style={{marginTop: '4vh', height: '100%', width: '100%'}} type='button' id='DijkstraButton' Class='Button' onClick={runDijkstras} value='Run Dijkstras'/>
 
-          <div style={{display: 'inline-block', padding: '1vh', width: '5%', height: '5%'}} id='distanceDiv' > </div>
+          <div style={{display: 'inline-block', padding: '1vh', width: '100%', backgroundColor: 'black' ,height: '50%'}} id='distanceDiv' > </div>
       </div>
 
 
