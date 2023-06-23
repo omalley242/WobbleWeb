@@ -17,6 +17,13 @@ function App () {
     var Displacement = 0;
     var TurningHeading = 0;
 
+    websocket.onmessage = (message) => {
+      console.log(JSON.parse(message).body());
+      // console.log(JSON.parse(JSON.stringify(message.body)));
+      // console.log(JSON.parse(websocketData.data));
+      updateWebsocketData(message);
+    }
+
     //Key listeners
     document.addEventListener('keydown', (e) => {
     if(e.code === "KeyW"){
@@ -42,16 +49,8 @@ function App () {
     });
     console.log(websocketData);
 
-    return () => null;
   }, []);
 
-  websocket.onmessage = (message) => {
-    console.log(JSON.parse(message).body());
-    // console.log(JSON.parse(JSON.stringify(message.body)));
-    // console.log(JSON.parse(websocketData.data));
-    updateWebsocketData(message);
-    websocket.close();
-  }
 
   const fetchPathData = () => {
     //location.host gives the server ip
