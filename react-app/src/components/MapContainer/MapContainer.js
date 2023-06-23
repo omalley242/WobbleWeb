@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 
     //Setup WebSocket to the server
 
-const MapContainer = ({nodeData, pathData, websocket}) => {
+const MapContainer = ({nodeData, pathData}) => {
 
 
     function setEndNode(id) {
