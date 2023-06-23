@@ -6,7 +6,6 @@ import ReactPolling from 'react-polling/lib/ReactPolling';
 const App = ({websocketData}) => {
 
   //define the inital states of the nodeData and its updated verion
-  const [WebsocketData, updateWebsocketData] = useState([]);
   const [nodeData, updateNodeData] = useState([]);
   const [pathData, updatePathData] = useState([]);
 
