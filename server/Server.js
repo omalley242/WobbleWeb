@@ -351,15 +351,15 @@ function main_server(database_connection) {Introduction:
                 database_connection.query(`UPDATE Nodes SET Colour="green" `, (err) => {
                     if (err) console.log(`Error updating path: ${err.code}`);
                 });
-                console.log(shortestPath);
+                // console.log(shortestPath);
                 for(let i=2; i<shortestPath.length; i++){
-                    console.log("Last Id:" + shortestPath[i-1] +  "; CurrentId: " + shortestPath[i]);    
+                    // console.log("Last Id:" + shortestPath[i-1] +  "; CurrentId: " + shortestPath[i]);    
                     database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${shortestPath[i-1]} AND EndId=${shortestPath[i]} OR StartId=${shortestPath[i]} AND EndId=${shortestPath[i-1]} `, (err) => {
                         if (err) console.log(`Error updating path: ${err.code}`);
                     });
                 }
                 for(let i=0; i<shortestPath.length; i++){
-                    console.log("Id:" + shortestPath[i]);    
+                    // console.log("Id:" + shortestPath[i]);    
                     database_connection.query(`UPDATE Nodes SET Colour="red" WHERE ID=${shortestPath[i]}`, (err) => {
                         if (err) console.log(`Error updating node: ${err.code}`);
                     });
