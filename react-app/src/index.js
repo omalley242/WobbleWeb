@@ -10,7 +10,7 @@ let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl",
 
 root.render(
   <React.StrictMode>
-    <App websocket={websocket}/>
+    <App/>
   </React.StrictMode>
 );
 
@@ -31,7 +31,7 @@ websocket.onmessage = (message) => {
   //   }
     
   // }, null);
-    console.log(message);
+  console.log(message);
 }
 
 //Movement Speed / Distance difference
