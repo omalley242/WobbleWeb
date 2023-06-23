@@ -1,7 +1,7 @@
 
 //SETUP CODE =========================================================
 
-var MergeRadius = 5;
+var MergeRadius = 3;
 var MergeAngle = 0.1;
 var PathMergeAngle = 0.1;
 
