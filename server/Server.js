@@ -349,7 +349,7 @@ function main_server(database_connection) {Introduction:
                     //Do nothing
                 }else{
                     console.log("Last Id:" + shortestPath[i-1] +  "; CurrentId: " + shortestPath[i]);    
-                    database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${shortestPath[i-1]} AND EndId=${shortestPath[i]}`, (err) => {
+                    database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${shortestPath[i-1]} AND EndId=${shortestPath[i]} OR StartId=${shortestPath[i]} AND EndId=${shortestPath[i-1]} `, (err) => {
                         if (err) console.log(`Error updating path: ${err.code}`);
                     });
                 }
