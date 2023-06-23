@@ -6,6 +6,7 @@ import ReactPolling from 'react-polling/lib/ReactPolling';
 function App() {
 
   //define the inital states of the nodeData and its updated verion
+  const [websocketData, updateWebsocketData] = useState([]);
   const [nodeData, updateNodeData] = useState([]);
   const [pathData, updatePathData] = useState([]);
 
@@ -66,7 +67,7 @@ function App() {
                 onFailure = {pathPollingFailure}
                 promise = {fetchPathData}
                 render = {() => {
-                  return <MapContainer nodeData={nodeData} pathData={pathData}></MapContainer>;
+                  return <MapContainer nodeData={nodeData} pathData={pathData} websocketData={websocketData}></MapContainer>;
                 }}
                 />;
       }}

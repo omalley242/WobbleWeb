@@ -7,7 +7,7 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App websocketData={websocketData}/>
   </React.StrictMode>
 );
 
@@ -21,11 +21,10 @@ let webSocket = new WebSocket("ws://" + window.location.host + "/ManualControl",
 
 
 //If we receive a message update our position
-var cur_position_data = {};
+var websocketData = {};
 
 webSocket.onmessage = (message) => {
-  cur_position_data = JSON.parse(message.data);
-  if(cur_position_data.keys())
+  websocketData = JSON.parse(message.data);
   console.log(message);
 }
 

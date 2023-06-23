@@ -1,7 +1,7 @@
 import './MapContainer.css'
 import Xarrow, { Xwrapper } from 'react-xarrows';
 
-const MapContainer = ({nodeData, pathData}) => {
+const MapContainer = ({nodeData, pathData, websocketData}) => {
 
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
     const MapItems = nodeData.map((item, index) => (
@@ -18,15 +18,25 @@ const MapContainer = ({nodeData, pathData}) => {
         </div>
     ));
 
+    let newPathData = pathData.map((item) => {
+        if(websocketData.contains(item.StartId) && websocketData.contains(item.EndId)){
+            item[color] = 'red';
+        }else {
+            item[color] = 'blue';
+        }
+    })
+
     // A function that creates all the paths
-    const PathItems = pathData.map((item, index) => {
+    const PathItems = newPathData.map((item) => {
             return <Xarrow 
             start={item.StartId.toString()}
             end={item.EndId.toString()}
-            curveness={0.1} 
+            curveness={0.1}
             strokeWidth={2}
+            color={item.color}
             headSize={3}
             animateDrawing={true}
+            id={item.StartId + ":" + item.Heading}
             labels=<div style={{ fontSize: "0.4em", fontFamily: "fantasy", fontStyle: "italic" }}>{item.Distance.toString()}</div>
             />;
         });
@@ -53,6 +63,8 @@ const MapContainer = ({nodeData, pathData}) => {
                 </div>;
     });
     
+
+
     return (
         <div className='Map-Container' style={{border: '3px solid #222', margin: '5vh', backgroundColor: '#444', maxHeight: '90vh'}}>
             <div style= {{height: '40vw', width: '60vw', position: 'relative'}}>

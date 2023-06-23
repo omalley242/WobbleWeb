@@ -279,10 +279,6 @@ function main_server(database_connection) {Introduction:
 
         var nodeData = new Object();
 
-        // graph.start[0].StartId = { (start[0].EndId) : (start[0].distance)};
-        
-        // graph.(start[0].StartId)
-
         for (node = startNodeId; node <= EndNodeId; node++){
             let curNode = await promiseQuery(`SELECT * FROM Paths WHERE StartId=${node} OR EndId=${node}`);
             // Object.assign(graph, curNode);
@@ -296,14 +292,8 @@ function main_server(database_connection) {Introduction:
             let temp_dic = {};
             nodeData[node].forEach(nodepath => temp_dic[((nodepath.StartId == node) ? nodepath.EndId : nodepath.StartId)] = nodepath.Distance);
             nodeData[node] = temp_dic;
-            // console.log(`${node}: ${nodeData[node][0].EndId, nodeData[node][0].Distance}`);
         }
         console.log(nodeData);
-        // database_connection.query(`SELECT * FROM Nodes`, function(err, result, fields) {
-        //     if (err) throw err;
-        //     nodes = result;
-        //     console.log(nodes);
-        // });
 
     }
 
