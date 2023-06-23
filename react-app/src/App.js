@@ -49,8 +49,11 @@ function App () {
 
   const runDijkstras = () => {
     fetch(`http://${window.location.host}/dijkstras`).then(Response => {
-        console.log(Response.text().then);
-  });
+        Response.text().then(text => {
+            console.log(text);
+            return text;
+        });
+    });
   }
 
   return (
