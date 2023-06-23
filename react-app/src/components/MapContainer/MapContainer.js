@@ -28,9 +28,9 @@ const MapContainer = ({nodeData, pathData, websocketData}) => {
     ));
 
     console.log(websocketData);
-    const websocketItems = (websocketData) => {
-        return <span style={{height: "25px", width: "25px", backgroundColor: "#bbb", borderRadius: "50%", display: "inline-block", left: `${websocketData.X / 3.6}%`, bottom: `${websocketData.Y / 2.4}%`}}></span>
-    }
+    const websocketItems = (websocketData).map(item => {
+        return <span style={{height: "100px", width: "100px", backgroundColor: "#bbb", borderRadius: "50%", display: "inline-block", left: `${item.X / 3.6}%`, bottom: `${item.Y / 2.4}%`}}></span>
+    })
 
     // A function that creates all the paths
     const PathItems = pathData.map((item) => {
