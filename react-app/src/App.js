@@ -11,7 +11,19 @@ const App = ({websocket}) => {
 
   websocket.onmessage = (message) => {
     websocketData = JSON.parse(message.data);
-    console.log(message);
+    pathData = pathData.reduce(lastPathId, path => {
+      if (lastPathId == null){
+        path[color] = 'blue';
+        return path.StartId;
+      }else if (websocketData.contains(path.StartId) && websocketData.contains(lastpath)){
+        path[color] = 'red';
+        return path.StartId;
+      }else {
+        return lastPathId;
+      }
+      
+    }, null);
+      console.log(message);
   }
 
   //Movement Speed / Distance difference
