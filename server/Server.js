@@ -397,6 +397,7 @@ function main_server(database_connection) {Introduction:
 
     app.get('/setNodeEnd', (req) => {
         EndNodeId = req.query.nodeId;
+        console.log("NewEndNode" + EndNodeId);
     })
 
     app.post('/add/simplenode', bodyParser.json(), (req, res) => {
