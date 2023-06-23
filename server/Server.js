@@ -157,7 +157,7 @@ function main_server(database_connection) {Introduction:
 
     function addNodeToDatabaseSimple(PX, PY){
         console.log(`Adding Node with ID: ${NodeId}`);
-        database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},0,0,0,"green")`, function(err) {
+        database_connection.query(`INSERT INTO Nodes VALUES (${NodeId},${PX},${PY},0,0,0,'green')`, function(err) {
             if (err) throw err;
         });     
     }
@@ -197,7 +197,7 @@ function main_server(database_connection) {Introduction:
             if(result.length > 0){
                 console.log(`Path Already Exists`);
             }else{
-                database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},5,"blue")`, (err) => {
+                database_connection.query(`INSERT INTO Paths VALUES (${StartId},NULL,${Heading},5,'blue')`, (err) => {
                     if (err) console.log(`Error Adding path: ${err.code}`);
                 });       
             }
@@ -345,22 +345,22 @@ function main_server(database_connection) {Introduction:
     app.get('/dijkstras', (req, res) => {     
         if(EndNodeId != undefined)
             dijkstras('0',EndNodeId.toString()).then((shortestPath) => {
-                database_connection.query(`UPDATE Paths SET Colour="green" `, (err) => {
+                database_connection.query(`UPDATE Paths SET Colour='green' `, (err) => {
                     if (err) console.log(`Error updating path: ${err.code}`);
                 });
-                database_connection.query(`UPDATE Nodes SET Colour="green" `, (err) => {
+                database_connection.query(`UPDATE Nodes SET Colour='green' `, (err) => {
                     if (err) console.log(`Error updating path: ${err.code}`);
                 });
                 // console.log(shortestPath);
                 for(let i=2; i<shortestPath.length; i++){
                     // console.log("Last Id:" + shortestPath[i-1] +  "; CurrentId: " + shortestPath[i]);    
-                    database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${shortestPath[i-1]} AND EndId=${shortestPath[i]} OR StartId=${shortestPath[i]} AND EndId=${shortestPath[i-1]} `, (err) => {
+                    database_connection.query(`UPDATE Paths SET Colour='red' WHERE StartId=${shortestPath[i-1]} AND EndId=${shortestPath[i]} OR StartId=${shortestPath[i]} AND EndId=${shortestPath[i-1]} `, (err) => {
                         if (err) console.log(`Error updating path: ${err.code}`);
                     });
                 }
                 for(let i=0; i<shortestPath.length; i++){
                     // console.log("Id:" + shortestPath[i]);    
-                    database_connection.query(`UPDATE Nodes SET Colour="red" WHERE ID=${shortestPath[i]}`, (err) => {
+                    database_connection.query(`UPDATE Nodes SET Colour='red' WHERE ID=${shortestPath[i]}`, (err) => {
                         if (err) console.log(`Error updating node: ${err.code}`);
                     });
                 }
@@ -397,10 +397,10 @@ function main_server(database_connection) {Introduction:
 
     app.get('/setEndNode', (req) => {
         EndNodeId = req.query.nodeId;
-        database_connection.query(`UPDATE Nodes SET Colour="green" WHERE Colour != "red"`, (err) => {
+        database_connection.query(`UPDATE Nodes SET Colour='green' WHERE Colour != 'red'`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
         });
-        database_connection.query(`UPDATE Nodes SET Colour="blue" WHERE ID=${EndNodeId}`, (err) => {
+        database_connection.query(`UPDATE Nodes SET Colour='blue' WHERE ID=${EndNodeId}`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
         });
         console.log("NewEndNode" + EndNodeId);
@@ -446,7 +446,7 @@ function main_server(database_connection) {Introduction:
                 NodeId = NodeId + 1;
             }
     
-            database_connection.query(`INSERT INTO Paths VALUES (${currentId},NULL,100,5,"green")`, (err) => {
+            database_connection.query(`INSERT INTO Paths VALUES (${currentId},NULL,100,5,'green')`, (err) => {
                 if (err) console.log(`Error Adding path: ${err.code}`);
             });
 
