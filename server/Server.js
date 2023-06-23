@@ -400,7 +400,7 @@ function main_server(database_connection) {Introduction:
         database_connection.query(`UPDATE Nodes SET Colour="green"`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
         });
-        database_connection.query(`UPDATE Nodes SET Colour="blue" WHERE StartId=${EndNodeId}`, (err) => {
+        database_connection.query(`UPDATE Nodes SET Colour="blue" WHERE ID=${EndNodeId}`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
         });
         console.log("NewEndNode" + EndNodeId);
