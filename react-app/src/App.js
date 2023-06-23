@@ -16,7 +16,7 @@ function App () {
     websocket.onmessage = (message) => {
       console.log(message);
       console.log(websocketData);
-      updateWebsocketData(message.data.json());    
+      updateWebsocketData(message.data().json());    
     }
 
     //Movement Speed / Distance difference
