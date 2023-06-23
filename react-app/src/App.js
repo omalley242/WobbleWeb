@@ -3,13 +3,12 @@ import MapContainer from './components/MapContainer/MapContainer';
 import React, {useState, useEffect} from 'react';
 import ReactPolling from 'react-polling/lib/ReactPolling';
 
-function App (websocket) {
+function App () {
   
   //define the inital states of the nodeData and its updated verion
   const [nodeData, updateNodeData] = useState([]);
   const [pathData, updatePathData] = useState([]);
   const [websocketData, updateWebsocketData] = useState([]);
-  
 
   useEffect(() => {
     let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
@@ -48,7 +47,9 @@ function App (websocket) {
     }
     });
     console.log(websocketData);
-  })
+
+    return () => null;
+  }, []);
 
 
   const fetchPathData = () => {
