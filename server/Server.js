@@ -343,7 +343,7 @@ function main_server(database_connection) {Introduction:
 
     
     app.get('/testdik', (req, res) => {     
-        dijkstras(0,3).then((shortestPath) => {
+        dijkstras('0','3').then((shortestPath) => {
             console.log(shortestPath);
             shortestPath.reduce((lastId, currentId) => {
                 console.log("Last Id:" + LastId +  "; CurrentId: " + currentId);    
