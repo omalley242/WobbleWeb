@@ -446,7 +446,7 @@ function main_server(database_connection) {Introduction:
                 NodeId = NodeId + 1;
             }
     
-            database_connection.query(`INSERT INTO Paths VALUES (${currentId},NULL,100,5,'green')`, (err) => {
+            database_connection.query(`INSERT INTO Paths VALUES (${currentId},NULL,${Math.random()},5,'green')`, (err) => {
                 if (err) console.log(`Error Adding path: ${err.code}`);
             });
 
