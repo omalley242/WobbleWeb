@@ -1,6 +1,6 @@
 import './MapContainer.css'
 import Xarrow, { Xwrapper } from 'react-xarrows';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
     //Setup WebSocket to the server
 
@@ -27,7 +27,7 @@ const MapContainer = ({nodeData, pathData, websocketData}) => {
         </div>
     ));
 
-    const websocketItems = websocketData.map(item => {
+    const websocketItems = websocketData.map((item) => {
         return <span style={{height: "25px", width: "25px", backgroundColor: "#bbb", borderRadius: "50%", display: "inline-block", left: `${item.XCoordinate / 3.6}%`, bottom: `${item.YCoordinate / 2.4}%`}}></span>
     })
 
