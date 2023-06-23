@@ -38,7 +38,6 @@ var LastId;
 var currentId;
 
 
-
 //Beacon info ---------------------------
 var XA = 0;
 var XB = 0;
@@ -363,7 +362,7 @@ function main_server(database_connection) {Introduction:
                     if (err) console.log(`Error updating node: ${err.code}`);
                 });
             }
-            res.send("working dik test");
+            res.send(shortestPath[0]);
         });
     });
 
