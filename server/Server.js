@@ -64,7 +64,7 @@ COT_C = 1/Math.tan(ANG_C);
 
 //End of Beacon info -------------------
 
-var EndNodeId;
+var EndNodeId = '10';
 
 function server_init() {
 
@@ -396,14 +396,14 @@ function main_server(database_connection) {Introduction:
     }
 
     app.get('/setEndNode', (req) => {
-        EndNodeId = req.query.nodeId;
+        // EndNodeId = req.query.nodeId;
         // database_connection.query(`UPDATE Nodes SET Colour='green' WHERE Colour != 'red'`, (err) => {
         //     if (err) console.log(`Error updating path: ${err.code}`);
         // });
         // database_connection.query(`UPDATE Nodes SET Colour='blue' WHERE ID=${EndNodeId}`, (err) => {
         //     if (err) console.log(`Error updating path: ${err.code}`);
         // });
-        console.log("NewEndNode" + EndNodeId);
+        // console.log("NewEndNode" + EndNodeId);
     })
 
     app.post('/add/simplenode', bodyParser.json(), (req, res) => {
