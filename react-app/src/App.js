@@ -49,7 +49,7 @@ function App () {
 
   const runDijkstras = () => {
     fetch(`http://${window.location.host}/dijkstras`).then(Response => {
-        console.log(Response.text());
+        console.log(Response.text().then);
   });
   }
 
