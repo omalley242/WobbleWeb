@@ -3,7 +3,7 @@ import MapContainer from './components/MapContainer/MapContainer';
 import React, {useState} from 'react';
 import ReactPolling from 'react-polling/lib/ReactPolling';
 
-const App = ({websocketData}) => {
+function App(){
 
   //define the inital states of the nodeData and its updated verion
   const [nodeData, updateNodeData] = useState([]);
@@ -66,7 +66,7 @@ const App = ({websocketData}) => {
                 onFailure = {pathPollingFailure}
                 promise = {fetchPathData}
                 render = {() => {
-                  return <MapContainer nodeData={nodeData} pathData={pathData} websocketData={websocketData}></MapContainer>;
+                  return <MapContainer nodeData={nodeData} pathData={pathData}></MapContainer>;
                 }}
                 />;
       }}

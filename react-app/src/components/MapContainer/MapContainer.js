@@ -1,7 +1,7 @@
 import './MapContainer.css'
 import Xarrow, { Xwrapper } from 'react-xarrows';
 
-const MapContainer = ({nodeData, pathData, websocketData}) => {
+const MapContainer = ({nodeData, pathData}) => {
 
     //a constant function that takes an input "data" and returns a list of Map-Item elements with a surronding div, called Map-Container
     const MapItems = nodeData.map((item, index) => (
@@ -17,16 +17,6 @@ const MapContainer = ({nodeData, pathData, websocketData}) => {
             </svg>                   
         </div>
     ));
-
-    let newPathData = pathData.forEach((item) => {
-        
-        if(websocketData != undefined){
-            item.color = 'red';
-        }else {
-            item.color = 'blue';
-        }
-
-    });
 
     // A function that creates all the paths
     const PathItems = newPathData.map((item) => {
