@@ -69,7 +69,7 @@ var EndNodeId;
 function server_init() {
 
     axios("https://checkip.amazonaws.com/").then(response => {
-        let current_ip = response.data
+        let current_ip = response.data;
 
         //Setup the Database connection
         var connection = sql.createConnection({
