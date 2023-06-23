@@ -345,7 +345,7 @@ function main_server(database_connection) {Introduction:
         dijkstras('0','3').then((shortestPath) => {
             console.log(shortestPath);
             let lastid = "";
-            for(let i=0; i<shortestPath.length(); i++){
+            for(let i=0; i<shortestPath.length; i++){
                 if(i = 0){
                     lastid = shortestPath[0];
                 }else{
