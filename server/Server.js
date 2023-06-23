@@ -246,12 +246,6 @@ function main_server(database_connection) {Introduction:
             if (err) console.log(`Error updating path: ${err.code}`);
         });     
 
-        // INSERT INTO table_name (column1, column2, column3,etc)
-        // VALUES (value1, value2, value3, etc);
-        // console.log(`Completing Path From ${currentId} To ${LastId}`);
-        // database_connection.query(`INSERT INTO Paths VALUES (${currentId},${LastId},100,${distance})`, (err) => {
-        //     if (err) console.log(`Error inserting path: ${err.code}`);
-        // }); 
     }
 
     // Find closest node
