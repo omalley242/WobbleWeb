@@ -28,7 +28,7 @@ const MapContainer = ({nodeData, pathData, websocketData}) => {
     ));
 
     function Dot (websocketData) {
-        return <span style={{position: 'absolute', height: "25px", width: "25px", backgroundColor: "#bbb", borderRadius: "50%", display: "inline-block", left: `${websocketData.X / 3.6}%`, bottom: `${websocketData.Y / 2.4}%`}}></span>
+        return <span style={{position: 'absolute', height: "10px", width: "10px", backgroundColor: "#bbb", borderRadius: "50%", display: "inline-block", left: `${websocketData.X / 3.6}%`, bottom: `${websocketData.Y / 2.4}%`}}></span>
     }
 
     console.log(websocketData);
