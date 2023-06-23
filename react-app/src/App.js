@@ -15,7 +15,7 @@ function App () {
 
     websocket.onmessage = (message) => {
       updateWebsocketData = message;
-      console.log(message);
+      console.log(websocketData);
     
     }
 
