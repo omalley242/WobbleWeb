@@ -88,7 +88,8 @@ function App () {
 
           <input style={{marginTop: '4vh', height: '100%', width: '100%'}} type='button' id='DijkstraButton' Class='Button' onClick={runDijkstras} value='Run Dijkstras'/>
 
-          <div style={{marginTop: '4vh', width: '100%', alignContent: 'center', textAlign:'center', height: '30%', backgroundColor: '#777', border: '1px solid #333', fontSize: '0.7em'}} id='distanceDiv'> </div>
+          <div style={{marginTop: '4vh'}}>Shortest Path Length</div>
+          <div style={{width: '100%', textAlign:'center', height: '30%', backgroundColor: '#777', border: '1px solid #333', fontSize: '0.7em'}} id='distanceDiv'> </div>
       </div>
 
 
