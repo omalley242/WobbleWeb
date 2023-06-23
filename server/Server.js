@@ -351,6 +351,12 @@ function main_server(database_connection) {Introduction:
                     if (err) console.log(`Error updating path: ${err.code}`);
                 });
             }
+            for(let i=0; i<shortestPath.length; i++){
+                console.log("Id:" + shortestPath[i]);    
+                database_connection.query(`UPDATE Nodes SET Colour="red" WHERE ID=${shortestPath[i]}`, (err) => {
+                    if (err) console.log(`Error updating node: ${err.code}`);
+                });
+            }
             res.send("working dik test");
         });
     });
