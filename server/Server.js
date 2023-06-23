@@ -397,7 +397,7 @@ function main_server(database_connection) {Introduction:
 
     app.get('/setEndNode', (req) => {
         EndNodeId = req.query.nodeId;
-        database_connection.query(`UPDATE Nodes SET Colour="green"`, (err) => {
+        database_connection.query(`UPDATE Nodes SET Colour="green" WHERE Colour != "red"`, (err) => {
             if (err) console.log(`Error updating path: ${err.code}`);
         });
         database_connection.query(`UPDATE Nodes SET Colour="blue" WHERE ID=${EndNodeId}`, (err) => {
