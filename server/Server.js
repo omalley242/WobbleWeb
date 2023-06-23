@@ -344,8 +344,10 @@ function main_server(database_connection) {Introduction:
     
     app.get('/testdik', (req, res) => {     
         dijkstras(0,3).then((shortestPath) => {
-            shortestPath.reduce((lastId, currentId) => {    
-                if(LastId != null)    
+            console.log(shortestPath);
+            shortestPath.reduce((lastId, currentId) => {
+                console.log("Last Id:" + LastId +  "; CurrentId: " + currentId);    
+                if(LastId != null)
                     database_connection.query(`UPDATE Paths SET Colour="red" WHERE StartId=${lastId} AND EndId=${currentId}`, (err) => {
                         if (err) console.log(`Error updating path: ${err.code}`);
                     });
