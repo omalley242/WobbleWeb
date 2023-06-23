@@ -3,7 +3,7 @@ import MapContainer from './components/MapContainer/MapContainer';
 import React, {useState} from 'react';
 import ReactPolling from 'react-polling/lib/ReactPolling';
 
-function App() {
+function App(websocketData) {
 
   //define the inital states of the nodeData and its updated verion
   const [websocketData, updateWebsocketData] = useState([]);
