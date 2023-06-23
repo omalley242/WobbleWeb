@@ -2,12 +2,10 @@ import './MapContainer.css'
 import Xarrow, { Xwrapper } from 'react-xarrows';
 import React, {useState} from 'react';
 
-
-
-const MapContainer = ({nodeData, pathData}) => {
-
     //Setup WebSocket to the server
-    let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
+let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
+
+const MapContainer = ({nodeData, pathData, websocket}) => {
 
     websocket.onmessage = (message) => {
         updateWebsocketData = message;
