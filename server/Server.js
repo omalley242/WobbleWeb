@@ -3,7 +3,7 @@
 
 var MergeRadius = 3;
 var MergeAngle = 0.1;
-var PathMergeAngle = 0.1;
+var PathMergeAngle = 0.1;   
 
 //fetch the mysql node library
 var sql = require('mysql');
@@ -344,7 +344,7 @@ function main_server(database_connection) {Introduction:
   
     app.get('/dijkstras', (req, res) => {     
         if(EndNodeId != undefined)
-            dijkstras('0',EndNodeId.toString()).then((shortestPath) => {
+            dijkstras('0',EndNodeId).then((shortestPath) => {
                 database_connection.query(`UPDATE Paths SET Colour='green' `, (err) => {
                     if (err) console.log(`Error updating path: ${err.code}`);
                 });
