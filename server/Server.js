@@ -362,7 +362,7 @@ function main_server(database_connection) {Introduction:
                     if (err) console.log(`Error updating node: ${err.code}`);
                 });
             }
-            res.send(shortestPath[0]);
+            res.send(shortestPath[0].toString());
         });
     });
 
