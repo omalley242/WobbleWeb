@@ -273,15 +273,11 @@ function main_server(database_connection) {Introduction:
         //     D: { finish: 1 },
         //     finish: {},
         // };
-        // var start = await promiseQuery(`SELECT Distance, EndId FROM Paths WHERE StartId=${startNodeId}`)
-
-        // console.log(start[0].StartId);
 
         var nodeData = new Object();
 
         for (node = startNodeId; node <= EndNodeId; node++){
             let curNode = await promiseQuery(`SELECT * FROM Paths WHERE StartId=${node} OR EndId=${node}`);
-            // Object.assign(graph, curNode);
             nodeData[node] = JSON.parse(JSON.stringify(curNode));
         }
 
