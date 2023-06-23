@@ -15,7 +15,7 @@ const App = ({websocket}) => {
       if (lastPathId == null){
         path[color] = 'blue';
         return path.StartId;
-      }else if (websocketData.contains(path.StartId) && websocketData.contains(lastpath)){
+      }else if (websocketData.contains(path.StartId) && websocketData.contains(lastPathId)){
         path[color] = 'red';
         return path.StartId;
       }else {
