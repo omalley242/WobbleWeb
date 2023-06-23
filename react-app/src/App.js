@@ -120,7 +120,7 @@ function App () {
                 onFailure = {pathPollingFailure}
                 promise = {fetchPathData}
                 render = {() => {
-                  return <MapContainer nodeData={nodeData} pathData={pathData}></MapContainer>;
+                  return <MapContainer nodeData={nodeData} pathData={pathData} websocketData={websocketData}></MapContainer>;
                 }}
                 />;
       }}

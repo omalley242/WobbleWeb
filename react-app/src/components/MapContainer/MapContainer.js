@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 
     //Setup WebSocket to the server
 
-const MapContainer = ({nodeData, pathData}) => {
+const MapContainer = ({nodeData, pathData, websocketData}) => {
 
 
     function setEndNode(id) {
@@ -26,6 +26,10 @@ const MapContainer = ({nodeData, pathData}) => {
             </svg>                   
         </div>
     ));
+
+    const websocketItems = websocketData.map(item => {
+        return <span style={{height: "25px", width: "25px", backgroundColor: "#bbb", borderRadius: "50%", display: "inline-block", left: `${item.XCoordinate / 3.6}%`, bottom: `${item.YCoordinate / 2.4}%`}}></span>
+    })
 
     // A function that creates all the paths
     const PathItems = pathData.map((item) => {
@@ -80,6 +84,7 @@ const MapContainer = ({nodeData, pathData}) => {
                 <Xwrapper>
                     {PathItems}
                     {MapItems}
+                    {websocketItems}
                 </Xwrapper>
             </div>
             <div style={{overflowY: 'scroll', overflowX: 'hidden', width: '100%', maxHeight: '14vw', border: '2px solid #222'}}>
