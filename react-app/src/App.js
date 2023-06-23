@@ -15,7 +15,7 @@ function App () {
 
     websocket.onmessage = (message) => {
       // console.log(JSON.parse(message.data.text()));
-      console.log(JSON.parse(message.body));
+      console.log(JSON.parse(message.body.text()));
       // console.log(JSON.parse(websocketData.data));
       updateWebsocketData(message);    
     }
