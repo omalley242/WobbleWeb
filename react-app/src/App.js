@@ -55,7 +55,7 @@ function App () {
             DistDiv.innerHTML = parseInt(text).toFixed(3);
             return text;
         });
-    });
+    }).then(fetchNodeData).then(fetchPathData);
   }
 
   return (
