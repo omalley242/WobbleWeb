@@ -52,7 +52,7 @@ function App () {
         Response.text().then(text => {
             console.log(text);
             var DistDiv = document.getElementById("distanceDiv");
-            myDiv.innerHTML = text;
+            DistDiv.innerHTML = text;
             return text;
         });
     });
