@@ -13,12 +13,12 @@ function App () {
   useEffect(() => {
     let websocket = new WebSocket("ws://" + window.location.host + "/ManualControl", "ManualControl");
 
-    websocket.onmessage.then(message => {
-      console.log(JSON.parse(message.data.text()));
-      // console.log(JSON.parse(JSON.stringify(message.body.text())));
+    websocket.onmessage = (message) => {
+      // console.log(JSON.parse(message.data.text()));
+      console.log(JSON.parse((message.body)));
       // console.log(JSON.parse(websocketData.data));
       updateWebsocketData(message);    
-    });
+    }
 
     //Movement Speed / Distance difference
     var Displacement = 0;
