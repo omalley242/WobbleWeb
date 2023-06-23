@@ -376,7 +376,7 @@ function main_server(database_connection) {Introduction:
             nodeData[node] = temp_dic;
         }
         // console.log(nodeData);
-        findShortestPath(nodeData, startNodeId, endNodeId);
+        return findShortestPath(nodeData, startNodeId, endNodeId);
 
     }
 
