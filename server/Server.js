@@ -344,7 +344,7 @@ function main_server(database_connection) {Introduction:
   
     app.get('/dijkstras', (req, res) => {     
         if(EndNodeId != undefined)
-            dijkstras('0','3').then((shortestPath) => {
+            dijkstras('0',EndNodeId.toString()).then((shortestPath) => {
                 database_connection.query(`UPDATE Paths SET Colour="green" `, (err) => {
                     if (err) console.log(`Error updating path: ${err.code}`);
                 });
