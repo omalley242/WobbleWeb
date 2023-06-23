@@ -20,7 +20,7 @@ const MapContainer = ({nodeData, pathData, websocketData}) => {
 
     let newPathData = pathData.forEach((item) => {
         
-        if(websocketData != undefined && websocketData.hasOwnProperty(item.StartId) && websocketData.hasOwnProperty(item.EndId)){
+        if(websocketData != undefined){
             item[color] = 'red';
         }else {
             item[color] = 'blue';
